@@ -1,15 +1,9 @@
 
-import { Routes, Route} from "react-router-dom";
+import RoutesPages from "./routes";
+
 function App() {
   return (
-    <>
-    
-    {/* <Routes>
-		    <Route path="/" element={}/> 
-		    <Route path="*" element={}/> 
-    </Routes> */}
-    
-    </>
+    <RoutesPages/>
   )
 }
 
