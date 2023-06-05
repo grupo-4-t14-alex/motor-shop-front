@@ -1,6 +1,6 @@
 import { defineStyleConfig } from "@chakra-ui/react";
 
-export const Button = defineStyleConfig({
+export const Buttons = defineStyleConfig({
     // The styles all button have in common
     baseStyle: {
       fontWeight: 'bold',
