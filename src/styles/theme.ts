@@ -1,4 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
+import { Buttons } from "./buttons";
 const theme = extendTheme({
   fonts: {
     body: "'Lexend', sans-serif",
@@ -75,5 +76,8 @@ const theme = extendTheme({
     medium: 500,
     normal: 400,
   },
+  components: {
+    Buttons,
+  }
 });
 export default theme;
