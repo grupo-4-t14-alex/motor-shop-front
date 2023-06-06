@@ -1,5 +1,7 @@
 import { extendTheme } from "@chakra-ui/react";
 import { Buttons } from "./buttons";
+import { modalTheme } from "../components/Modal/style";
+
 const theme = extendTheme({
   colors: {
     brand: {
@@ -74,6 +76,7 @@ const theme = extendTheme({
   },
   components: {
     Buttons,
+    Modal: modalTheme
   }
 });
 export default theme;
