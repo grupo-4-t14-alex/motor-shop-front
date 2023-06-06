@@ -1,4 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
+import { Buttons } from "./buttons";
 const theme = extendTheme({
   colors: {
     brand: {
@@ -47,6 +48,7 @@ const theme = extendTheme({
     },
   },
   fonts: {
+    
     heading: {
       1: "2.75rem",
       2: "2.25rem",
@@ -71,5 +73,9 @@ const theme = extendTheme({
     semibold: 600,
     medium: 500,
   },
+  components: {
+    Buttons,
+    Input: InputConfig
+  }
 });
 export default theme;

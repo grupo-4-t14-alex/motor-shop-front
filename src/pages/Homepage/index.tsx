@@ -1,14 +1,15 @@
-import { Box } from '@chakra-ui/react'
-import { NavBarComponent } from '../../components/NavBar'
+import { Box, Flex, Input, border } from "@chakra-ui/react"
 
-export const Homepage = () => {
+export const Homepage = ( ) => { 
 
-  return (
-    <>
-        <NavBarComponent />
-        <Box bg='grey.1' w='100%' p={4} color='white'>
-            Box Test
-        </Box>
-    </>
-  )
+    return(
+        <Flex bg={"#f6f6f6"} height={"100vh"} justify={"center"} align={"center"}>
+
+            <Input size={"lg"} borderColor={"grey.7"} _hover={{borderColor:"grey.8"}} _focus={{ border: "1px solid transparent"}} focusBorderColor="brand.2" fontFamily={"inter"} borderRadius={"4px"}  /> 
+            <Input /> 
+
+
+        </Flex>
+    )
 }
+
