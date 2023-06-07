@@ -1,6 +1,9 @@
 import { extendTheme } from "@chakra-ui/react";
 import { Buttons } from "./buttons";
 const theme = extendTheme({
+  fonts: {
+    body: "'Lexend', sans-serif",
+  },
   colors: {
     brand: {
       1: "#4529E6",
@@ -47,19 +50,19 @@ const theme = extendTheme({
       12: "#30007D",
     },
   },
-  fonts: {
+  fontSizes: {
     heading: {
-      1: "2.75rem",
-      2: "2.25rem",
-      3: "2rem",
-      4: "1.75rem",
-      5: "1.5rem",
-      6: "1.25rem",
-      7: "1rem",
+      "1": "2.75rem",
+      "2": "2.25rem",
+      "3": "2rem",
+      "4": "1.75rem",
+      "5": "1.5rem",
+      "6": "1.25rem",
+      "7": "1rem",
     },
     body: {
-      1: "1rem",
-      2: "0.875rem",
+      "1": "1rem",
+      "2": "0.688rem",
     },
     buttonBigText: "1rem",
     buttonMediumText: "0.875rem",
@@ -71,6 +74,7 @@ const theme = extendTheme({
     bold: 700,
     semibold: 600,
     medium: 500,
+    normal: 400,
   },
   components: {
     Buttons,
