@@ -1,5 +1,7 @@
 import { extendTheme } from "@chakra-ui/react";
 import { Buttons } from "./buttons";
+import { InputConfig } from "./input";
+
 const theme = extendTheme({
   colors: {
     brand: {
