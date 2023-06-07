@@ -2,7 +2,7 @@ import { Box, Flex, Input, Text } from "@chakra-ui/react"
 
 export const Filter = () => {
     return (
-        <Flex h="90vh" ml="20px" flexDirection="column" gap="15px">
+        <Flex h="90vh" mb="100px" maxW="30%" mt="40px" ml="20px" flexDirection="column" gap="15px">
             <Box>
                 <Text fontSize="heading.4" fontWeight="600">Marca</Text>
                 <Box pl="10px" mt="15px">
