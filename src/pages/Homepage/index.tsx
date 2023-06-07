@@ -2,6 +2,7 @@ import { Box, Button, Card } from "@chakra-ui/react";
 import { NavBarComponent } from "../../components/NavBar";
 import { Footer } from "../../components/Footer";
 import { CardProducts } from "../../components/CardProducts";
+import { CardMainImage } from "../../components/CardMainImage/indes";
 
 export const Homepage = () => {
   return (
@@ -13,11 +14,7 @@ export const Homepage = () => {
       <Button variant="solid" bg="brand.2" color="whiteFixed">
         Teste
       </Button>
-      <CardProducts />
-      <CardProducts />
-      <CardProducts />
-      <CardProducts />
-      <CardProducts />
+      <CardMainImage />
       <CardProducts />
       <Footer />
     </>
