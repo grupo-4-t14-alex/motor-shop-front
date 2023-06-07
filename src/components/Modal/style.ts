@@ -30,14 +30,16 @@ const baseStyle = definePartsStyle({
 const footerEndVariant = definePartsStyle({
     footer: {
         display: "flex",
-        justifyContent: "end"
+        justifyContent: "end",
+        gap: "10px"
     }
 })
 
 const footerStartVariant = definePartsStyle({
     footer: {
         display: "flex",
-        justifyContent: "start"
+        justifyContent: "start",
+        gap: "10px"
     }
 })
 
