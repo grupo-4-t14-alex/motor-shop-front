@@ -1,6 +1,7 @@
 import { Box, Button } from "@chakra-ui/react";
 import { NavBarComponent } from "../../components/NavBar";
 import { Footer } from "../../components/Footer";
+import { Filter } from "../../components/Filter";
 import { CardCarOwner } from "../../components/CardCarOwner";
 
 export const Homepage = () => {
@@ -13,6 +14,7 @@ export const Homepage = () => {
       <Button variant="solid" bg="brand.2" color="whiteFixed">
         Teste
       </Button>
+      <Filter />
       <CardCarOwner />
       <Footer />
     </>
