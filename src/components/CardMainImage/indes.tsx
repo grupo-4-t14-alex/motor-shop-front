@@ -5,9 +5,7 @@ export const CardMainImage = () => {
   return (
     <Flex
       w={{ base: "350px", md: "800px" }}
-      //   w={"80%"}
       h={"350px"}
-      backgroundColor={"aqua"}
       justifyContent={"center"}
       alignItems={"center"}
       borderRadius={"5px"}
