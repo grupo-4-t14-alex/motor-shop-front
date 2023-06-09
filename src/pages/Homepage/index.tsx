@@ -1,41 +1,19 @@
-import { Flex, FormControl, FormHelperText, FormLabel, Input, useDisclosure } from "@chakra-ui/react"
-import ModalContainer from "../../components/Modal"
+import { Container, Image } from "@chakra-ui/react";
+import { NavBarComponent } from "../../components/NavBar";
+import { Footer } from "../../components/Footer";
+import { Filter } from "../../components/Filter";
+import imgHomePage from "../../assets/img/imgHomePage.png"
 
 
-const Homepage = ( ) => { 
-
-
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    return ( 
-        <Flex w={"100%"} h={"100vh"} bg={"green"} align={"center"} justify={"center"} flexDir={"column"}>
-
-            <button onClick={()=> onOpen()} > adasdasd</button>
-
-            <ModalContainer title="teste" onClose={onClose} isOpen={isOpen}>
-                <form action="">
-
-            <   FormControl mb={"4"}>
-                <FormLabel>Email address</FormLabel>
-                <Input type='email' />
-                </FormControl>
-            <   FormControl mb={"4"}>
-                <FormLabel>Email address</FormLabel>
-                <Input type='email' />
-                </FormControl>
-            <   FormControl mb={"4"}>
-                <FormLabel>Email address</FormLabel>
-                <Input type='email' />
-                </FormControl>
-
-                </form>
-            </ModalContainer>
-
-            
-            
-        </Flex>
-    )
-
-}
-
-
-export { Homepage }
+export const Homepage = () => {
+  return (
+    <>
+      <NavBarComponent />
+      <Container minH="100vh" height="100%" maxW="1600px" pb="60px">
+        <Image src={imgHomePage}/>
+        <Filter/>
+        <Footer />
+      </Container>
+    </>
+  );
+};

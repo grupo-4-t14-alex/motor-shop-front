@@ -6,12 +6,12 @@ interface Props {
     children: ReactNode
     isOpen: boolean
     onClose: () => void
+    variant: string
 }
 
-const ModalContainer = ({title, children, isOpen, onClose}: Props) => {
-    
+const ModalContainer = ({title, children, isOpen, onClose, variant}: Props) => {
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal variant={variant} isOpen={isOpen} onClose={onClose}>
             <ModalOverlay/>
             <ModalContent>
                 <ModalHeader>
