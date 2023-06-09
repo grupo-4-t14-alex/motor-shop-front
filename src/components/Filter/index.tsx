@@ -5,7 +5,8 @@ export const Filter = () => {
     <Flex
       h="90vh"
       mb="100px"
-      maxW="30%"
+      maxW="25%"
+      w={"100%"}
       mt="40px"
       ml="20px"
       flexDirection="column"
