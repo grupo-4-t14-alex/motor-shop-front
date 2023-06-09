@@ -18,6 +18,7 @@ export const CardStoragePhoto = () => {
       h={{ base: "310px", md: "350px" }}
       flexDirection={"column"}
       padding={"20px"}
+      backgroundColor={"whiteFixed"}
       gap={"30px"}
       borderRadius={"5px"}
     >

@@ -9,6 +9,7 @@ export const CardCarOwner = () => {
       flexDirection={"column"}
       alignItems={"center"}
       padding={"20px"}
+      backgroundColor={"whiteFixed"}
       gap={"30px"}
       borderRadius={"5px"}
     >

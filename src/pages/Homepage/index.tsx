@@ -26,8 +26,6 @@ export const Homepage = () => {
             h={"400px"}
             maxW={"70%"}
             display={"grid"}
-            // flexWrap={"wrap"}
-            // justifyContent={"space-between"}
             gridTemplateColumns={"repeat(3, 1fr)"}
             gap={6}
           >
