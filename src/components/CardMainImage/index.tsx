@@ -9,6 +9,7 @@ export const CardMainImage = () => {
       justifyContent={"center"}
       alignItems={"center"}
       borderRadius={"5px"}
+      backgroundColor={"whiteFixed"}
     >
       <Image src={imgCar} />
     </Flex>

@@ -7,6 +7,7 @@ export const CardTitleCars = () => {
       h={{ base: "350px", md: "250px" }}
       flexDirection={"column"}
       justifyContent={"space-between"}
+      backgroundColor={"whiteFixed"}
       gap={"40px"}
       borderRadius={"5px"}
       padding={"40px"}
