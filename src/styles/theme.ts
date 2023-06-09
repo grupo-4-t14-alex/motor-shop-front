@@ -1,6 +1,7 @@
 import { extendTheme } from "@chakra-ui/react";
 import { Buttons } from "./buttons";
 import { InputConfig } from "./input";
+import { modalTheme } from "../components/Modal/style";
 
 const theme = extendTheme({
   fonts: {
@@ -80,7 +81,8 @@ const theme = extendTheme({
   },
   components: {
     Buttons,
-    Input: InputConfig
+    Input: InputConfig,
+    Modal: modalTheme
   }
 });
 export default theme;
