@@ -21,14 +21,15 @@ export const Footer = () => {
       alignItems={"center"}
       justifyContent={"center"}
       h={{ base: "230px", md: "100px" }}
-      paddingInline={{ base: "10px", md: "60px" }}
+      padding={"10px"}
     >
       <Flex
         justifyContent={"space-between"}
         flexDirection={{ base: "column", md: "row" }}
+        paddingInline={{ base: "16px", md: "16px" }}
         w={"100%"}
         h={"100%"}
-        p={"20px"}
+        maxW={"1600px"}
         alignItems={"center"}
       >
         <Img src={Logo} w={"150px"} h={"26px"} />
