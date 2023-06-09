@@ -6,7 +6,7 @@ export const CardDescriptionCars = () => {
       w={{ base: "350px", md: "800px" }}
       h={{ base: "350px", md: "200px" }}
       flexDirection={"column"}
-      backgroundColor={"aqua"}
+      backgroundColor={"whiteFixed"}
       padding={"40px"}
       gap={"30px"}
       borderRadius={"5px"}
