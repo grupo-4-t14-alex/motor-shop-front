@@ -13,7 +13,7 @@ import { CardUser } from "../CardUser";
 
 export const CardProducts = () => {
   return (
-    <Card w={"300px"} h={"350px"} variant="unstyled">
+    <Card w={"300px"} h={"350px"} variant="unstyled" zIndex={"-1"}>
       <CardBody marginBottom={0}>
         <Flex
           w={"100%"}
