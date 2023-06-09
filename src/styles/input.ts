@@ -2,16 +2,28 @@ import { defineStyleConfig } from "@chakra-ui/react";
 
 
 export const InputConfig = defineStyleConfig({
-  baseStyle: {},
+  baseStyle: {
+    _hover: {
+      borderColor: "gray.800",
+    },
+    _focus: {
+      border: "1px solid transparent",
+    },
+    borderRadius: "4px",
+    fontSize: "16px",
+  },
 
   sizes: {},
 
   variants: {
-    test: { 
-     
-    }
 
   },
 
-  defaultProps: { size:"lg", borderColor:"grey.7", _hover:{borderColor:"grey.8"}, _focus:{ border: "1px solid transparent"}, focusBorderColor:"brand.2",fontFamily:"inter", borderRadius:"4px"},
+  defaultProps: { size:"lg", borderColor:"grey.7",  focusBorderColor:"brand.2",fontFamily:"inter"},
 })
+
+
+
+
+//  modelo de input 
+//  <Input _hover={{borderColor:"grey.8"}} _focus={ {border: "1px solid transparent"}} borderRadius="4px" >

@@ -1,20 +1,41 @@
-import { Box, Button } from "@chakra-ui/react";
-import { NavBarComponent } from "../../components/NavBar";
-import { Footer } from "../../components/Footer";
-import { Filter } from "../../components/Filter";
+import { Flex, FormControl, FormHelperText, FormLabel, Input, useDisclosure } from "@chakra-ui/react"
+import ModalContainer from "../../components/Modal"
 
-export const Homepage = () => {
-  return (
-    <>
-      <NavBarComponent />
-      <Box bg="grey.1" w="100%" p={4} color="white">
-        Box Test
-      </Box>
-      <Button variant="solid" bg="brand.2" color="whiteFixed">
-        Teste
-      </Button>
-      <Filter/>
-      <Footer />
-    </>
-  );
-};
+
+const Homepage = ( ) => { 
+
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    return ( 
+        <Flex w={"100%"} h={"100vh"} bg={"green"} align={"center"} justify={"center"} flexDir={"column"}>
+
+            <button onClick={()=> onOpen()} > adasdasd</button>
+
+            <ModalContainer title="teste" onClose={onClose} isOpen={isOpen}>
+                <form action="">
+
+            <   FormControl mb={"4"}>
+                <FormLabel>Email address</FormLabel>
+                <Input type='email' />
+                </FormControl>
+            <   FormControl mb={"4"}>
+                <FormLabel>Email address</FormLabel>
+                <Input type='email' />
+                </FormControl>
+            <   FormControl mb={"4"}>
+                <FormLabel>Email address</FormLabel>
+                <Input type='email' />
+                </FormControl>
+
+                </form>
+            </ModalContainer>
+
+            
+            
+        </Flex>
+    )
+
+}
+
+
+export { Homepage }

@@ -9,6 +9,7 @@ interface Props {
 }
 
 const ModalContainer = ({title, children, isOpen, onClose}: Props) => {
+    
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay/>
