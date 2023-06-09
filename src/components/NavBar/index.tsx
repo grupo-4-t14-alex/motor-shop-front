@@ -35,10 +35,12 @@ export const NavBarComponent = () => {
       paddingInline={{base: "60px", md: "60px"}}
       >
         <Img src={Logo} w={"153px"} h={"27px"} />
+
         {
           web ? (
 
           <Flex display={"flex"}>
+
             <Button onClick={() => navigate("/login")} bg={"none"} color={"grey.2"}>Fazer Login</Button>
             <Button onClick={() => navigate("/register")} bg={"none"} border={"1px"} borderColor={"grey.0"}>Cadastrar</Button>
           </Flex>
@@ -47,17 +49,17 @@ export const NavBarComponent = () => {
             <Menu>
               {({ isOpen }) => (
                 <>
-                  <MenuButton isActive={isOpen} as={Button} rightIcon={isOpen ? <CloseIcon/> : <HamburgerIcon/> }>
-                  </MenuButton>
-                  <MenuList>
-                    <MenuItem>Carros</MenuItem>
-                    <MenuItem>Motos</MenuItem>
-                    <MenuItem>Leilão</MenuItem>
-                    <div>
-
-                    </div>
-                    <MenuItem onClick={() => navigate("/")}>Fazer Login</MenuItem>
-                  </MenuList>
+                <MenuButton isActive={isOpen} as={Button} rightIcon={isOpen ? <CloseIcon/> : <HamburgerIcon/> }>
+                </MenuButton>
+                <MenuList>
+                <MenuItem>Carros</MenuItem>
+                <MenuItem>Motos</MenuItem>
+                <MenuItem>Leilão</MenuItem>
+                <div>
+                
+                </div>
+                <MenuItem onClick={() => navigate("/")}>Fazer Login</MenuItem>
+                </MenuList>
                 </>
               )}
             </Menu>
