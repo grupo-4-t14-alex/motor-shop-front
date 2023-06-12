@@ -3,7 +3,6 @@ import { Box, Flex, Input, Text } from "@chakra-ui/react";
 export const Filter = () => {
   return (
     <Flex
-      h="90vh"
       mb="100px"
       maxW="25%"
       w={"100%"}
@@ -11,6 +10,7 @@ export const Filter = () => {
       ml="20px"
       flexDirection="column"
       gap="15px"
+      zIndex={-1}
     >
       <Box>
         <Text fontSize="heading.4" fontWeight="600">
