@@ -10,7 +10,7 @@ export const Filter = () => {
       ml="20px"
       flexDirection="column"
       gap="15px"
-      zIndex={-1}
+      zIndex={0}
     >
       <Box>
         <Text fontSize="heading.4" fontWeight="600">
