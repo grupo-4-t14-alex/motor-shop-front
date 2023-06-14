@@ -14,7 +14,6 @@ export const Homepage = () => {
         height="100%"
         maxW="1600px"
         paddingBottom={"200px"}
-        marginBottom={"500px"}
         marginTop={"100px"}
       >
         <Image src={imgHomePage} />
