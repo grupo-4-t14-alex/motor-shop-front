@@ -35,6 +35,21 @@ const footerEndVariant = definePartsStyle({
     }
 })
 
+const filterVariant = definePartsStyle({
+    dialog: {
+        margin: "0",
+        width: "100%",
+        minW: "98%"
+    },
+    body: {
+        maxW: "100%"
+    },
+    footer: {
+        display: "flex",
+        justifyContent: "center"
+    }
+})
+
 const footerStartVariant = definePartsStyle({
     footer: {
         display: "flex",
@@ -45,5 +60,5 @@ const footerStartVariant = definePartsStyle({
 
 export const modalTheme = defineMultiStyleConfig({
     baseStyle, 
-    variants: { footerStartVariant, footerEndVariant }
+    variants: { footerStartVariant, footerEndVariant, filterVariant }
 })
