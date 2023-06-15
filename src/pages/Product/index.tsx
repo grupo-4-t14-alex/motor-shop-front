@@ -31,12 +31,14 @@ export const Product = () => {
             <CardMainImage />
             <CardTitleCars />
             <CardDescriptionCars />
-            <CommentsArea />
-            <CardComment />
+            <Flex flexDirection={"column"} gap={"20px"}>
+              <CardStoragePhoto />
+              <CardCarOwner />
+            </Flex>
           </Flex>
           <Flex flexDirection={"column"} gap={"20px"}>
-            <CardStoragePhoto />
-            <CardCarOwner />
+            <CommentsArea />
+            <CardComment />
           </Flex>
         </Flex>
       </Container>
