@@ -49,17 +49,14 @@ export const NavBarComponent = () => {
         {web ? (
           <Flex display={"flex"}>
             <Button
+              variant="link"
               onClick={() => navigate("/login")}
-              bg={"none"}
-              color={"grey.2"}
             >
               Fazer Login
             </Button>
             <Button
               onClick={() => navigate("/register")}
-              bg={"none"}
-              border={"1px"}
-              borderColor={"grey.0"}
+              variant='outline2'
             >
               Cadastrar
             </Button>
