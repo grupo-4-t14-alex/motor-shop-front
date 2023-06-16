@@ -1,7 +1,8 @@
-import { ReactNode, createContext } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { LoginData } from "../pages/Login/validator";
 import api from "../services/api";
-import { useNavigate } from "react-router-dom";
 
 interface AuthProviderProps {
     children: ReactNode
@@ -9,6 +10,7 @@ interface AuthProviderProps {
 
 interface AuthContextValues {
     signIn: (data: LoginData) => void
+    loading: boolean
 }
 
 export const AuthContext = createContext<AuthContextValues>({} as AuthContextValues)
@@ -16,6 +18,19 @@ export const AuthContext = createContext<AuthContextValues>({} as AuthContextVal
 export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     const navigate = useNavigate()
+    const [ loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const token = localStorage.getItem("motors-shop:token")
+
+        if(!token){
+            setLoading(false)
+            return
+        }
+
+        api.defaults.headers.common.authorization = `Bearer ${token}`
+        setLoading(false)
+    }, [])
 
     const signIn = async (data: LoginData) => {
         try {
@@ -25,7 +40,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
             api.defaults.headers.common.authorization = `Bearer ${token}`
 
-            localStorage.setItem('motors-shop:token', token)
+            localStorage.setItem("motors-shop:token", token)
 
             navigate("product") //se admin -> profileViewAdmin, se não admin -> página normal com anúncios, mas nome renderizado
 
@@ -35,7 +50,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     return (
-        <AuthContext.Provider value={{ signIn }}>
+        <AuthContext.Provider value={{ signIn, loading }}>
             {children}
         </AuthContext.Provider>
     )
