@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }, [])
 
     const signIn = async (data: LoginData) => {
+        console.log("signin")
         try {
             const response = await api.post("/login", data)
             

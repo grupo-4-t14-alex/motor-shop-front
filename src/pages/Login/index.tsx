@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormLabel, Heading, Input, Link } from "@chakra-ui/react"
+import { Box, Button, FormControl, FormErrorMessage, FormLabel, Heading, Input, Link } from "@chakra-ui/react"
 import { NavBarComponent } from "../../components/NavBar";
 import { Footer } from "../../components/Footer";
 import { useForm } from "react-hook-form"
@@ -13,7 +13,7 @@ export const Login = () => {
     const { signIn } = useAuth()
     const navigate = useNavigate();
 
-    const { register, handleSubmit } = useForm<LoginData>({
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginData>({
         resolver: zodResolver(loginSchema)
     })
 
@@ -39,40 +39,36 @@ export const Login = () => {
             borderRadius={"4px"}
             padding={"5%"}
         >
-            <form onSubmit={handleSubmit(signIn)} >
-                <FormControl
-                    gap={"10px"} 
-                    display={"flex"} 
-                    flexDirection={"column"}
-                >
+            <form onSubmit={handleSubmit(signIn)}>
+                <Box>
                     <Heading 
                         fontSize={"heading.3"} 
                         textAlign={"left"} 
                         marginBottom={"15px"}>Login</Heading>
+                        
+                    <FormControl>
+                        <FormLabel fontSize={"inputLabel"} >Email</FormLabel>
+                        <Input {...register("email")}
+                             type="email" id="email" placeholder="Digitar email" marginBottom={"15px"} />
+                        <FormErrorMessage fontSize={"lg"}>{errors.email?.message}</FormErrorMessage>
+                    </FormControl>    
 
-                    <FormLabel fontSize={"inputLabel"}>Email</FormLabel>
-                    <Input {...register("email")}
-                        isRequired type="email" id="email" placeholder="Digitar email" marginBottom={"15px"} />
-                
-
-                    <FormLabel>Password</FormLabel>
-                    <Input {...register("password")} 
-                        isRequired type="password" id="password" placeholder="Digitar senha" marginBottom={"15px"}  />
-                
-
+                    <FormControl >
+                        <FormLabel>Password</FormLabel>
+                        <Input {...register("password")} 
+                             type="password" id="password" placeholder="Digitar senha" marginBottom={"15px"}  />
+                        <FormErrorMessage fontSize={"lg"}>{errors.password?.message}</FormErrorMessage>
+                    </FormControl>
+                    
                     <Link marginBottom={"30px"}>Esqueci minha senha</Link>
-
                     <Button type="submit" onClick={() => console.log("cheguei")} marginBottom={"20px"}>Entrar</Button>
-
-                    <Heading fontSize={"heading.5"} marginBottom={"20px"}>Ainda não possui conta?</Heading>
-
-                    <Button onClick={() => navigate("/register")}>Cadastrar</Button>
-                </FormControl>
+                </Box>
             </form>
+            <Heading fontSize={"heading.5"} marginBottom={"20px"}>Ainda não possui conta?</Heading>
+
+            <Button onClick={() => navigate("/register")}>Cadastrar</Button>
         </Box>
         <Footer/>
     </Box>
     )
 }
-
-
