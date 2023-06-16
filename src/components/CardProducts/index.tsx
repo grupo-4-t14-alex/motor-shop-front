@@ -13,7 +13,23 @@ import imgTeste from "../../assets/img/imgteste.png";
 import imgIcon from "../../assets/img/iconCard.png";
 import { CardUser } from "../CardUser";
 
-export const CardProducts = () => {
+interface iProducts {
+  product: {
+    id: number;
+    brand: string;
+    model: string;
+    year: number;
+    fuel: number;
+    km: number;
+    color: string;
+    fipePrice: number;
+    sellPrice: number;
+    description: string;
+    isActive: boolean;
+  };
+}
+
+export const CardProducts = ({ product }: iProducts) => {
   return (
     <Card
       w={"300px"}
@@ -50,7 +66,7 @@ export const CardProducts = () => {
               paddingY={"1px"}
             >
               <Text color={"whiteFixed"} fontSize={"body.2"}>
-                Inativo
+                {product.isActive ? "Ativo" : "Inativo"}
               </Text>
             </Flex>
           )}
@@ -58,7 +74,7 @@ export const CardProducts = () => {
         </Flex>
         <Stack mt="4" spacing="3">
           <Heading fontSize={"heading.7"} fontWeight={"bold"}>
-            Maserati - Ghibli
+            {product.brand}
           </Heading>
           <Text
             noOfLines={2}
@@ -66,8 +82,7 @@ export const CardProducts = () => {
             fontSize={"body.2"}
             fontWeight={"normal"}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            hendrerit nisi non sem tincidunt, ut iaculis enim sagittis.
+            {product.description}
           </Text>
         </Stack>
         <Flex mt={"20px"} flexDirection={"column"} gap={"20px"}>
@@ -82,7 +97,7 @@ export const CardProducts = () => {
                 fontSize={"buttonMediumText"}
                 fontWeight={"medium"}
               >
-                0 KM
+                {product.km} KM
               </Text>
               <Text
                 backgroundColor={"brand.4"}
@@ -92,11 +107,11 @@ export const CardProducts = () => {
                 fontSize={"buttonMediumText"}
                 fontWeight={"medium"}
               >
-                2019
+                {product.year}
               </Text>
             </Flex>
             <Text fontSize={"heading.7"} fontWeight={"bold"}>
-              R$ 00.000,00
+              R$ {product.sellPrice}
             </Text>
           </Flex>
         </Flex>
