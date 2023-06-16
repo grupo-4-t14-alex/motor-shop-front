@@ -14,11 +14,12 @@ export const CardStoragePhoto = () => {
 
   return (
     <Flex
-      w={{ base: "310px", md: "400px" }}
+      w={{ base: "350px", md: "800px", xl: "400px" }}
       h={{ base: "310px", md: "350px" }}
       flexDirection={"column"}
       padding={"20px"}
       backgroundColor={"whiteFixed"}
+      alignItems={"center"}
       gap={"30px"}
       borderRadius={"5px"}
     >

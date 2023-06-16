@@ -38,20 +38,22 @@ export const CardProducts = () => {
             right={"0"}
             padding={"0"}
           />
-          <Flex
-            position={"absolute"}
-            top={"0"}
-            left={"0"}
-            padding={"0"}
-            margin={"10px"}
-            backgroundColor={"brand.2"}
-            paddingInline={"5px"}
-            paddingY={"1px"}
-          >
-            <Text color={"whiteFixed"} fontSize={"body.2"}>
-              Inativo
-            </Text>
-          </Flex>
+          {window.location.pathname === "/profileViewAdmin" && (
+            <Flex
+              position={"absolute"}
+              top={"0"}
+              left={"0"}
+              padding={"0"}
+              margin={"10px"}
+              backgroundColor={"brand.2"}
+              paddingInline={"5px"}
+              paddingY={"1px"}
+            >
+              <Text color={"whiteFixed"} fontSize={"body.2"}>
+                Inativo
+              </Text>
+            </Flex>
+          )}
           <Image src={imgTeste} />
         </Flex>
         <Stack mt="4" spacing="3">
@@ -98,10 +100,12 @@ export const CardProducts = () => {
             </Text>
           </Flex>
         </Flex>
-        <ButtonGroup marginTop={"20px"}>
-          <Button>Editar</Button>
-          <Button>Ver detalhes</Button>
-        </ButtonGroup>
+        {window.location.pathname === "/profileViewAdmin" && (
+          <ButtonGroup marginTop={"20px"}>
+            <Button>Editar</Button>
+            <Button>Ver detalhes</Button>
+          </ButtonGroup>
+        )}
       </CardBody>
     </Card>
   );
