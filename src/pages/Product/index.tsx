@@ -25,13 +25,21 @@ export const Product = () => {
           w={"100%"}
           h={"100%"}
           marginTop={"-580px"}
-          justifyContent={"space-between"}
+          justifyContent={{ base: "center", xl: "space-between" }}
+          alignItems={{ base: "center", xl: "normal" }}
+          flexDirection={"column"}
         >
-          <Flex flexDirection={"column"} gap={"20px"}>
-            <CardMainImage />
-            <CardTitleCars />
-            <CardDescriptionCars />
-            <Flex flexDirection={"column"} gap={"20px"}>
+          <Flex
+            gap={"20px"}
+            justifyContent={"space-between"}
+            flexDirection={{ base: "column", xl: "row" }}
+          >
+            <Flex flexDirection={"column"} gap={"20px"} paddingBottom={"20px"}>
+              <CardMainImage />
+              <CardTitleCars />
+              <CardDescriptionCars />
+            </Flex>
+            <Flex flexDirection={"column"} gap={"20px"} paddingBottom={"20px"}>
               <CardStoragePhoto />
               <CardCarOwner />
             </Flex>

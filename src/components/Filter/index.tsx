@@ -11,7 +11,8 @@ export const Filter = () => {
       flexDirection="column"
       gap="15px"
       zIndex={0}
-      display={{base: "none", md: "flex"}}
+      display={{ base: "none", md: "flex" }}
+      marginBottom={"200px"}
     >
       <Box>
         <Text fontSize="heading.4" fontWeight="600">
