@@ -12,8 +12,12 @@ const RoutesPages = () => {
     <>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
+        <Route path="/register" element={ <RegisterPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/product" element={<Product />} />
+          <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
+        </Route>
         {/* <Route path="/login" element={} />
         <Route path="/profileView" element={} />
         <Route path="/register" element={} />
