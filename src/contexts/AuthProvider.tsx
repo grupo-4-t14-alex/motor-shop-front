@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }, [])
 
     const signIn = async (data: LoginData) => {
+        console.log("signin")
         try {
             const response = await api.post("/login", data)
             
@@ -42,7 +43,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
             localStorage.setItem("motors-shop:token", token)
 
-            navigate("product") //se admin -> profileViewAdmin, se não admin -> página normal com anúncios, mas nome renderizado
+            navigate("") //se admin -> profileViewAdmin, se não admin -> página normal com anúncios, mas nome renderizado
 
         } catch (error) {
             console.error(error)

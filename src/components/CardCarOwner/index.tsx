@@ -1,11 +1,19 @@
-import { Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import img from "../../assets/img/imgUser2.png";
 
 export const CardCarOwner = () => {
   return (
     <Flex
-      w={{ base: "310px", md: "400px" }}
-      h={{ base: "400px", md: "400px" }}
+      w={{ base: "350px", md: "800px", xl: "400px" }}
+      h={"400px"}
       flexDirection={"column"}
       alignItems={"center"}
       padding={"20px"}
