@@ -7,12 +7,10 @@ import { Flex, ModalBody, ModalFooter } from "@chakra-ui/react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IcreateAnnounce, createAnnounceSchema } from "./validators"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import axios from "axios"
-import api from "../../services/api"
-import { useToast } from '@chakra-ui/react'
-import { boolean } from "zod"
-
+import { useContext } from "react";
+import { AnnouncementContext } from "../../contexts/AnnouncementContext"
 
 export const FormCreateAnnouncement = () => {
     
@@ -22,76 +20,7 @@ export const FormCreateAnnouncement = () => {
     const {register, handleSubmit } = useForm<IcreateAnnounce>({
         resolver: zodResolver(createAnnounceSchema)
     })
-
-    const [ updatePage, setUpdatePage ] = useState(true)
-
-    const toast = useToast()
-    
-    const CreateAnnouncement = async ( data: IcreateAnnounce) => { 
-        data.year = Number(model?.year!)
-        data.fipePrice = model?.value!
-        data.fuel = model?.fuel!
-        data.sellPrice = Number(data.sellPrice)
-        data.km = Number(data.km)
-        console.log(data)
-
-        try {
-            const token = localStorage.getItem("motors-shop:token")
-            await api.post( "/cars", data,{headers:{Authorization: `Bearer ${token}`,}})
-
-            toast({
-                title: 'Annoucement created',
-                description: "We've created your Annoucement for you.",
-                status: 'success',
-                position: "top-right",
-                duration: 2000,
-                isClosable: true,
-              })
-
-              setUpdatePage(!updatePage)
-            
-            
-            
-        } catch (error) {
-            toast({
-                title: 'Try again later',
-                description: "Try again later",
-                status: 'error',
-                position: "top-right",
-                duration: 2000,
-                isClosable: true,
-              })
-            
-              setUpdatePage(!updatePage)
-        }
-    }
-
-    const onError = (errors:any, e:any) => console.log(errors, e);
-
-    interface Car {
-        name: string;
-      }
-      
-    type CarData = {
-        [brand: string]: Car[];
-      };
-
-    interface Car2 {
-        id: string;
-        name: string;
-        brand: string;
-        year: number;
-        fuel: number;
-        value: number;
-      }
-
-    const [resApiForm, setResApiForm] = useState({} as CarData )
-    const [resApiForm2, setResApiForm2] = useState([] as Car2[])
-    const [marca, setMarca] = useState("" as string)
-    const [model, setModel] = useState({} as Car2 | undefined)
-    const arrayFuel = ["flex", "hibrido", "eletrico"]
-
-
+    const { ops1 ,handlerModel, handlerBrand ,CreateAnnouncement, onError, resApiForm, setResApiForm, resApiForm2, setResApiForm2, marca, setMarca, model, setModel,arrayFuel  } = useContext(AnnouncementContext);
 
     useEffect(() => {
         axios({
@@ -103,16 +32,6 @@ export const FormCreateAnnouncement = () => {
 
     }, [])
 
-
-    const handlerBrand = async (value: string)  => {
-        setMarca(value)
-
-    }
-    const handlerModel= async (value: string)  => {
-        setModel(resApiForm2.find((elem)=> elem.name == value))
-        // setInputValue(resApiForm2.find((elem)=> elem.name == value)?.fuel)
-    }
-    
     useEffect(()=>{
         axios({
             method: "get",
@@ -123,12 +42,9 @@ export const FormCreateAnnouncement = () => {
         
     }, [marca])
 
-
-    const ops1 = Object.keys(resApiForm)
-
     return(
         <>
-            <button onClick={onOpen}>teste</button>
+            <Button w={"150px"} onClick={onOpen}>Criar anuncio</Button>
             <ModalContainer variant="footerStartVariant" title="Criar anuncio" onClose={onClose} isOpen={isOpen} >
             <form onSubmit={ handleSubmit(CreateAnnouncement, onError)}>
             <ModalBody>

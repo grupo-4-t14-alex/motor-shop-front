@@ -28,5 +28,21 @@ export type IcreateAnnounce = {
 
 }
 
+export interface Car {
+	name: string;
+  }
+  
+export type CarData = {
+	[brand: string]: Car[];
+  };
+
+export interface Car2 {
+	id: string;
+	name: string;
+	brand: string;
+	year: number;
+	fuel: number;
+	value: number;
+  }
 
 export { createAnnounceSchema }

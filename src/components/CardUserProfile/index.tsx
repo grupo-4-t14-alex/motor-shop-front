@@ -1,5 +1,6 @@
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
 import img from "../../assets/img/imgUser2.png";
+import { FormCreateAnnouncement } from "../formCreateAnnouncement";
 
 export const CardUserProfile = () => {
   return (
@@ -32,7 +33,8 @@ export const CardUserProfile = () => {
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s
       </Text>
-      <Button w={"150px"}>Criar anuncio</Button>
+      <FormCreateAnnouncement/>
+      {/* //<Button w={"150px"}>Criar anuncio</Button> */}
     </Flex>
   );
 };
