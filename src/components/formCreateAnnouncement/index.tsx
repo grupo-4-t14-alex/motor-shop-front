@@ -21,15 +21,20 @@ export const FormCreateAnnouncement = () => {
         resolver: zodResolver(createAnnounceSchema)
     })
 
+
+    
     const CreateAnnouncement = async ( data: IcreateAnnounce) => { 
         data.year = Number(model?.year!)
         data.fipePrice = model?.value!
         data.fuel = model?.fuel!
         data.sellPrice = Number(data.sellPrice)
+        data.km = Number(data.km)
+        console.log(data)
+
         try {
-            await api.post( "cars", data)
+            // const token = localStorage.getItem()
             // await api.post( "client", data,{headers:{Authorization: `Bearer ${token}`,}})
-            console.log("funfo")
+            
             
         } catch (error) {
             console.log(error)
@@ -61,6 +66,7 @@ export const FormCreateAnnouncement = () => {
     const [marca, setMarca] = useState("" as string)
     const [model, setModel] = useState({} as Car2 | undefined)
     const arrayFuel = ["flex", "hibrido", "eletrico"]
+
 
 
     useEffect(() => {
@@ -133,7 +139,7 @@ export const FormCreateAnnouncement = () => {
 
             <FormControl mb={"5"} >
                 <FormLabel >Quilometragem</FormLabel>
-                    <Input type='text' borderRadius={"4px"} {...register("km")} />
+                    <Input type='number' borderRadius={"4px"} {...register("km")} />
             </FormControl> 
 
             <FormControl mb={"5"} >
@@ -163,13 +169,11 @@ export const FormCreateAnnouncement = () => {
             </FormControl>
 
 
-
-
             </ModalBody>
 
-            <ModalFooter>
+            <ModalFooter display={"flex"} justifyContent={"flex-end"}>
 
-                <Button type="submit">dsasdajsdjaksd</Button>
+                <Button type="submit" variant={"custom"} >asdasd</Button>
 
 
             </ModalFooter>

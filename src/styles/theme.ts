@@ -1,6 +1,6 @@
 import { FormControl, FormLabel, extendTheme } from "@chakra-ui/react";
-import { Buttons } from "./buttons";
-import { InputConfig, inputTheme } from "./input";
+import { Button } from "./buttons";
+import { InputConfig } from "./input";
 import { modalTheme } from "../components/Modal/style";
 import { formLabelConfig } from "./formLabel";
 import { formControlConfig } from "./form";
@@ -8,6 +8,7 @@ import { formControlConfig } from "./form";
 const theme = extendTheme({
   fonts: {
     body: "'Lexend', sans-serif",
+    button: "'Inter', sans-serif",
   },
   colors: {
     brand: {
@@ -82,12 +83,13 @@ const theme = extendTheme({
     normal: 400,
   },
   components: {
-    Buttons,
-    Input: InputConfig ,
+    Button: Button,
+    Input: InputConfig,
     Modal: modalTheme,
     FormLabel: formLabelConfig,
     FormControl:formControlConfig,
     Select: InputConfig,
+    Textarea: InputConfig,
 
   }
 });

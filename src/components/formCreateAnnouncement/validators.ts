@@ -5,11 +5,12 @@ const createAnnounceSchema = z.object({
 	model: z.string().nonempty("this field cannot be empty"),
 	year: z.string(),
 	fuel:z.string(),
-	km: z.string().nonempty("this field cannot be empty"),
+	km: z.number(),
 	color: z.string().nonempty("this field cannot be empty"),
 	fipePrice: z.string(),
 	sellPrice: z.string().nonempty("this field cannot be empty"),
 	description: z.string().nonempty("this field cannot be empty"),
+
 })
 
 
@@ -19,7 +20,7 @@ export type IcreateAnnounce = {
 	model: string,
 	year: number,
 	fuel: number,
-	km: string,
+	km: number,
 	color: string,
 	fipePrice: number,
 	sellPrice: number,
