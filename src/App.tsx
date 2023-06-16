@@ -2,7 +2,9 @@ import RoutesPages from "./routes";
 
 function App() {
   return (
-    <RoutesPages/>
+   
+      <RoutesPages/>
+
   )
 }
 
