@@ -6,12 +6,11 @@ import { BrowserRouter } from "react-router-dom";
 import theme from "./styles/theme.ts";
 
 
-
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <App />
+          <App />
       </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>
