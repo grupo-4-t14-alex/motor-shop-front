@@ -1,22 +1,63 @@
-import { Button, Center, Container, Flex, Input, Text, Textarea } from "@chakra-ui/react"
+import { Button, Center, Flex, Input, Text, Textarea } from "@chakra-ui/react"
 import { NavBarComponent } from "../../components/NavBar"
 import { Link } from "react-router-dom"
 import { iFormRegister } from "./types"
 import {
-    FormControl,
+
     FormLabel,
-    FormErrorMessage,
-    FormHelperText,
   } from '@chakra-ui/react'
 import { useForm } from "react-hook-form"
 import { Footer } from "../../components/Footer"
+import { useContext, useState } from "react"
+import { UserContext } from "../../contexts/UserContext"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { registerSchema } from "./schema"
 
 export const RegisterPage = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<iFormRegister>()
+    const { registerUser } = useContext(UserContext)
 
-    const onSubmit = () => {
-        console.log("Hi")
+    const [isAdmin, setIsAdmin] = useState(false)
+
+    const { register, handleSubmit, formState: { errors } } = useForm<iFormRegister>({
+        resolver: zodResolver(registerSchema)
+    })
+
+    const isAdminTrue = () => {
+        setIsAdmin(true)
+        console.log(isAdmin);
+        
+    }
+
+    const isAdminFalse = () => {
+        setIsAdmin(false)
+        console.log(isAdmin);
+    }
+
+    const onSubmit = (data: iFormRegister) => {
+
+        data.admin = isAdmin
+
+        const userBody = {
+            name: data.name,
+            email: data.email,
+            cpf: data.cpf,
+            phone: data.phone,
+            birthDate: data.birthDate,
+            description: data.description,
+            admin: data.admin,
+            password: data.password,
+            address: {
+                cep: data.address.cep,
+                estate: data.address.estate,
+                city: data.address.city,
+                street: data.address.street,
+                number: data.address.number,
+                complement: data.address.complement
+            }
+        }
+        registerUser(userBody)
+        
     }
 
   return (
@@ -27,6 +68,8 @@ export const RegisterPage = () => {
             minH="100vh"
 
             height="100%"
+            paddingTop={"20px"}
+            paddingBottom={"20px"}
             marginTop={"80px"}
             zIndex={"2"}
             display={"flex"}
@@ -37,59 +80,68 @@ export const RegisterPage = () => {
                 <div style={{width: '22.125rem'}}>
                     <Text fontSize={"24px"} marginBottom={"20px"}>Cadastro</Text>
                     <Text fontSize={"14px"} marginBottom={"20px"}>Informações pessoais</Text>
-                    <form >
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        
                         <FormLabel>Nome</FormLabel>
-                        <Input marginBottom={"25px"} type="text"  placeholder="Nome completo" {...register("name")}/>
-                        {/* {errors.name && <p>{errors.name?.message}</p>} */}
+                        <Input marginBottom={"10px"} type="text"  placeholder="Nome completo" {...register("name", { required: true })}/>
+                        {errors.name && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.name?.message}</Text>}
                         <FormLabel>Email</FormLabel>
-                        <Input marginBottom={"25px"} type="text" placeholder="Ex: user@motosshop.com.br" {...register("email")}/>
-                        {/* {errors.email && <p>{errors.email?.message}</p>} */}
+                        <Input marginBottom={"10px"} type="text" placeholder="Ex: user@motosshop.com.br" {...register("email", { required: true })}/>
+                        {errors.email && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.email?.message}</Text>}
                         <FormLabel>CPF</FormLabel>
-                        <Input marginBottom={"25px"} type="text" placeholder="000.000.000-00" {...register("cpf")}/>
-                        {/* {errors.password && <p>{errors.password?.message}</p>} */}
+                        <Input marginBottom={"10px"} type="text" placeholder="000.000.000-00" {...register("cpf", { required: true })}/>
+                        {errors.cpf && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.cpf?.message}</Text>}
                         <FormLabel>Celular</FormLabel>
-                        <Input marginBottom={"25px"} type="text" placeholder="(DDD) 90000-0000" {...register("phone")}/>
-                        {/* {errors.contactNumber && <p>{errors.contactNumber?.message}</p>} */}
+                        <Input marginBottom={"10px"} type="text" placeholder="(DDD) 90000-0000" {...register("phone", { required: true })}/>
+                        {errors.phone && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.phone?.message}</Text>}
                         <FormLabel>Data de nascimento</FormLabel>
-                        <Input marginBottom={"25px"} type="text" placeholder="00/00/0000" {...register("birthDate")}/>
-                        {/* {errors.contactNumber && <p>{errors.contactNumber?.message}</p>} */}
+                        <Input marginBottom={"10px"} type="text" placeholder="00/00/0000" {...register("birthDate", { required: true })}/>
+                        {errors.birthDate && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.birthDate?.message}</Text>}
                         <FormLabel>Descrição</FormLabel>
-                        <Textarea placeholder="Digitar descrição" {...register("description")}/>
-                        {/* {errors.contactNumber && <p>{errors.contactNumber?.message}</p>} */}
+                        <Textarea placeholder="Digitar descrição" {...register("description", { required: true })}/>
+                        {errors.description && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.description?.message}</Text>}
 
                         <FormLabel marginTop={"25px"} marginBottom={"15px"}>Informações de endereço</FormLabel>
 
                         <FormLabel>CEP</FormLabel>
-                        <Input marginBottom={"25px"} type="text" placeholder="00000-000"/>
-                        {/* {errors.contactNumber && <p>{errors.contactNumber?.message}</p>} */}
+                        <Input marginBottom={"10px"} type="text" placeholder="00000-000" {...register("address.cep", { required: true })}/>
+                        {errors.address && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.address.cep?.message}</Text>}
                         <Flex marginBottom={"15px"}>
                             <Flex display={"flex"} flexDirection={"column"} marginRight={"10px"}>
                                 <FormLabel>Estado</FormLabel>
-                                <Input type="text" placeholder="Digitar estado"/>
-                                {/* {errors.contactNumber && <p>{errors.contactNumber?.message}</p>} */}
+                                <Input marginBottom={"10px"} type="text" placeholder="Digitar estado" {...register("address.estate", { required: true })}/>
+                                {errors.address && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.address.estate?.message}</Text>}
                             </Flex>
                             <Flex display={"flex"} flexDirection={"column"}>
-                                <FormLabel>CEP</FormLabel>
-                                <Input type="text" placeholder="Cidade"/>
-                                {/* {errors.contactNumber && <p>{errors.contactNumber?.message}</p>} */}
+                                <FormLabel>Cidade</FormLabel>
+                                <Input marginBottom={"10px"} type="text" placeholder="Cidade" {...register("address.city", { required: true })}/>
+                                {errors.address && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.address.city?.message}</Text>}
                             </Flex>
                         </Flex>
                         <FormLabel>Rua</FormLabel>
-                        <Input marginBottom={"15px"} type="text" placeholder="Nome da rua"/>
-                        {/* {errors.contactNumber && <p>{errors.contactNumber?.message}</p>} */}
+                        <Input marginBottom={"15px"} type="text" placeholder="Nome da rua" {...register("address.street", { required: true })}/>
+                        {errors.address && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.address.street?.message}</Text>}
                         <Flex marginBottom={"15px"}>
                             <Flex display={"flex"} flexDirection={"column"} marginRight={"10px"}>                                
                                 <FormLabel>Número</FormLabel>
-                                <Input type="text" placeholder="Digitar número"/>
-                                {/* {errors.contactNumber && <p>{errors.contactNumber?.message}</p>} */}
+                                <Input marginBottom={"10px"} type="text" placeholder="Digitar número" {...register("address.number", { required: true })}/>
+                                {errors.address && <Text>{errors.address.number?.message}</Text>}
                             </Flex>
                             <Flex display={"flex"} flexDirection={"column"}>
                                 <FormLabel>Complemento</FormLabel>
-                                <Input type="text" placeholder="Ex: apart 307"/>
-                                {/* {errors.contactNumber && <p>{errors.contactNumber?.message}</p>} */}
+                                <Input marginBottom={"10px"} type="text" placeholder="Ex: apart 307" {...register("address.complement", { required: true })}/>
+                                {errors.address && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.address.complement?.message}</Text>}
                             </Flex>
                         </Flex>
-                        <Button _hover={{ bg: "#00296F", color: "white" }} type="submit">Cadastrar</Button>
+                        <FormLabel>Tipo de conta</FormLabel>
+                        <Flex marginBottom={"10px"} display={"flex"} justifyContent={""} w={"100%"}>
+                            <Button onClick={() => isAdminFalse()} w={"50%"} bg="#4529E6" color="white" _focus={{ bg: "white", color: "#4529E6" }} >Comprador</Button>
+                            <Button onClick={() => isAdminTrue()} w={"50%"} bg="#4529E6" color="white" _focus={{ bg: "white", color: "#4529E6" }} >Anunciante</Button>
+                        </Flex>
+                        <FormLabel>Senha</FormLabel>
+                        <Input marginBottom={"15px"} type="text" placeholder="Digitar senha" {...register("password", { required: true })}/>
+                        {errors.password && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.password?.message}</Text>}
+                        <Button w={"100%"} bg="#4529E6" color="white" _hover={{ bg: "white", color: "#4529E6" }} type="submit" >Cadastrar</Button>
                     </form>
                     <Text marginTop={"15px"} textAlign={"center"}>Já possui conta? <Link to="/">Logar</Link></Text>
                 </div>
