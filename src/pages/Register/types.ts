@@ -5,5 +5,5 @@ export interface iFormRegister {
     phone: string,
     birthDate: string,
     description: string,
-    password: string
+    password: string,
 }

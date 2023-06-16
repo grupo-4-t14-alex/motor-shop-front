@@ -20,8 +20,8 @@ export const Footer = () => {
       right={0}
       alignItems={"center"}
       justifyContent={"center"}
-      h={{ base: "230px", md: "100px" }}
-      padding={"10px"}
+      h={{ base: "200px", md: "100px" }}
+      padding={"20px"}
     >
       <Flex
         justifyContent={"space-between"}

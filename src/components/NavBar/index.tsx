@@ -30,11 +30,12 @@ export const NavBarComponent = () => {
       bg={"grey.10"}
       alignItems={"center"}
       justifyContent={"center"}
-      h={{ base: "230px", md: "80px" }}
+      h={"80px"}
       position={"fixed"}
       top={"0"}
       left={"0"}
       w={"100%"}
+      zIndex={"1"}
     >
       <Flex
         alignItems={"center"}
