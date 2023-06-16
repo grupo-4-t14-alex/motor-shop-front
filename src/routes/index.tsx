@@ -6,7 +6,6 @@ import { TestPage } from "../pages/testPage";
 import { Login } from "../pages/Login";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 
-
 export const RoutesPages = () => {
   return (
     <>
@@ -15,8 +14,8 @@ export const RoutesPages = () => {
         <Route path="/product" element={<Product />} />
         <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
         <Route path="/test" element={<TestPage />} />
-        {/* <Route path="/login" element={} />
         <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/product" element={<Product />} />
           <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
@@ -27,7 +26,7 @@ export const RoutesPages = () => {
         <Route path="*" element={} /> */}
       </Routes>
     </>
-  )
-}
+  );
+};
 
 export default RoutesPages;

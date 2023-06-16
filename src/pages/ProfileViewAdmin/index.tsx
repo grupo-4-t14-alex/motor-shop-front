@@ -8,10 +8,9 @@ import api from "../../services/api";
 import { ProductContext } from "../../contexts/ProductsContext";
 
 export const ProfileViewAdmin = () => {
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhcmFoQG1haWwuY29tIiwiYWRtaW4iOnRydWUsImlhdCI6MTY4NjkzMzM1MiwiZXhwIjoxNjg3MDE5NzUyLCJzdWIiOiIxIn0.4jwnvqbZgQ2r4bhymneA7EQTVl2Ml26ErJROa42-lUg";
+  const token = localStorage.getItem("motors-shop:token");
 
-  const { setProductsProfile, productsProfile } = useContext(ProductContext);
+  const { setProductsProfile, updatePage } = useContext(ProductContext);
 
   useEffect(() => {
     (async () => {
@@ -21,15 +20,12 @@ export const ProfileViewAdmin = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data.data);
-        setProductsProfile(response.data.data);
+        setProductsProfile(response.data);
       } catch (error) {
         console.log(error);
       }
     })();
-  }, []);
-
-  console.log(productsProfile);
+  }, [updatePage]);
 
   return (
     <Box backgroundColor={"grey.9"} h={"100%"}>
