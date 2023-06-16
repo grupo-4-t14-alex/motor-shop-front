@@ -18,7 +18,7 @@ const baseStyle = definePartsStyle({
         alignItems: "center",
         fontSize: "heading.7",
         color: "grey.2",
-        fontFamily: "Roboto"
+        fontFamily: "Lexend"
     },
     body: {
         pr: "0",
