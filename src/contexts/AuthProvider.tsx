@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
             localStorage.setItem("motors-shop:token", token)
 
-            navigate("product") //se admin -> profileViewAdmin, se não admin -> página normal com anúncios, mas nome renderizado
+            navigate("") //se admin -> profileViewAdmin, se não admin -> página normal com anúncios, mas nome renderizado
 
         } catch (error) {
             console.error(error)
