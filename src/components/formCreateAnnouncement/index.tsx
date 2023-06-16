@@ -10,6 +10,8 @@ import { IcreateAnnounce, createAnnounceSchema } from "./validators"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import api from "../../services/api"
+import { useToast } from '@chakra-ui/react'
+import { boolean } from "zod"
 
 
 export const FormCreateAnnouncement = () => {
@@ -21,7 +23,9 @@ export const FormCreateAnnouncement = () => {
         resolver: zodResolver(createAnnounceSchema)
     })
 
+    const [ updatePage, setUpdatePage ] = useState(true)
 
+    const toast = useToast()
     
     const CreateAnnouncement = async ( data: IcreateAnnounce) => { 
         data.year = Number(model?.year!)
@@ -32,13 +36,33 @@ export const FormCreateAnnouncement = () => {
         console.log(data)
 
         try {
-            // const token = localStorage.getItem()
-            // await api.post( "client", data,{headers:{Authorization: `Bearer ${token}`,}})
+            const token = localStorage.getItem("motors-shop:token")
+            await api.post( "/cars", data,{headers:{Authorization: `Bearer ${token}`,}})
+
+            toast({
+                title: 'Annoucement created',
+                description: "We've created your Annoucement for you.",
+                status: 'success',
+                position: "top-right",
+                duration: 2000,
+                isClosable: true,
+              })
+
+              setUpdatePage(!updatePage)
+            
             
             
         } catch (error) {
-            console.log(error)
+            toast({
+                title: 'Try again later',
+                description: "Try again later",
+                status: 'error',
+                position: "top-right",
+                duration: 2000,
+                isClosable: true,
+              })
             
+              setUpdatePage(!updatePage)
         }
     }
 
@@ -173,7 +197,9 @@ export const FormCreateAnnouncement = () => {
 
             <ModalFooter display={"flex"} justifyContent={"flex-end"}>
 
-                <Button type="submit" variant={"custom"} >asdasd</Button>
+                <Button type="reset" variant={"negative"} onClick={onClose} >Cancelar</Button>
+                <Button type="submit" variant={"brand1"} onClick={onClose} >Criar anúncio</Button>
+
 
 
             </ModalFooter>

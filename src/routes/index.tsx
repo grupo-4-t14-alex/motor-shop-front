@@ -3,8 +3,11 @@ import { Homepage } from "../pages/homepage";
 import { Product } from "../pages/Product";
 import { ProfileViewAdmin } from "../pages/ProfileViewAdmin";
 import { TestPage } from "../pages/testPage";
+import { Login } from "../pages/Login";
+import { ProtectedRoutes } from "./ProtectedRoutes";
 
-const RoutesPages = () => {
+
+export const RoutesPages = () => {
   return (
     <>
       <Routes>
@@ -13,12 +16,18 @@ const RoutesPages = () => {
         <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
         <Route path="/test" element={<TestPage />} />
         {/* <Route path="/login" element={} />
+        <Route path="/login" element={<Login />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/product" element={<Product />} />
+          <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
+        </Route>
+        {/* 
         <Route path="/profileView" element={} />
         <Route path="/register" element={} />
         <Route path="*" element={} /> */}
       </Routes>
     </>
-  );
-};
+  )
+}
 
 export default RoutesPages;
