@@ -1,4 +1,4 @@
-import { useDisclosure, Box, Text, Input, Flex, Button, ModalFooter } from "@chakra-ui/react"
+import { Box, Text, Input, Flex, Button, ModalFooter } from "@chakra-ui/react"
 import ModalContainer from "../Modal"
 
 interface Props {
