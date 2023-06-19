@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState, useContext } from "react";
-import { Toast, useToast } from "@chakra-ui/react";
+import {useDisclosure, useToast } from "@chakra-ui/react";
 import {
   Car2,
   CarData,
@@ -27,6 +27,9 @@ interface AnnouncementContextValues {
   handlerBrand: (value: string) => void;
   handlerModel: (value: string) => void;
   ops1: string[];
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void; 
 }
 export const AnnouncementContext = createContext<AnnouncementContextValues>(
   {} as AnnouncementContextValues
@@ -36,7 +39,9 @@ export const AnnouncementProvider = ({
   children,
 }: AnnouncementProviderProps) => {
   const { updatePage, setUpdatePage } = useContext(ProductContext);
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast();
+
   const CreateAnnouncement = async (data: IcreateAnnounce) => {
     data.year = Number(model?.year!);
     data.fipePrice = model?.value!;
@@ -49,8 +54,8 @@ export const AnnouncementProvider = ({
       await api.post("/cars", data, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
-      Toast({
+      onClose()
+      toast({
         title: "Annoucement created",
         description: "We've created your Annoucement for you.",
         status: "success",
@@ -58,6 +63,7 @@ export const AnnouncementProvider = ({
         duration: 2000,
         isClosable: true,
       });
+
     } catch (error) {
       toast({
         title: "Try again later",
@@ -78,7 +84,22 @@ export const AnnouncementProvider = ({
   const [model, setModel] = useState({} as Car2 | undefined);
   const arrayFuel = ["flex", "hibrido", "eletrico"];
 
-  const onError = (errors: any, e: any) => console.log(errors, e);
+  const onError = (errors: any, e: any) =>{ 
+    console.log(errors, e);
+    const fields = Object.keys(errors).toString()
+    
+
+    toast({
+      title: "fill in all required fields",
+      description: `fields[${fields}]`,
+      status: "error",
+      position: "top-right",
+      duration: 2000,
+      isClosable: true,
+    });
+  }
+
+
   const handlerBrand = async (value: string) => {
     setMarca(value);
   };
@@ -92,6 +113,9 @@ export const AnnouncementProvider = ({
   return (
     <AnnouncementContext.Provider
       value={{
+        isOpen, 
+        onOpen, 
+        onClose,
         ops1,
         handlerModel,
         handlerBrand,
