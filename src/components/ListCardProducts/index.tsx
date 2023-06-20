@@ -1,21 +1,16 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Button,
-  Wrap,
-  WrapItem,
-  useBreakpointValue,
-  useMediaQuery,
-} from "@chakra-ui/react";
+import { Box, Flex, Text, Button } from "@chakra-ui/react";
 import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { CardProducts } from "../CardProducts";
+import { ProductContext } from "../../contexts/ProductsContext";
+import { useContext } from "react";
 
 export const ListCardProducts = () => {
+  const { productsProfile } = useContext(ProductContext);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
-  const totalItems = 20;
+  const totalItems = productsProfile.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const handlePreviousPage = () => {
@@ -26,32 +21,31 @@ export const ListCardProducts = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
-  const cardData = Array.from({ length: totalItems }, (_, index) => ({
-    id: index + 1,
-  }));
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentItems = cardData.slice(startIndex, endIndex);
+  const currentItems = productsProfile.slice(startIndex, endIndex);
 
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>
       <Flex
         overflowX={{ base: "auto", md: "unset" }}
-        overflowY={{ base: "auto", md: "unset" }}
+        overflowY={"hidden"}
         flexWrap={{ base: "nowrap", md: "wrap" }}
         w={"100%"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        paddingBottom={"20px"}
       >
-        {currentItems.map(() => (
+        {currentItems.map((element, index) => (
           <Box padding={"20px"} marginBottom={"20px"}>
-            <CardProducts />
+            <CardProducts product={element} key={index} />
           </Box>
         ))}
       </Flex>
-            
+
       <Flex
         mt={4}
-        marginBottom={{ base: "200", md: "150" }}
+        marginBottom={{ base: "230", md: "150" }}
         marginTop={{ base: "50", md: "100" }}
         alignItems={"center"}
         gap={"30px"}

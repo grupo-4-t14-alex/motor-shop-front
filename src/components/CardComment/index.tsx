@@ -22,11 +22,11 @@ export const CardComment = () => {
           Comentar
         </Button>
       </Box>
-      <ButtonGroup>
+      <Flex flexDirection={{ base: "column", md: "row" }} gap={"10px"}>
         <Button size="sm">Gostei muito!</Button>
         <Button size="sm">Incrível</Button>
         <Button size="sm">Recomendarei para meus amigos!</Button>
-      </ButtonGroup>
+      </Flex>
     </Flex>
   );
 };

@@ -87,7 +87,10 @@ const theme = extendTheme({
     Input: InputConfig,
     Modal: modalTheme,
     FormLabel: formLabelConfig,
-    FormControl:formControlConfig
+    FormControl:formControlConfig,
+    Select: InputConfig,
+    Textarea: InputConfig,
+
   }
 });
 export default theme;
