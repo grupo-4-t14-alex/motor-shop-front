@@ -12,6 +12,7 @@ import { useContext, useState } from "react"
 import { UserContext } from "../../contexts/UserContext"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { registerSchema } from "./schema"
+import { PasswordField } from "../../components/PasswordField"
 
 export const RegisterPage = () => {
 
@@ -139,7 +140,7 @@ export const RegisterPage = () => {
                             <Button onClick={() => isAdminTrue()} w={"50%"} bg="#4529E6" color="white" _focus={{ bg: "white", color: "#4529E6" }} >Anunciante</Button>
                         </Flex>
                         <FormLabel>Senha</FormLabel>
-                        <Input marginBottom={"15px"} type="text" placeholder="Digitar senha" {...register("password", { required: true })}/>
+                        <PasswordField marginBottom={"15px"} type="text" placeholder="Digitar senha" {...register("password", { required: true })}/>
                         {errors.password && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.password?.message}</Text>}
                         <Button w={"100%"} bg="#4529E6" color="white" _hover={{ bg: "white", color: "#4529E6" }} type="submit" >Cadastrar</Button>
                     </form>
