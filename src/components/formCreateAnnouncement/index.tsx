@@ -18,7 +18,7 @@ export const FormCreateAnnouncement = () => {
     const {register, handleSubmit, formState:{errors} } = useForm<IcreateAnnounce>({
         resolver: zodResolver(createAnnounceSchema)
     })
-    const {isOpen, onOpen, onClose, ops1 ,handlerModel, handlerBrand ,CreateAnnouncement, onError, resApiForm, setResApiForm, resApiForm2, setResApiForm2, marca, setMarca, model, setModel,arrayFuel  } = useContext(AnnouncementContext);
+    const {isOpen, onOpen, onClose, ops1 ,handlerModel, handlerBrand ,CreateAnnouncement, onError, resApiForm, setResApiForm, resApiForm2, setResApiForm2, marca, setMarca, model, setModel, arrayFuel  } = useContext(AnnouncementContext);
 
     useEffect(() => {
         axios({
