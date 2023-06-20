@@ -6,11 +6,14 @@ import { ProductContext } from "../../contexts/ProductsContext";
 import { useContext } from "react";
 
 export const ListCardProducts = () => {
-  const { productsProfile } = useContext(ProductContext);
+  const { productsProfile, products } = useContext(ProductContext);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
-  const totalItems = productsProfile.length;
+  const totalItems =
+    window.location.pathname === "/profileViewAdmin"
+      ? productsProfile.length
+      : products.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const handlePreviousPage = () => {
@@ -23,7 +26,10 @@ export const ListCardProducts = () => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentItems = productsProfile.slice(startIndex, endIndex);
+  const currentItems =
+    window.location.pathname === "/profileViewAdmin"
+      ? productsProfile.slice(startIndex, endIndex)
+      : products.slice(startIndex, endIndex);
 
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>
