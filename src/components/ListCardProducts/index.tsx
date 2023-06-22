@@ -1,16 +1,37 @@
 import { Box, Flex, Text, Button } from "@chakra-ui/react";
 import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CardProducts } from "../CardProducts";
 import { ProductContext } from "../../contexts/ProductsContext";
 import { useContext } from "react";
 
-export const ListCardProducts = () => {
-  const { productsProfile } = useContext(ProductContext);
+interface iProducts {
+  id: number;
+  brand: string;
+  model: string;
+  year: number;
+  fuel: number;
+  km: number;
+  color: string;
+  fipePrice: number;
+  sellPrice: number;
+  description: string;
+  isActive: boolean;
+  user: {
+    id: number;
+    name: string;
+    description: string;
+  };
+}
 
+export const ListCardProducts = () => {
+  const { productsProfile, products, productsFiltered } =
+    useContext(ProductContext);
+
+  const [totalItems, setTotalItems] = useState<number>(0);
+  const [currentItems, setCurrentItems] = useState<iProducts[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
-  const totalItems = productsProfile.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const handlePreviousPage = () => {
@@ -21,9 +42,32 @@ export const ListCardProducts = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = productsProfile.slice(startIndex, endIndex);
+  useEffect(() => {
+    (async () => {
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+
+      setTotalItems(
+        window.location.pathname === "/profileViewAdmin"
+          ? productsProfile.length
+          : window.location.pathname === "/"
+          ? productsFiltered.length > 0
+            ? productsFiltered.length
+            : products.length
+          : 0
+      );
+
+      setCurrentItems(
+        window.location.pathname === "/profileViewAdmin"
+          ? productsProfile.slice(startIndex, endIndex)
+          : window.location.pathname === "/"
+          ? productsFiltered.length > 0
+            ? productsFiltered.slice(startIndex, endIndex)
+            : products.slice(startIndex, endIndex)
+          : []
+      );
+    })();
+  }, [productsFiltered, products, productsProfile, currentPage]);
 
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>

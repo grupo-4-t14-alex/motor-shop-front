@@ -8,13 +8,38 @@ import {
   Flex,
   Img,
   useMediaQuery,
+  Box,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/logoHeader.png";
 import { useEffect, useState } from "react";
+import { CardUser } from "../CardUser";
+
+interface iUser {
+  name: string;
+  description: string;
+}
 
 export const NavBarComponent = () => {
   const navigate = useNavigate();
+
+  const userJson = localStorage.getItem("motors-shop:user");
+
+  let userObj: iUser = {
+    name: "",
+    description: "",
+  };
+
+  if (userJson !== null) {
+    userObj = JSON.parse(userJson);
+  }
+
+  console.log(userObj);
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   const [web, setWeb] = useState(true);
 
@@ -43,44 +68,63 @@ export const NavBarComponent = () => {
         maxW={"1600px"}
         width={"100%"}
         paddingInline={{ base: "16px", md: "16px" }}
+        h={"100%"}
       >
         <Img src={Logo} w={"153px"} h={"27px"} />
 
-        {web ? (
-          <Flex display={"flex"}>
-            <Button
-              variant="link"
-              onClick={() => navigate("/login")}
-            >
-              Fazer Login
-            </Button>
-            <Button
-              onClick={() => navigate("/register")}
-              variant='outline2'
-            >
-              Cadastrar
-            </Button>
-          </Flex>
-        ) : (
-          <Menu>
-            {({ isOpen }) => (
-              <>
-                <MenuButton
-                  isActive={isOpen}
-                  as={Button}
-                  rightIcon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-                ></MenuButton>
-                <MenuList>
-                  <MenuItem>Carros</MenuItem>
-                  <MenuItem>Motos</MenuItem>
-                  <MenuItem>Leilão</MenuItem>
-                  <div></div>
-                  <MenuItem onClick={() => navigate("/")}>Fazer Login</MenuItem>
-                </MenuList>
-              </>
-            )}
-          </Menu>
-        )}
+        <Flex h={"100%"} alignItems={"center"} gap={"30px"}>
+          <Box w={"2px"} h={"100%"} backgroundColor={"grey.7"} />
+          {userObj.name != "" ? (
+            <Menu>
+              {({ isOpen }) => (
+                <>
+                  <MenuButton isActive={isOpen} as={Button} border={"none"}>
+                    <CardUser name={userObj.name} />
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem>Editar Perfil</MenuItem>
+                    <MenuItem>Editar endereco</MenuItem>
+                    <MenuItem onClick={() => navigate("/profileViewAdmin")}>
+                      Meus Anúncios
+                    </MenuItem>
+                    <MenuItem onClick={() => logout()}>Sair</MenuItem>
+                  </MenuList>
+                </>
+              )}
+            </Menu>
+          ) : web ? (
+            <Flex display={"flex"}>
+              <Button variant="link" onClick={() => navigate("/login")}>
+                Fazer Login
+              </Button>
+              <Button onClick={() => navigate("/register")} variant="outline2">
+                Cadastrar
+              </Button>
+            </Flex>
+          ) : (
+            <Menu>
+              {({ isOpen }) => (
+                <>
+                  <MenuButton isActive={isOpen} as={Button}>
+                    {isOpen ? (
+                      <CloseIcon w={"20px"} h={"20px"} />
+                    ) : (
+                      <HamburgerIcon w={"20px"} h={"20px"} />
+                    )}
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem onClick={() => navigate("/register")}>
+                      Cadastrar
+                    </MenuItem>
+                    <MenuItem onClick={() => navigate("/login")}>
+                      Fazer Login
+                    </MenuItem>
+                  </MenuList>
+                </>
+              )}
+            </Menu>
+          )}
+        </Flex>
       </Flex>
     </Flex>
   );
