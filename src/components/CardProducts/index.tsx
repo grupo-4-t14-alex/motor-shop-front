@@ -26,6 +26,11 @@ interface iProducts {
     sellPrice: number;
     description: string;
     isActive: boolean;
+    user: {
+      id: number;
+      name: string;
+      description: string;
+    };
   };
 }
 
@@ -74,7 +79,7 @@ export const CardProducts = ({ product }: iProducts) => {
         </Flex>
         <Stack mt="4" spacing="3">
           <Heading fontSize={"heading.7"} fontWeight={"bold"}>
-            {product.brand}
+            {product.model}
           </Heading>
           <Text
             noOfLines={2}
@@ -86,7 +91,7 @@ export const CardProducts = ({ product }: iProducts) => {
           </Text>
         </Stack>
         <Flex mt={"20px"} flexDirection={"column"} gap={"20px"}>
-          <CardUser />
+          <CardUser name={product.user.name} />
           <Flex justifyContent={"space-between"} alignItems={"center"}>
             <Flex gap={"10px"}>
               <Text
