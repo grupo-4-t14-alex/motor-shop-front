@@ -3,7 +3,7 @@ import { NavBarComponent } from "../../components/NavBar";
 import { Footer } from "../../components/Footer";
 import { ListCardProducts } from "../../components/ListCardProducts";
 import { CardUserProfile } from "../../components/CardUserProfile";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import api from "../../services/api";
 import { ProductContext } from "../../contexts/ProductsContext";
 

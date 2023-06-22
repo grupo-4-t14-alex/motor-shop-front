@@ -25,7 +25,7 @@ interface iProducts {
 }
 
 export const ListCardProducts = () => {
-  const { productsProfile, products, productsFiltered, setProductsFiltered } =
+  const { productsProfile, products, productsFiltered } =
     useContext(ProductContext);
 
   const [totalItems, setTotalItems] = useState<number>(0);
@@ -44,7 +44,6 @@ export const ListCardProducts = () => {
 
   useEffect(() => {
     (async () => {
-      const clearProductsFiltered = () => setProductsFiltered([]);
       const startIndex = (currentPage - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
 
@@ -67,8 +66,6 @@ export const ListCardProducts = () => {
             : products.slice(startIndex, endIndex)
           : []
       );
-
-      console.log(currentItems);
     })();
   }, [productsFiltered, products, productsProfile, currentPage]);
 

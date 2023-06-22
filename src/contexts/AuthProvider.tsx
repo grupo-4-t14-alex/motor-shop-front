@@ -40,8 +40,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       api.defaults.headers.common.authorization = `Bearer ${response.data.token}`;
 
+      const obj = {
+        name: response.data.user.name,
+        description: response.data.user.description,
+      };
+
+      const userJson = JSON.stringify(obj);
+
       localStorage.setItem("motors-shop:token", response.data.token);
-      localStorage.setItem("motors-shop:user-name", response.data.user.name);
+      localStorage.setItem("motors-shop:user", userJson);
 
       navigate(""); //se admin -> profileViewAdmin, se não admin -> página normal com anúncios, mas nome renderizado
     } catch (error) {

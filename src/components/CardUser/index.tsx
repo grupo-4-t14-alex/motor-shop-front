@@ -41,10 +41,12 @@ export const CardUser = ({ name }: name) => {
         justifyContent={"center"}
         alignItems={"center"}
         color={"whiteFixed"}
+        fontSize={"body.2"}
+        fontWeight={"medium"}
       >
         {getInitials(name)}
       </Flex>
-      <Heading fontSize={"body.2"} fontWeight={"bold"} color={"grey.4"}>
+      <Heading fontSize={"body.1"} fontWeight={"medium"} color={"grey.4"}>
         {name}
       </Heading>
     </Flex>

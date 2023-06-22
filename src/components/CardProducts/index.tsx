@@ -35,6 +35,16 @@ interface iProducts {
 }
 
 export const CardProducts = ({ product }: iProducts) => {
+  function isCarValueLowerBy5Percent(
+    carValue: number,
+    fipeValue: number
+  ): boolean {
+    const difference = fipeValue - carValue;
+    const percentage = (difference / fipeValue) * 100;
+
+    return percentage >= 5;
+  }
+
   return (
     <Card
       w={"300px"}
@@ -52,13 +62,15 @@ export const CardProducts = ({ product }: iProducts) => {
           alignItems={"center"}
           position={"relative"}
         >
-          <Image
-            src={imgIcon}
-            position={"absolute"}
-            top={"0"}
-            right={"0"}
-            padding={"0"}
-          />
+          {isCarValueLowerBy5Percent(product.sellPrice, product.fipePrice) && (
+            <Image
+              src={imgIcon}
+              position={"absolute"}
+              top={"0"}
+              right={"0"}
+              padding={"0"}
+            />
+          )}
           {window.location.pathname === "/profileViewAdmin" && (
             <Flex
               position={"absolute"}
