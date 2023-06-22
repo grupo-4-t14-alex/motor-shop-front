@@ -1,12 +1,53 @@
-import { Flex, Heading, Image } from "@chakra-ui/react";
-import imgUser from "../../assets/img/imgUser.png";
+import { Flex, Heading, useTheme } from "@chakra-ui/react";
+import { useState } from "react";
 
-export const CardUser = () => {
+interface name {
+  name: string;
+}
+
+export const CardUser = ({ name }: name) => {
+  const theme = useTheme();
+  const [randomColor, setRandomColor] = useState("");
+
+  const getRandomColor = () => {
+    const colorValues = Object.keys(theme.colors.random);
+    const randomIndex = Math.floor(Math.random() * colorValues.length);
+    const randomColor = colorValues[randomIndex];
+    return randomColor;
+  };
+
+  const getInitials = (name: string) => {
+    const nameParts = name.split(" ");
+    const initials = nameParts.map((part) => part[0]);
+    return initials.join("");
+  };
+
+  const setRandomUserColor = () => {
+    const newRandomColor = "random." + getRandomColor();
+    setRandomColor(newRandomColor);
+  };
+
+  if (!randomColor) {
+    setRandomUserColor();
+  }
+
   return (
     <Flex alignItems={"center"} gap={"10px"}>
-      <Image src={imgUser} />
-      <Heading fontSize={"body.2"} fontWeight={"bold"} color={"grey.4"}>
-        Samuel Leao
+      <Flex
+        backgroundColor={randomColor}
+        width={"30px"}
+        height={"30px"}
+        borderRadius={"50%"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        color={"whiteFixed"}
+        fontSize={"body.2"}
+        fontWeight={"medium"}
+      >
+        {getInitials(name)}
+      </Flex>
+      <Heading fontSize={"body.1"} fontWeight={"medium"} color={"grey.4"}>
+        {name}
       </Heading>
     </Flex>
   );
