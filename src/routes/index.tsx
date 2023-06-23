@@ -1,11 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import { Homepage } from "../pages/Homepage";
+import { Homepage } from "../pages/homepage";
 import { Product } from "../pages/Product";
-import { RegisterPage } from "../pages/Register";
+import { RegisterPage } from "../pages/register";
 import { ProfileViewAdmin } from "../pages/ProfileViewAdmin";
 // import { TestPage } from "../pages/testPage";
 import { Login } from "../pages/Login";
 import { ProtectedRoutes } from "./ProtectedRoutes";
+import { TestPage } from "../pages/testPage";
 
 
 const RoutesPages = () => {
@@ -15,6 +16,7 @@ const RoutesPages = () => {
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/test" element={<TestPage/>} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/product" element={<Product />} />
           <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
