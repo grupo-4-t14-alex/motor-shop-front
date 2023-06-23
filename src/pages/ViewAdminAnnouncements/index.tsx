@@ -1,7 +1,6 @@
 import { Box, Container, Flex } from '@chakra-ui/react';
 import { useContext, useEffect } from 'react'
 import { NavBarComponent } from '../../components/NavBar';
-import { CardUserProfile } from '../../components/CardUserProfile';
 import { ListCardProducts } from '../../components/ListCardProducts';
 import { ProductContext } from '../../contexts/ProductsContext';
 import api from '../../services/api';
