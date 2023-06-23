@@ -25,7 +25,7 @@ interface iProducts {
 }
 
 export const ListCardProducts = () => {
-  const { productsProfile, products, productsFiltered } =
+  const { productsProfile, products, productsFiltered, productsSorted } =
     useContext(ProductContext);
 
   const [totalItems, setTotalItems] = useState<number>(0);
@@ -64,10 +64,18 @@ export const ListCardProducts = () => {
           ? productsFiltered.length > 0
             ? productsFiltered.slice(startIndex, endIndex)
             : products.slice(startIndex, endIndex)
+          : productsSorted.length > 0
+          ? productsSorted.slice(startIndex, endIndex)
           : []
       );
     })();
-  }, [productsFiltered, products, productsProfile, currentPage]);
+  }, [
+    productsFiltered,
+    products,
+    productsProfile,
+    currentPage,
+    productsSorted,
+  ]);
 
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>
