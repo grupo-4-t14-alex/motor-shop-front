@@ -6,15 +6,20 @@ import { ProfileViewAdmin } from "../pages/ProfileViewAdmin";
 // import { TestPage } from "../pages/testPage";
 import { Login } from "../pages/Login";
 import { ProtectedRoutes } from "./ProtectedRoutes";
+import { SendEmailResetPassword } from "../pages/ResetPasword";
+import { ResetPassword } from "../pages/ResetPasword/token";
 
 
 const RoutesPages = () => {
+
   return (
     <>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/resetPassword" element={<SendEmailResetPassword />} />
+        <Route path="/resetPassword/:token" element={<ResetPassword />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/product" element={<Product />} />
           <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
