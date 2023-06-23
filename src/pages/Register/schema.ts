@@ -3,7 +3,7 @@ import { z } from "zod";
 export const registerSchema = z.object({
     name: z.string().min(3, 'O nome deve ter pelo menos 3 caracteres'),
     email: z.string().email('Insira um endereço de e-mail válido'),
-    cpf: z.string().min(11, 'Insira um CPF válido').max(11, 'Insira um CPF válido'),
+    cpf: z.string(),
     phone: z.string().min(11, 'Insira um telefone válido').max(11, 'Insira um telefone válido'),
     birthDate: z.string(),
     description: z.string().min(3, 'Digite algo sebre você'),
