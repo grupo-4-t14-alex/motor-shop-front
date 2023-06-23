@@ -3,7 +3,7 @@ import { NavBarComponent } from "../../components/NavBar";
 import { Footer } from "../../components/Footer";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginData, loginSchema } from "./validator";
+import { LoginData, loginSchema } from "./schema";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
@@ -40,11 +40,11 @@ export const Login = () => {
             w={"60%"}
             bg={"whiteFixed"}
             borderRadius={"10px"}
-            padding={"7%"}
+            padding={"48px 44px"}
         >
             <Heading 
                 fontSize={"heading.4"} 
-                marginBottom={"40px"}>Login</Heading>
+                marginBottom={"1.875rem"}>Login</Heading>
 
             <FormControl>
                 <FormLabel 
@@ -54,7 +54,7 @@ export const Login = () => {
                     isRequired type="email" 
                     id="email" 
                     placeholder="Digitar email" 
-                    marginBottom={"30px"} />
+                    marginBottom={"1.875rem"} />
                 <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
             </FormControl>
 
@@ -72,25 +72,25 @@ export const Login = () => {
             </FormControl>
 
             <Link 
-                marginBottom={"40px"} 
+                onClick={() => navigate("/resetPassword")}
+                marginBottom={"1.875rem"} 
                 textAlign={"right"}
                 fontSize={"heading.7"} >Esqueci minha senha</Link>
-
+            
             <Button 
                 type="submit" 
-                marginBottom={"40px"} 
+                marginBottom={"1.875rem"} 
                 variant={"brand1"}>Entrar</Button>
 
             <Heading 
                 fontSize={"heading.7"} 
                 textAlign={"center"}
-                marginBottom={"30px"}>Ainda não possui conta?</Heading>
+                marginBottom={"1.875rem"}>Ainda não possui conta?</Heading>
 
             <Button 
                 onClick={() => navigate("/register")} 
-                marginBottom={"30px"} 
+                marginBottom={"1.875rem"} 
                 variant={"outline2"}>Cadastrar</Button>
-                
         </Box>
         <Footer/>
     </Box>
