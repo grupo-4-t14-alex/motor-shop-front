@@ -8,10 +8,12 @@ import {
   Flex,
   ButtonGroup,
   Button,
+  Box,
 } from "@chakra-ui/react";
 import imgTeste from "../../assets/img/imgteste.png";
 import imgIcon from "../../assets/img/iconCard.png";
 import { CardUser } from "../CardUser";
+import { useNavigate } from "react-router-dom";
 
 interface iProducts {
   product: {
@@ -44,6 +46,8 @@ export const CardProducts = ({ product }: iProducts) => {
 
     return percentage >= 5;
   }
+
+  const navigate = useNavigate();
 
   return (
     <Card
@@ -103,7 +107,12 @@ export const CardProducts = ({ product }: iProducts) => {
           </Text>
         </Stack>
         <Flex mt={"20px"} flexDirection={"column"} gap={"20px"}>
-          <CardUser name={product.user.name} />
+          <Box
+            onClick={() => navigate("/profileAdminAnnoucementsPublic")}
+            cursor={"pointer"}
+          >
+            <CardUser name={product.user.name} />
+          </Box>
           <Flex justifyContent={"space-between"} alignItems={"center"}>
             <Flex gap={"10px"}>
               <Text
