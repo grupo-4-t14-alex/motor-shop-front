@@ -1,7 +1,7 @@
 import { Modal, ModalOverlay, ModalHeader, ModalContent, ModalCloseButton } from "@chakra-ui/react"
 import { ReactNode } from "react"
 
-interface Props {
+export interface Props {
     title: string,
     children: ReactNode
     isOpen: boolean
