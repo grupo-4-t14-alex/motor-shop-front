@@ -1,6 +1,124 @@
-import { Box, Flex, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Input, Text } from "@chakra-ui/react";
+import { ProductContext } from "../../contexts/ProductsContext";
+import { useContext, useEffect, useState } from "react";
+
+interface iProducts {
+  id: number;
+  brand: string;
+  model: string;
+  year: number;
+  fuel: number;
+  km: number;
+  color: string;
+  fipePrice: number;
+  sellPrice: number;
+  description: string;
+  isActive: boolean;
+  user: {
+    id: number;
+    name: string;
+    description: string;
+  };
+  [key: string]: any;
+}
 
 export const Filter = () => {
+  const { products, setProductsFiltered, productsFiltered } =
+    useContext(ProductContext);
+
+  const [models, setModels] = useState<string>("");
+  const [brands, setBrands] = useState<string>("");
+  const [years, setYears] = useState<number>(0);
+  const [colors, setColors] = useState<string>("");
+  const [fuels, setFuels] = useState<number>(0);
+
+  const uniqueBrands: Set<string> = new Set();
+  const uniqueModels: Set<string> = new Set();
+  const uniqueYears: Set<number> = new Set();
+  const uniqueFuels: Set<number> = new Set();
+  const uniqueColors: Set<string> = new Set();
+
+  productsFiltered.length > 0
+    ? productsFiltered.forEach((product) => {
+        uniqueBrands.add(product.brand);
+        uniqueModels.add(product.model);
+        uniqueYears.add(product.year);
+        uniqueFuels.add(product.fuel);
+        uniqueColors.add(product.color);
+      })
+    : products.forEach((product) => {
+        uniqueBrands.add(product.brand);
+        uniqueModels.add(product.model);
+        uniqueYears.add(product.year);
+        uniqueFuels.add(product.fuel);
+        uniqueColors.add(product.color);
+      });
+
+  const uniqueBrandsArray: string[] = Array.from(uniqueBrands);
+  const uniqueModelsArray: string[] = Array.from(uniqueModels);
+  const uniqueYearsArray: number[] = Array.from(uniqueYears);
+  const uniqueFuelsArray: number[] = Array.from(uniqueFuels);
+  const uniqueColorsArray: string[] = Array.from(uniqueColors);
+
+  const filters: Partial<iProducts> = {};
+
+  const filterProperties = [
+    { key: "brand", value: brands },
+    { key: "year", value: years },
+    { key: "color", value: colors },
+    { key: "fuel", value: fuels },
+    { key: "model", value: models },
+  ];
+
+  filterProperties.forEach(({ key, value }) => {
+    if (value) {
+      filters[key] = value;
+    }
+  });
+
+  const filterProducts = (
+    products: iProducts[],
+    filters: Partial<iProducts>
+  ): iProducts[] => {
+    return products.filter((product) => {
+      for (const key in filters) {
+        if (key.includes(".")) {
+          const nestedKeys = key.split(".");
+          let nestedValue = product;
+          for (const nestedKey of nestedKeys) {
+            if (nestedValue === undefined || nestedValue === null) {
+              return false;
+            }
+            nestedValue = nestedValue[nestedKey];
+          }
+          if (nestedValue !== filters[key]) {
+            return false;
+          }
+        } else if (product[key] !== filters[key]) {
+          return false;
+        }
+      }
+      return true;
+    });
+  };
+
+  const clearFilter = () => {
+    setBrands("");
+    setColors("");
+    setFuels(0);
+    setModels("");
+    setYears(0);
+    console.log(filters);
+    setProductsFiltered([]);
+  };
+
+  useEffect(() => {
+    (async () => {
+      const filteredCars = filterProducts(products, filters);
+      setProductsFiltered(filteredCars);
+    })();
+  }, [models, brands, fuels, years, colors]);
+
   return (
     <Flex
       mb="100px"
@@ -18,172 +136,171 @@ export const Filter = () => {
         <Text fontSize="heading.4" fontWeight="600">
           Marca
         </Text>
-        <Box pl="10px" mt="15px">
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            General Motors
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Fiat
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Ford
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Honda
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Toyota
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Volkswagen
-          </Text>
-        </Box>
+        <Flex
+          flexDirection={"column"}
+          alignItems={"flex-start"}
+          pl="10px"
+          mt="15px"
+        >
+          {uniqueBrandsArray.map((element) => {
+            return (
+              <Button
+                border={"none"}
+                fontSize="heading.6"
+                fontWeight="500"
+                color="grey.4"
+                cursor="pointer"
+                onClick={() => setBrands(brands === element ? "" : element)}
+              >
+                {element}
+              </Button>
+            );
+          })}
+        </Flex>
       </Box>
       <Box>
         <Text fontSize="heading.4" fontWeight="600">
           Modelo
         </Text>
-        <Box pl="10px" mt="20px">
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Civic
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Corolla
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Cruze
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Fit
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Gol
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Ka
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Onix
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Porsche 718
-          </Text>
-        </Box>
+        <Flex
+          flexDirection={"column"}
+          justifyContent={"flex-start"}
+          pl="10px"
+          mt="20px"
+          alignItems={"flex-start"}
+        >
+          {uniqueModelsArray.map((element) => {
+            return (
+              <Button
+                border={"none"}
+                fontSize="heading.6"
+                fontWeight="500"
+                color="grey.4"
+                cursor="pointer"
+                onClick={() => setModels(models === element ? "" : element)}
+              >
+                {element}
+              </Button>
+            );
+          })}
+        </Flex>
       </Box>
       <Box>
         <Text fontSize="heading.4" fontWeight="600">
           Cor
         </Text>
-        <Box pl="10px" mt="20px">
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Azul
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Branca
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Cinza
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Prata
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Preta
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Verde
-          </Text>
-        </Box>
+        <Flex
+          flexDirection={"column"}
+          justifyContent={"flex-start"}
+          pl="10px"
+          mt="20px"
+          alignItems={"flex-start"}
+        >
+          {uniqueColorsArray.map((element) => {
+            return (
+              <Button
+                border={"none"}
+                fontSize="heading.6"
+                fontWeight="500"
+                color="grey.4"
+                cursor="pointer"
+                onClick={() => setColors(colors === element ? "" : element)}
+              >
+                {element}
+              </Button>
+            );
+          })}
+        </Flex>
       </Box>
       <Box>
         <Text fontSize="heading.4" fontWeight="600">
           Ano
         </Text>
-        <Box pl="10px" mt="20px">
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            2022
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            2021
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            2018
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            2015
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            2013
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            2012
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            2010
-          </Text>
-        </Box>
+        <Flex
+          flexDirection={"column"}
+          justifyContent={"flex-start"}
+          pl="10px"
+          mt="20px"
+          alignItems={"flex-start"}
+        >
+          {uniqueYearsArray.map((element) => {
+            return (
+              <Button
+                border={"none"}
+                fontSize="heading.6"
+                fontWeight="500"
+                color="grey.4"
+                cursor="pointer"
+                onClick={() => setYears(years === element ? 0 : element)}
+              >
+                {element}
+              </Button>
+            );
+          })}
+        </Flex>
       </Box>
       <Box>
         <Text fontSize="heading.4" fontWeight="600">
           Combustível
         </Text>
-        <Box pl="10px" mt="20px">
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Diesel
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Etanol
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Gasolina
-          </Text>
-          <Text fontSize="heading.6" fontWeight="500" color="grey.4">
-            Flex
-          </Text>
-        </Box>
+        <Flex
+          flexDirection={"column"}
+          justifyContent={"flex-start"}
+          pl="10px"
+          mt="20px"
+          alignItems={"flex-start"}
+        >
+          {uniqueFuelsArray.map((element) => {
+            return (
+              <Button
+                border={"none"}
+                fontSize="heading.6"
+                fontWeight="500"
+                color="grey.4"
+                cursor="pointer"
+                onClick={() => setFuels(fuels === element ? 0 : element)}
+              >
+                {element === 1
+                  ? "Diesel"
+                  : element === 2
+                  ? "Gasoline"
+                  : element === 3
+                  ? "Ethanol"
+                  : "Unknown Fuel"}
+              </Button>
+            );
+          })}
+        </Flex>
       </Box>
       <Box>
         <Text fontSize="heading.4" fontWeight="600">
           Km
         </Text>
-        <Flex gap="20px" pl="10px" mt="20px">
-          <Input
-            bg="grey.5"
-            placeholder="Mínima"
-            disabled
-            maxW="125px"
-            borderRadius="0"
-          />
-          <Input
-            bg="grey.5"
-            placeholder="Máxima"
-            disabled
-            maxW="125px"
-            borderRadius="0"
-          />
+        <Flex gap="20px" mt="20px" justifyContent={"space-between"}>
+          <Button bg="grey.5" w="170px" borderRadius="0">
+            Min
+          </Button>
+          <Button bg="grey.5" w="170px" borderRadius="0">
+            Max
+          </Button>
         </Flex>
       </Box>
       <Box>
         <Text fontSize="heading.4" fontWeight="600">
           Preço
         </Text>
-        <Flex gap="20px" pl="10px" mt="20px">
-          <Input
-            bg="grey.5"
-            placeholder="Mínima"
-            disabled
-            maxW="125px"
-            borderRadius="0"
-          />
-          <Input
-            bg="grey.5"
-            placeholder="Máxima"
-            disabled
-            maxW="125px"
-            borderRadius="0"
-          />
+        <Flex gap="20px" mt="20px" justifyContent={"space-between"}>
+          <Button bg="grey.5" w="170px" borderRadius="0">
+            Min
+          </Button>
+          <Button bg="grey.5" w="170px" borderRadius="0">
+            Max
+          </Button>
         </Flex>
       </Box>
+      <Button marginTop={"20px"} onClick={() => clearFilter()}>
+        Limpar filtro
+      </Button>
     </Flex>
   );
 };

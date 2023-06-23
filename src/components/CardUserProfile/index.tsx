@@ -1,8 +1,29 @@
-import { Button, Flex, Image, Text } from "@chakra-ui/react";
-import img from "../../assets/img/imgUser2.png";
+import { Flex, Text } from "@chakra-ui/react";
 import { FormCreateAnnouncement } from "../formCreateAnnouncement";
 
+interface iUser {
+  name: string;
+  description: string;
+}
+
 export const CardUserProfile = () => {
+  const userJson = localStorage.getItem("motors-shop:user");
+
+  let userObj: iUser = {
+    name: "",
+    description: "",
+  };
+
+  if (userJson !== null) {
+    userObj = JSON.parse(userJson);
+  }
+
+  const getInitials = (name: string) => {
+    const nameParts = name.split(" ");
+    const initials = nameParts.map((part) => part[0]);
+    return initials.join("");
+  };
+
   return (
     <Flex
       backgroundColor={"whiteFixed"}
@@ -12,10 +33,21 @@ export const CardUserProfile = () => {
       gap={"20px"}
       borderRadius={"5px"}
     >
-      <Image src={img} w={"100px"} h={"100px"} />
+      <Flex
+        backgroundColor={"brand.1"}
+        width={"100px"}
+        height={"100px"}
+        borderRadius={"50%"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        color={"whiteFixed"}
+        fontSize={"heading.1"}
+      >
+        {getInitials(userObj?.name)}
+      </Flex>
       <Flex alignItems={"center"} gap={"20px"}>
         <Text fontSize={"heading.6"} fontWeight={"bold"}>
-          Samuel Leão
+          {userObj?.name}
         </Text>
         <Text
           backgroundColor={"brand.4"}
@@ -29,12 +61,9 @@ export const CardUserProfile = () => {
         </Text>
       </Flex>
       <Text fontSize={"body.1"} color={"grey.3"}>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s
+        {userObj?.description}
       </Text>
-      <FormCreateAnnouncement/>
-      {/* //<Button w={"150px"}>Criar anuncio</Button> */}
+      <FormCreateAnnouncement />
     </Flex>
   );
 };
