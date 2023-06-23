@@ -83,7 +83,7 @@ export const CardProducts = ({ product }: iProducts) => {
           </Text>
         </Stack>
         <Flex mt={"20px"} flexDirection={"column"} gap={"20px"}>
-          <CardUser />
+          <CardUser name="Usuario" />
           <Flex justifyContent={"space-between"} alignItems={"center"}>
             <Flex gap={"10px"}>
               <Text

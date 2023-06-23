@@ -6,7 +6,7 @@ import { ProfileViewAdmin } from "../pages/ProfileViewAdmin";
 // import { TestPage } from "../pages/testPage";
 import { Login } from "../pages/Login";
 import { ProtectedRoutes } from "./ProtectedRoutes";
-import { ViewAdminAnnouncements } from "../pages/ViewAdminAnnouncements";
+import { ViewAdminAnnouncementsPublic } from "../pages/ViewAdminAnnouncements";
 
 
 const RoutesPages = () => {
@@ -20,7 +20,7 @@ const RoutesPages = () => {
           <Route path="/product" element={<Product />} />
           <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
         </Route>
-          <Route path="/profileAdminAnnoucements" element={<ViewAdminAnnouncements />} />
+          <Route path="/profileAdminAnnoucementsPublic" element={<ViewAdminAnnouncementsPublic />} />
         {/* <Route path="/login" element={} />
         <Route path="/profileView" element={} />
         <Route path="/register" element={} />
