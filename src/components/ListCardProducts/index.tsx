@@ -48,17 +48,21 @@ export const ListCardProducts = () => {
       const endIndex = startIndex + itemsPerPage;
 
       setTotalItems(
-        window.location.pathname === "/profileViewAdmin"
+        window.location.pathname === "/profileViewAdmin" ||
+          window.location.pathname === "/profileAdminAnnoucementsPublic"
           ? productsProfile.length
           : window.location.pathname === "/"
           ? productsFiltered.length > 0
             ? productsFiltered.length
             : products.length
+          : productsSorted.length > 0
+          ? productsSorted.length
           : 0
       );
 
       setCurrentItems(
-        window.location.pathname === "/profileViewAdmin"
+        window.location.pathname === "/profileViewAdmin" ||
+          window.location.pathname === "/profileAdminAnnoucementsPublic"
           ? productsProfile.slice(startIndex, endIndex)
           : window.location.pathname === "/"
           ? productsFiltered.length > 0
