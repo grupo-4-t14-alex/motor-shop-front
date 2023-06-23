@@ -8,11 +8,11 @@ import {
   } from '@chakra-ui/react'
 import { useForm } from "react-hook-form"
 import { Footer } from "../../components/Footer"
-import { useContext, useState } from "react"
+import React, { useContext, useState } from "react"
 import { UserContext } from "../../contexts/UserContext"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { registerSchema } from "./schema"
-import { PasswordField } from "../../components/PasswordField"
+import InputMask from "react-input-mask";
 
 export const RegisterPage = () => {
 
@@ -39,10 +39,12 @@ export const RegisterPage = () => {
 
         data.admin = isAdmin
 
+        const cpfMasked = data.cpf
+
         const userBody = {
             name: data.name,
             email: data.email,
-            cpf: data.cpf,
+            cpf: cpfMasked.replace(/[.-]/g, ""),
             phone: data.phone,
             birthDate: data.birthDate,
             description: data.description,
@@ -58,6 +60,8 @@ export const RegisterPage = () => {
             }
         }
         registerUser(userBody)
+
+        console.log(userBody);
         
     }
 
@@ -90,7 +94,12 @@ export const RegisterPage = () => {
                         <Input marginBottom={"10px"} type="text" placeholder="Ex: user@motosshop.com.br" {...register("email", { required: true })}/>
                         {errors.email && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.email?.message}</Text>}
                         <FormLabel>CPF</FormLabel>
-                        <Input marginBottom={"10px"} type="text" placeholder="000.000.000-00" {...register("cpf", { required: true })}/>
+                        <Input as={InputMask} mask="999.999.999-99" marginBottom={"10px"} type="text" placeholder="000.000.000-00" {...register("cpf", { required: true })}/>
+                        {/* <MaskedInput
+                            style={{marginBottom: "10px", width: "100%", height: "3rem", color: "#1A202C", border: "1px solid", borderRadius: "0.375rem", borderColor: "inherit", padding: "0 1rem 0 1rem", fontSize: "1.125rem"}}
+                            mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
+                            {...register("cpf")}
+                        /> */}
                         {errors.cpf && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.cpf?.message}</Text>}
                         <FormLabel>Celular</FormLabel>
                         <Input marginBottom={"10px"} type="text" placeholder="(DDD) 90000-0000" {...register("phone", { required: true })}/>
@@ -140,7 +149,7 @@ export const RegisterPage = () => {
                             <Button onClick={() => isAdminTrue()} w={"50%"} bg="#4529E6" color="white" _focus={{ bg: "white", color: "#4529E6" }} >Anunciante</Button>
                         </Flex>
                         <FormLabel>Senha</FormLabel>
-                        <PasswordField marginBottom={"15px"} type="text" placeholder="Digitar senha" {...register("password", { required: true })}/>
+                        <Input marginBottom={"15px"} type="password" placeholder="Digitar senha" {...register("password", { required: true })}/>
                         {errors.password && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.password?.message}</Text>}
                         <Button w={"100%"} bg="#4529E6" color="white" _hover={{ bg: "white", color: "#4529E6" }} type="submit" >Cadastrar</Button>
                     </form>
