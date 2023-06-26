@@ -37,16 +37,13 @@ const footerEndVariant = definePartsStyle({
 
 const filterVariant = definePartsStyle({
     dialog: {
-        margin: "0",
-        width: "100%",
-        minW: "98%"
-    },
-    body: {
-        maxW: "100%"
+        maxW: "520px",
+        w: "100%"
     },
     footer: {
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "end",
+        gap: "10px"
     }
 })
 

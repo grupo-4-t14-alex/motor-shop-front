@@ -36,8 +36,6 @@ export const NavBarComponent = () => {
     userObj = JSON.parse(userJson);
   }
 
-  console.log(userObj);
-
   const logout = () => {
     localStorage.clear();
     navigate("/");

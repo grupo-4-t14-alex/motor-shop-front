@@ -68,20 +68,20 @@ const FormUpdateAddress =  () => {
                     <ModalBody>
                         <FormControl mb={"5"}  isInvalid={errors.address?.cep?true:false} >
                             <FormLabel >CEP</FormLabel>
-                                <Input type='text' borderRadius={"4px"} {...register("address.cep")} defaultValue={userData.address.cep }/>
+                                <Input type='text' borderRadius={"4px"} {...register("address.cep")} defaultValue={userData.address?.cep }/>
                                 {errors.address?.cep && <FormErrorMessage>{errors.address?.cep?.message}</FormErrorMessage>}
                         </FormControl>
 
                         <Flex gap={"2"}>
                             <FormControl mb={"5"} isInvalid={errors.address?.estate ? true:false} >
                                 <FormLabel >Estado</FormLabel>
-                                    <Input type='text' borderRadius={"4px"} {...register("address.estate")} defaultValue={userData.address.estate } />
+                                    <Input type='text' borderRadius={"4px"} {...register("address.estate")} defaultValue={userData.address?.estate } />
                                     {errors.address?.estate && <FormErrorMessage>{errors.address?.estate?.message}</FormErrorMessage>}
                             </FormControl> 
 
                             <FormControl mb={"5"} isInvalid={errors.address?.city?true:false}>
                                 <FormLabel >Cidade</FormLabel>
-                                    <Input type='text' borderRadius={"4px"} {...register("address.city")} defaultValue={userData.address.city }/>
+                                    <Input type='text' borderRadius={"4px"} {...register("address.city")} defaultValue={userData.address?.city }/>
                                     {errors.address?.city && <FormErrorMessage>{errors.address?.city?.message}</FormErrorMessage>}
                             </FormControl>
                         </Flex>
@@ -89,20 +89,20 @@ const FormUpdateAddress =  () => {
 
                         <FormControl mb={"5"}  isInvalid={errors.address?.cep?true:false} >
                             <FormLabel >Rua</FormLabel>
-                                <Input type='text' borderRadius={"4px"} {...register("address.street")} defaultValue={userData.address.street }/>
+                                <Input type='text' borderRadius={"4px"} {...register("address.street")} defaultValue={userData.address?.street }/>
                                 {errors.address?.cep && <FormErrorMessage>{errors.address?.cep?.message}</FormErrorMessage>}
                         </FormControl>
 
                         <Flex gap={"2"}>
                             <FormControl mb={"5"} isInvalid={errors.address?.number ? true:false} >
                                 <FormLabel >Numero</FormLabel>
-                                    <Input type='text' borderRadius={"4px"} {...register("address.number")} defaultValue={userData.address.number }/>
+                                    <Input type='text' borderRadius={"4px"} {...register("address.number")} defaultValue={userData.address?.number }/>
                                     {errors.address?.number && <FormErrorMessage>{errors.address?.number?.message}</FormErrorMessage>}
                             </FormControl> 
 
                             <FormControl mb={"5"} isInvalid={errors.address?.complement?true:false}>
                                 <FormLabel >Complemento</FormLabel>
-                                    <Input type='text' borderRadius={"4px"} {...register("address.complement")} defaultValue={userData.address.complement}/>
+                                    <Input type='text' borderRadius={"4px"} {...register("address.complement")} defaultValue={userData.address?.complement}/>
                                     {errors.address?.complement && <FormErrorMessage>{errors.address?.complement?.message}</FormErrorMessage>}
                             </FormControl>
                         </Flex>
