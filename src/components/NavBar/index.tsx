@@ -87,6 +87,7 @@ export const NavBarComponent = () => {
                     <MenuItem onClick={() => navigate("/profileViewAdmin")}>
                       Meus Anúncios
                     </MenuItem>
+                    <MenuItem onClick={() => navigate("/")}>Home</MenuItem>
                     <MenuItem onClick={() => logout()}>Sair</MenuItem>
                   </MenuList>
                 </>

@@ -15,6 +15,8 @@ interface ProductsContextValues {
   setProducts: React.Dispatch<React.SetStateAction<iProducts[]>>;
   productsFiltered: iProducts[];
   setProductsFiltered: React.Dispatch<React.SetStateAction<iProducts[]>>;
+  productsSorted: iProducts[];
+  setProductsSorted: React.Dispatch<React.SetStateAction<iProducts[]>>;
 }
 
 interface iProducts {
@@ -44,6 +46,7 @@ export const ProductProvider = ({ children }: ProductsProviderProps) => {
   const [productsProfile, setProductsProfile] = useState<iProducts[]>([]);
   const [products, setProducts] = useState<iProducts[]>([]);
   const [productsFiltered, setProductsFiltered] = useState<iProducts[]>([]);
+  const [productsSorted, setProductsSorted] = useState<iProducts[]>([]);
   const toast = useToast();
   const [updatePage, setUpdatePage] = useState(true);
 
@@ -69,6 +72,8 @@ export const ProductProvider = ({ children }: ProductsProviderProps) => {
         setProducts,
         productsFiltered,
         setProductsFiltered,
+        productsSorted,
+        setProductsSorted,
       }}
     >
       {children}

@@ -22,9 +22,16 @@ interface iProducts {
   [key: string]: any;
 }
 
+type Sort = "asc" | "desc";
+
 export const Filter = () => {
-  const { products, setProductsFiltered, productsFiltered } =
-    useContext(ProductContext);
+  const {
+    products,
+    setProductsFiltered,
+    productsFiltered,
+    setProductsSorted,
+    productsSorted,
+  } = useContext(ProductContext);
 
   const [models, setModels] = useState<string>("");
   const [brands, setBrands] = useState<string>("");
@@ -108,8 +115,9 @@ export const Filter = () => {
     setFuels(0);
     setModels("");
     setYears(0);
-    console.log(filters);
+    setProductsSorted([]);
     setProductsFiltered([]);
+    console.log(productsSorted);
   };
 
   useEffect(() => {
@@ -118,6 +126,33 @@ export const Filter = () => {
       setProductsFiltered(filteredCars);
     })();
   }, [models, brands, fuels, years, colors]);
+
+  const sortArray = (
+    array: iProducts[],
+    key: keyof iProducts,
+    sort: Sort
+  ): void => {
+    const arraySorted = array.sort((a: iProducts, b: iProducts) => {
+      const valorA = a[key];
+      const valorB = b[key];
+
+      if (sort === "asc") {
+        return valorA - valorB;
+      } else {
+        return valorB - valorA;
+      }
+    });
+
+    setProductsSorted(arraySorted);
+  };
+
+  const handleSortClick = (key: keyof iProducts, sort: Sort): void => {
+    if (productsFiltered.length > 0) {
+      sortArray(productsFiltered, key, sort);
+    } else {
+      sortArray(products, key, sort);
+    }
+  };
 
   return (
     <Flex
@@ -277,10 +312,20 @@ export const Filter = () => {
           Km
         </Text>
         <Flex gap="20px" mt="20px" justifyContent={"space-between"}>
-          <Button bg="grey.5" w="170px" borderRadius="0">
+          <Button
+            bg="grey.5"
+            w="170px"
+            borderRadius="0"
+            onClick={() => handleSortClick("km", "asc")}
+          >
             Min
           </Button>
-          <Button bg="grey.5" w="170px" borderRadius="0">
+          <Button
+            bg="grey.5"
+            w="170px"
+            borderRadius="0"
+            onClick={() => handleSortClick("km", "desc")}
+          >
             Max
           </Button>
         </Flex>
@@ -290,10 +335,20 @@ export const Filter = () => {
           Preço
         </Text>
         <Flex gap="20px" mt="20px" justifyContent={"space-between"}>
-          <Button bg="grey.5" w="170px" borderRadius="0">
+          <Button
+            bg="grey.5"
+            w="170px"
+            borderRadius="0"
+            onClick={() => handleSortClick("sellPrice", "asc")}
+          >
             Min
           </Button>
-          <Button bg="grey.5" w="170px" borderRadius="0">
+          <Button
+            bg="grey.5"
+            w="170px"
+            borderRadius="0"
+            onClick={() => handleSortClick("sellPrice", "desc")}
+          >
             Max
           </Button>
         </Flex>
