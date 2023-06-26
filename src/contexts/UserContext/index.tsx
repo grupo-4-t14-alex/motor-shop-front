@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { iUserProvider, iUserTypes } from "./types";
-import { iFormRegister } from "../../pages/Register/types";
+import { iFormRegister } from "../../pages/register/types";
 import { useToast } from "@chakra-ui/react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";

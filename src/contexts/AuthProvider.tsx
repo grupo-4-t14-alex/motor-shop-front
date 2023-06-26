@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { LoginData } from "../pages/Login/validator";
 import api from "../services/api";
 
+
+
 interface AuthProviderProps {
   children: ReactNode;
 }
@@ -33,22 +35,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setLoading(false);
   }, []);
 
+
+
+
   const signIn = async (data: LoginData) => {
     console.log("signin");
     try {
       const response = await api.post("/login", data);
-
       api.defaults.headers.common.authorization = `Bearer ${response.data.token}`;
-
-      const obj = {
-        name: response.data.user.name,
-        description: response.data.user.description,
-      };
-
-      const userJson = JSON.stringify(obj);
-
       localStorage.setItem("motors-shop:token", response.data.token);
-      localStorage.setItem("motors-shop:user", userJson);
+      localStorage.setItem("motors-shop:user", JSON.stringify(response.data.user));
 
       navigate(""); //se admin -> profileViewAdmin, se não admin -> página normal com anúncios, mas nome renderizado
     } catch (error) {
@@ -57,7 +53,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ signIn, loading }}>
+    <AuthContext.Provider value={{ signIn, loading  }}>
       {children}
     </AuthContext.Provider>
   );
