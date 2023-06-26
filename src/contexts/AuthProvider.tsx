@@ -36,6 +36,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setLoading(false);
   }, []);
 
+
+
+
   const signIn = async (data: LoginData) => {
     console.log("signin");
     try {

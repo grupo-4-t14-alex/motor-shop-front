@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/logoHeader.png";
 import { useEffect, useState } from "react";
 import { CardUser } from "../CardUser";
+import { FormUpdateUser } from "../formUpdateUser";
+import { FormUpdateAddress } from "../formUpdateAddress";
 
 interface iUser {
   name: string;
@@ -33,8 +35,6 @@ export const NavBarComponent = () => {
   if (userJson !== null) {
     userObj = JSON.parse(userJson);
   }
-
-  console.log(userObj);
 
   const logout = () => {
     localStorage.clear();
@@ -82,8 +82,8 @@ export const NavBarComponent = () => {
                     <CardUser name={userObj.name} />
                   </MenuButton>
                   <MenuList>
-                    <MenuItem>Editar Perfil</MenuItem>
-                    <MenuItem>Editar endereco</MenuItem>
+                    <FormUpdateUser/>
+                    <FormUpdateAddress/>
                     <MenuItem onClick={() => navigate("/profileViewAdmin")}>
                       Meus Anúncios
                     </MenuItem>
