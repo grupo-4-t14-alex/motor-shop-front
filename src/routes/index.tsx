@@ -23,7 +23,7 @@ const RoutesPages = () => {
         <Route path="/resetPassword/:token" element={<ResetPassword />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/product" element={<Product />} />
-          <Route path="/profileViewAdmin/" element={<ProfileViewAdmin />} />
+          <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
         </Route>
           <Route path="/profileAdminAnnoucementsPublic" element={<ViewAdminAnnouncementsPublic />} />
         {/* <Route path="/login" element={} />
