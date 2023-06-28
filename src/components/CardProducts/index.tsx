@@ -14,6 +14,9 @@ import imgTeste from "../../assets/img/imgteste.png";
 import imgIcon from "../../assets/img/iconCard.png";
 import { CardUser } from "../CardUser";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ProductContext } from "../../contexts/ProductsContext";
+import api from "../../services/api";
 
 interface iProducts {
   product: {
@@ -48,6 +51,33 @@ export const CardProducts = ({ product }: iProducts) => {
   }
 
   const navigate = useNavigate();
+  const token = localStorage.getItem("motors-shop:token");
+  const { setProductsProfilePublic, setProfilePublic } =
+    useContext(ProductContext);
+
+  const navigateProfilePublic = async () => {
+    try {
+      const response = await api.get(`/cars`);
+      setProductsProfilePublic(
+        response.data.filter((element: any) => {
+          return element.user.id == product.user.id;
+        })
+      );
+      try {
+        const response = await api.get(`/users/${product.user.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setProfilePublic(response.data);
+        navigate("/profileAdminAnnoucementsPublic");
+      } catch (error) {
+        console.log(error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Card
@@ -107,12 +137,16 @@ export const CardProducts = ({ product }: iProducts) => {
           </Text>
         </Stack>
         <Flex mt={"20px"} flexDirection={"column"} gap={"20px"}>
-          <Box
-            onClick={() => navigate("/profileAdminAnnoucementsPublic")}
-            cursor={"pointer"}
-          >
-            <CardUser name={product.user.name} />
-          </Box>
+          {window.location.pathname === "/profileViewAdmin" ||
+          window.location.pathname === "/profileAdminAnnoucementsPublic" ? (
+            <Box cursor={"pointer"}>
+              <CardUser name={product.user.name} />
+            </Box>
+          ) : (
+            <Box onClick={() => navigateProfilePublic()} cursor={"pointer"}>
+              <CardUser name={product.user.name} />
+            </Box>
+          )}
           <Flex justifyContent={"space-between"} alignItems={"center"}>
             <Flex gap={"10px"}>
               <Text

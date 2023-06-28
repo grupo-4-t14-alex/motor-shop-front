@@ -17,6 +17,10 @@ interface ProductsContextValues {
   setProductsFiltered: React.Dispatch<React.SetStateAction<iProducts[]>>;
   productsSorted: iProducts[];
   setProductsSorted: React.Dispatch<React.SetStateAction<iProducts[]>>;
+  productsProfilePublic: iProducts[];
+  setProductsProfilePublic: React.Dispatch<React.SetStateAction<iProducts[]>>;
+  profilePublic: iUser[];
+  setProfilePublic: React.Dispatch<React.SetStateAction<iUser[]>>;
 }
 
 interface iProducts {
@@ -38,6 +42,41 @@ interface iProducts {
   };
 }
 
+interface iCars {
+  id: number;
+  brand: string;
+  model: string;
+  year: number;
+  fuel: number;
+  km: number;
+  color: string;
+  fipePrice: number;
+  sellPrice: number;
+  description: string;
+  isActive: boolean;
+}
+
+interface iAddress {
+  cep: string;
+  city: string;
+  complement: string;
+  estate: string;
+  number: string;
+  street: string;
+}
+
+interface iUser {
+  address: iAddress;
+  birthDate: string;
+  cars: iCars[];
+  cpf: string;
+  description: string;
+  email: string;
+  id: number;
+  name: string;
+  phone: string;
+}
+
 export const ProductContext = createContext<ProductsContextValues>(
   {} as ProductsContextValues
 );
@@ -47,6 +86,10 @@ export const ProductProvider = ({ children }: ProductsProviderProps) => {
   const [products, setProducts] = useState<iProducts[]>([]);
   const [productsFiltered, setProductsFiltered] = useState<iProducts[]>([]);
   const [productsSorted, setProductsSorted] = useState<iProducts[]>([]);
+  const [productsProfilePublic, setProductsProfilePublic] = useState<
+    iProducts[]
+  >([]);
+  const [profilePublic, setProfilePublic] = useState<iUser[]>([]);
   const toast = useToast();
   const [updatePage, setUpdatePage] = useState(true);
 
@@ -74,6 +117,10 @@ export const ProductProvider = ({ children }: ProductsProviderProps) => {
         setProductsFiltered,
         productsSorted,
         setProductsSorted,
+        productsProfilePublic,
+        setProductsProfilePublic,
+        profilePublic,
+        setProfilePublic,
       }}
     >
       {children}
