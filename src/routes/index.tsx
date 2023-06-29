@@ -9,6 +9,7 @@ import { ProtectedRoutes } from "./ProtectedRoutes";
 import { ViewAdminAnnouncementsPublic } from "../pages/ViewAdminAnnouncements";
 import { SendEmailResetPassword } from "../pages/ResetPasword";
 import { ResetPassword } from "../pages/ResetPasword/token";
+import { TestPage } from "../pages/testPage";
 
 
 const RoutesPages = () => {
@@ -21,6 +22,7 @@ const RoutesPages = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/resetPassword" element={<SendEmailResetPassword />} />
         <Route path="/resetPassword/:token" element={<ResetPassword />} />
+        <Route path="/test" element={<TestPage />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/product" element={<Product />} />
           <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
