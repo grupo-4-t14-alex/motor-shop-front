@@ -1,22 +1,9 @@
 import { Flex, Text } from "@chakra-ui/react";
-// import { FormCreateAnnouncement } from "../formCreateAnnouncement";
-
-interface iUser {
-  name: string;
-  description: string;
-}
+import { useContext, useEffect } from "react";
+import { ProductContext } from "../../contexts/ProductsContext";
 
 export const CardAdminPublic = () => {
-  const userJson = localStorage.getItem("motors-shop:user");
-
-  let userObj: iUser = {
-    name: "",
-    description: "",
-  };
-
-  if (userJson !== null) {
-    userObj = JSON.parse(userJson);
-  }
+  const { profilePublic } = useContext(ProductContext);
 
   const getInitials = (name: string) => {
     const nameParts = name.split(" ");
@@ -43,11 +30,11 @@ export const CardAdminPublic = () => {
         color={"whiteFixed"}
         fontSize={"heading.1"}
       >
-        {getInitials(userObj?.name)}
+        {getInitials(profilePublic.name)}
       </Flex>
       <Flex alignItems={"center"} gap={"20px"}>
         <Text fontSize={"heading.6"} fontWeight={"bold"}>
-          {userObj?.name}
+          {profilePublic.name}
         </Text>
         <Text
           backgroundColor={"brand.4"}
@@ -61,7 +48,7 @@ export const CardAdminPublic = () => {
         </Text>
       </Flex>
       <Text fontSize={"body.1"} color={"grey.3"}>
-        {userObj?.description}
+        {profilePublic.description}
       </Text>
     </Flex>
   );
