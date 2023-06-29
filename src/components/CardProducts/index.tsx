@@ -14,6 +14,7 @@ import imgTeste from "../../assets/img/imgteste.png";
 import imgIcon from "../../assets/img/iconCard.png";
 import { CardUser } from "../CardUser";
 import { useNavigate } from "react-router-dom";
+import { FormUpdateAnnouncement } from "../formUpdateAnnoucement";
 
 interface iProducts {
   product: {
@@ -143,11 +144,12 @@ export const CardProducts = ({ product }: iProducts) => {
         </Flex>
         {window.location.pathname === "/profileViewAdmin" && (
           <ButtonGroup marginTop={"20px"}>
-            <Button>Editar</Button>
+            <FormUpdateAnnouncement product={ product }/>
             <Button>Ver detalhes</Button>
           </ButtonGroup>
         )}
       </CardBody>
     </Card>
   );
+
 };
