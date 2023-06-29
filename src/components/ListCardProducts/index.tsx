@@ -25,8 +25,13 @@ interface iProducts {
 }
 
 export const ListCardProducts = () => {
-  const { productsProfile, products, productsFiltered, productsSorted } =
-    useContext(ProductContext);
+  const {
+    productsProfile,
+    products,
+    productsFiltered,
+    productsSorted,
+    productsProfilePublic,
+  } = useContext(ProductContext);
 
   const [totalItems, setTotalItems] = useState<number>(0);
   const [currentItems, setCurrentItems] = useState<iProducts[]>([]);
@@ -46,30 +51,33 @@ export const ListCardProducts = () => {
     (async () => {
       const startIndex = (currentPage - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
+      const path = window.location.pathname;
 
       setTotalItems(
-        window.location.pathname === "/profileViewAdmin" ||
-          window.location.pathname === "/profileAdminAnnoucementsPublic"
+        path === "/profileViewAdmin"
           ? productsProfile.length
-          : window.location.pathname === "/"
+          : path === "/"
           ? productsFiltered.length > 0
             ? productsFiltered.length
+            : productsSorted.length > 0
+            ? productsSorted.length
             : products.length
-          : productsSorted.length > 0
-          ? productsSorted.length
+          : path === "/profileAdminAnnoucementsPublic"
+          ? productsProfilePublic.length
           : 0
       );
 
       setCurrentItems(
-        window.location.pathname === "/profileViewAdmin" ||
-          window.location.pathname === "/profileAdminAnnoucementsPublic"
+        path === "/profileViewAdmin"
           ? productsProfile.slice(startIndex, endIndex)
-          : window.location.pathname === "/"
+          : path === "/"
           ? productsFiltered.length > 0
             ? productsFiltered.slice(startIndex, endIndex)
+            : productsSorted.length > 0
+            ? productsSorted.slice(startIndex, endIndex)
             : products.slice(startIndex, endIndex)
-          : productsSorted.length > 0
-          ? productsSorted.slice(startIndex, endIndex)
+          : path === "/profileAdminAnnoucementsPublic"
+          ? productsProfilePublic.slice(startIndex, endIndex)
           : []
       );
     })();
