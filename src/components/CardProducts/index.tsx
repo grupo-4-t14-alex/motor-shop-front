@@ -17,6 +17,8 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ProductContext } from "../../contexts/ProductsContext";
 import api from "../../services/api";
+import { FormUpdateAnnouncement } from "../formUpdateAnnoucement";
+
 
 interface iProducts {
   product: {
@@ -177,11 +179,12 @@ export const CardProducts = ({ product }: iProducts) => {
         </Flex>
         {window.location.pathname === "/profileViewAdmin" && (
           <ButtonGroup marginTop={"20px"}>
-            <Button>Editar</Button>
+            <FormUpdateAnnouncement product={ product }/>
             <Button>Ver detalhes</Button>
           </ButtonGroup>
         )}
       </CardBody>
     </Card>
   );
+
 };
