@@ -8,12 +8,83 @@ import {
   Flex,
   ButtonGroup,
   Button,
+  Box,
 } from "@chakra-ui/react";
 import imgTeste from "../../assets/img/imgteste.png";
 import imgIcon from "../../assets/img/iconCard.png";
 import { CardUser } from "../CardUser";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ProductContext } from "../../contexts/ProductsContext";
+import api from "../../services/api";
+import { FormUpdateAnnouncement } from "../formUpdateAnnoucement";
 
-export const CardProducts = () => {
+interface iProducts {
+  product: {
+    id: number;
+    brand: string;
+    model: string;
+    year: number;
+    fuel: number;
+    km: number;
+    color: string;
+    fipePrice: number;
+    sellPrice: number;
+    description: string;
+    isActive: boolean;
+    user: {
+      id: number;
+      name: string;
+      description: string;
+    };
+  };
+}
+
+export const CardProducts = ({ product }: iProducts) => {
+  function isCarValueLowerBy5Percent(
+    carValue: number,
+    fipeValue: number
+  ): boolean {
+    const difference = fipeValue - carValue;
+    const percentage = (difference / fipeValue) * 100;
+
+    return percentage >= 5;
+  }
+
+  const navigate = useNavigate();
+  const token = localStorage.getItem("motors-shop:token");
+  const { setProductsProfilePublic, setProfilePublic } =
+    useContext(ProductContext);
+
+  const navigateProfilePublic = async () => {
+    try {
+      const response = await api.get(`/cars`);
+      setProductsProfilePublic(
+        response.data.filter((element: any) => {
+          return element.user.id == product.user.id;
+        })
+      );
+      try {
+        const response = await api.get(`/users/${product.user.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setProfilePublic(response.data);
+        navigate("/profileAdminAnnoucementsPublic");
+      } catch (error) {
+        console.log(error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const navigatePageProduct = async () => {
+    navigate("/product");
+    localStorage.setItem("id-product-page:", JSON.stringify(product));
+  };
+
   return (
     <Card
       w={"300px"}
@@ -21,6 +92,8 @@ export const CardProducts = () => {
       variant="unstyled"
       zIndex={"0"}
       backgroundColor={"grey.9"}
+      onClick={() => navigatePageProduct()}
+      cursor={"pointer"}
     >
       <CardBody marginBottom={0}>
         <Flex
@@ -31,32 +104,36 @@ export const CardProducts = () => {
           alignItems={"center"}
           position={"relative"}
         >
-          <Image
-            src={imgIcon}
-            position={"absolute"}
-            top={"0"}
-            right={"0"}
-            padding={"0"}
-          />
-          <Flex
-            position={"absolute"}
-            top={"0"}
-            left={"0"}
-            padding={"0"}
-            margin={"10px"}
-            backgroundColor={"brand.2"}
-            paddingInline={"5px"}
-            paddingY={"1px"}
-          >
-            <Text color={"whiteFixed"} fontSize={"body.2"}>
-              Inativo
-            </Text>
-          </Flex>
+          {isCarValueLowerBy5Percent(product.sellPrice, product.fipePrice) && (
+            <Image
+              src={imgIcon}
+              position={"absolute"}
+              top={"0"}
+              right={"0"}
+              padding={"0"}
+            />
+          )}
+          {window.location.pathname === "/profileViewAdmin" && (
+            <Flex
+              position={"absolute"}
+              top={"0"}
+              left={"0"}
+              padding={"0"}
+              margin={"10px"}
+              backgroundColor={"brand.2"}
+              paddingInline={"5px"}
+              paddingY={"1px"}
+            >
+              <Text color={"whiteFixed"} fontSize={"body.2"}>
+                {product.isActive ? "Ativo" : "Inativo"}
+              </Text>
+            </Flex>
+          )}
           <Image src={imgTeste} />
         </Flex>
         <Stack mt="4" spacing="3">
           <Heading fontSize={"heading.7"} fontWeight={"bold"}>
-            Maserati - Ghibli
+            {product.model}
           </Heading>
           <Text
             noOfLines={2}
@@ -64,12 +141,20 @@ export const CardProducts = () => {
             fontSize={"body.2"}
             fontWeight={"normal"}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            hendrerit nisi non sem tincidunt, ut iaculis enim sagittis.
+            {product.description}
           </Text>
         </Stack>
         <Flex mt={"20px"} flexDirection={"column"} gap={"20px"}>
-          <CardUser />
+          {window.location.pathname === "/profileViewAdmin" ||
+          window.location.pathname === "/profileAdminAnnoucementsPublic" ? (
+            <Box cursor={"pointer"}>
+              <CardUser name={product.user.name} />
+            </Box>
+          ) : (
+            <Box onClick={() => navigateProfilePublic()} cursor={"pointer"}>
+              <CardUser name={product.user.name} />
+            </Box>
+          )}
           <Flex justifyContent={"space-between"} alignItems={"center"}>
             <Flex gap={"10px"}>
               <Text
@@ -80,7 +165,7 @@ export const CardProducts = () => {
                 fontSize={"buttonMediumText"}
                 fontWeight={"medium"}
               >
-                0 KM
+                {product.km} KM
               </Text>
               <Text
                 backgroundColor={"brand.4"}
@@ -90,18 +175,20 @@ export const CardProducts = () => {
                 fontSize={"buttonMediumText"}
                 fontWeight={"medium"}
               >
-                2019
+                {product.year}
               </Text>
             </Flex>
             <Text fontSize={"heading.7"} fontWeight={"bold"}>
-              R$ 00.000,00
+              R$ {product.sellPrice}
             </Text>
           </Flex>
         </Flex>
-        <ButtonGroup marginTop={"20px"}>
-          <Button>Editar</Button>
-          <Button>Ver detalhes</Button>
-        </ButtonGroup>
+        {window.location.pathname === "/profileViewAdmin" && (
+          <ButtonGroup marginTop={"20px"}>
+            <FormUpdateAnnouncement product={product} />
+            <Button>Ver detalhes</Button>
+          </ButtonGroup>
+        )}
       </CardBody>
     </Card>
   );

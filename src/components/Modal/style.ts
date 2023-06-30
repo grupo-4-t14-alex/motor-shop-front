@@ -18,7 +18,7 @@ const baseStyle = definePartsStyle({
         alignItems: "center",
         fontSize: "heading.7",
         color: "grey.2",
-        fontFamily: "Roboto"
+        fontFamily: "Lexend"
     },
     body: {
         pr: "0",
@@ -28,6 +28,18 @@ const baseStyle = definePartsStyle({
 })
 
 const footerEndVariant = definePartsStyle({
+    footer: {
+        display: "flex",
+        justifyContent: "end",
+        gap: "10px"
+    }
+})
+
+const filterVariant = definePartsStyle({
+    dialog: {
+        maxW: "520px",
+        w: "100%"
+    },
     footer: {
         display: "flex",
         justifyContent: "end",
@@ -45,5 +57,5 @@ const footerStartVariant = definePartsStyle({
 
 export const modalTheme = defineMultiStyleConfig({
     baseStyle, 
-    variants: { footerStartVariant, footerEndVariant }
+    variants: { footerStartVariant, footerEndVariant, filterVariant }
 })
