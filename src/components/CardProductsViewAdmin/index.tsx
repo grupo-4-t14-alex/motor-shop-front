@@ -64,8 +64,7 @@ export const CardProducts = ({ product }: iProducts) => {
               backgroundColor={"brand.2"}
               paddingInline={"5px"}
               paddingY={"1px"}
-            >
-            </Flex>
+            ></Flex>
           )}
           <Image src={imgTeste} />
         </Flex>
