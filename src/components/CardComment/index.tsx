@@ -11,7 +11,7 @@ export const CardComment = () => {
       gap={"30px"}
       borderRadius={"5px"}
     >
-      <CardUser />
+      {/* <CardUser /> */}
       <Box position="relative" width="100%">
         <Textarea
           placeholder="Digite seu comentário aqui..."

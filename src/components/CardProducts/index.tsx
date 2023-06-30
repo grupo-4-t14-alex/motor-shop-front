@@ -19,7 +19,6 @@ import { ProductContext } from "../../contexts/ProductsContext";
 import api from "../../services/api";
 import { FormUpdateAnnouncement } from "../formUpdateAnnoucement";
 
-
 interface iProducts {
   product: {
     id: number;
@@ -81,6 +80,11 @@ export const CardProducts = ({ product }: iProducts) => {
     }
   };
 
+  const navigatePageProduct = async () => {
+    navigate("/product");
+    localStorage.setItem("id-product-page:", JSON.stringify(product));
+  };
+
   return (
     <Card
       w={"300px"}
@@ -88,6 +92,8 @@ export const CardProducts = ({ product }: iProducts) => {
       variant="unstyled"
       zIndex={"0"}
       backgroundColor={"grey.9"}
+      onClick={() => navigatePageProduct()}
+      cursor={"pointer"}
     >
       <CardBody marginBottom={0}>
         <Flex
@@ -179,12 +185,11 @@ export const CardProducts = ({ product }: iProducts) => {
         </Flex>
         {window.location.pathname === "/profileViewAdmin" && (
           <ButtonGroup marginTop={"20px"}>
-            <FormUpdateAnnouncement product={ product }/>
+            <FormUpdateAnnouncement product={product} />
             <Button>Ver detalhes</Button>
           </ButtonGroup>
         )}
       </CardBody>
     </Card>
   );
-
 };

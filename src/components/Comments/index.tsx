@@ -5,7 +5,7 @@ export const Comments = () => {
   return (
     <Flex flexDirection={"column"} gap={"20px"}>
       <Flex gap={"10px"} alignItems={"center"}>
-        <CardUser />
+        {/* <CardUser /> */}
         <Box
           w={"5px"}
           h={"5px"}
