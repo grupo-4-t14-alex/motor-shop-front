@@ -1,4 +1,5 @@
-import { iFormRegister } from "../../pages/Register/types"
+import { iFormRegister } from "../../pages/register/types"
+
 
 export interface iUserProvider {
     children: React.ReactNode

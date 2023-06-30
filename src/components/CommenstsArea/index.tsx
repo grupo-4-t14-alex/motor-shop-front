@@ -1,7 +1,8 @@
 import { Flex, Heading } from "@chakra-ui/react";
-import { Comments } from "../Comments";
+import { ListComments } from "../ListComments";
 
 export const CommentsArea = () => {
+  
   return (
     <Flex
       w={{ base: "350px", md: "800px" }}
@@ -14,7 +15,7 @@ export const CommentsArea = () => {
       <Heading fontSize={"heading.6"} fontWeight={"bold"}>
         Comentários
       </Heading>
-      <Comments />
+      <ListComments />
     </Flex>
   );
 };

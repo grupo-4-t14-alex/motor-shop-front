@@ -1,5 +1,4 @@
-import { Flex, Heading, useTheme } from "@chakra-ui/react";
-import { useState } from "react";
+import { Flex, Heading } from "@chakra-ui/react";
 
 interface name {
   name: string;

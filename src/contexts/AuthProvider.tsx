@@ -47,6 +47,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         api.defaults.headers.common.authorization = `Bearer ${response.data.token}`;
 
     const obj = {
+        id: response.data.user.id,
         name: response.data.user.name,
         description: response.data.user.description,
     };
