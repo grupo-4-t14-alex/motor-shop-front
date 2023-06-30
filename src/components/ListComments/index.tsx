@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { Comments } from "../Comments";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text, list } from "@chakra-ui/react";
 
 interface iComment {
   id: number;
@@ -66,9 +66,15 @@ export const ListComments = () => {
         alignItems={"flex"}
         justifyContent={"center"}
     >
-      {comments.map((comment, index) => (
-        <Comments key={index} comment={comment.comment} commentAuthor={comment.user_id.name} />
-      ))}
+      {
+        comments.length >= 1 ? (
+          comments.map((comment, index) => (
+            <Comments key={index} comment={comment.comment} commentAuthor={comment.user_id.name} />
+          ))
+        ) : (
+          <Text>No momento não possui comentários!</Text>
+        )
+      }
     </Flex>
   );
 };

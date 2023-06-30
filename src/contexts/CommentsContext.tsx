@@ -24,31 +24,38 @@ export const CommentProvider = ({ children }: CommentsProvider) => {
 
   const registerComment = async (data: iComment) => {
     const token = localStorage.getItem("motors-shop:token");
-    const product = localStorage.getItem("id-product-page");
+    const product = localStorage.getItem("id-product-page:");
 
     if (product) {
       const idProduct = JSON.parse(product);
 
-      try {
-        console.log(idProduct.id);
-        await api.post(`/comments/${idProduct.id}`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
+      if(!token){
         toast({
-          title: "Comentário criado :)",
-          status: "success",
+          title: "É necessário realizar login para fazer comentários!",
+          status: "info",
           isClosable: true,
-        });
-      } catch (error) {
-        toast({
-          title: "Ops, algo deu errado :(",
-          status: "error",
-          isClosable: true,
-        });
-        console.log(error);
+        })
+      }else{
+        try {
+          await api.post(`/comments/${idProduct.id}`, data, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+  
+          toast({
+            title: "Comentário criado :)",
+            status: "success",
+            isClosable: true,
+          });
+        } catch (error) {
+          toast({
+            title: "Ops, algo deu errado :(",
+            status: "error",
+            isClosable: true,
+          });
+          console.log(error);
+        }
       }
     }
   };
