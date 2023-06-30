@@ -7,14 +7,30 @@ interface iComment {
   id: number;
   comment: string;
   createdAt: string;
-  author: {
-    authorId: number;
-    authorName: string;
+  user_id: {
+    id: number,
+    name: string,
+    email: string,
+    cpf: string,
+    phone: string,
+    birthDate: string,
+    description: string,
+    admin: boolean,
+    password: string,
+    reset_token: null
   };
-  car: {
-    carId: number;
-    brand: string;
-    model: string;
+  car_id: {
+    id: number,
+    brand: string,
+    model: string,
+    year: number,
+    fuel: number,
+    km: number,
+    color: string,
+    fipePrice: number,
+    sellPrice: number,
+    description: string,
+    isActive: true
   };
 }
 
@@ -22,14 +38,22 @@ export const ListComments = () => {
 
   const [comments, setComments] = useState<iComment[]>([]);
 
+  const product = localStorage.getItem("id-product-page:");
+
   useEffect(() => {
     const listComments = async () => {
-      try {
-        const response = await api.get("/comments");
-        setComments(response.data);
-      } catch (error) {
-        console.error(error);
+      if (product) {
+        const idProduct = JSON.parse(product)
+
+        try {
+          const response = await api.get(`/cars/${idProduct.id}/comments`);
+          setComments(response.data);
+          listComments()
+        } catch (error) {
+          console.error(error);
+        }
       }
+      
     };
     listComments();
   }, []);
@@ -43,7 +67,7 @@ export const ListComments = () => {
         justifyContent={"center"}
     >
       {comments.map((comment, index) => (
-        <Comments key={index} comment={comment.comment} commentAuthor={comment.author.authorName} />
+        <Comments key={index} comment={comment.comment} commentAuthor={comment.user_id.name} />
       ))}
     </Flex>
   );

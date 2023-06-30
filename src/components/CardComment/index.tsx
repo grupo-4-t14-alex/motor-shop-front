@@ -3,8 +3,12 @@ import { CardUser } from "../CardUser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createCommentSchema, iCreateComment } from "./types";
+import { useContext } from "react";
+import { CommentContext } from "../../contexts/CommentsContext";
 
 export const CardComment = () => {
+
+  const { registerComment } = useContext(CommentContext)
 
   let userObj = {
     name: ""
@@ -22,6 +26,8 @@ export const CardComment = () => {
 
   const onSubmit = (data: iCreateComment) => {
     console.log(data);
+
+    registerComment(data)
     
   }
 

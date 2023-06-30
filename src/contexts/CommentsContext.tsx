@@ -3,72 +3,59 @@ import { ReactNode, createContext } from "react";
 import api from "../services/api";
 
 interface CommentsProvider {
-    children: ReactNode
+  children: ReactNode;
 }
 
 interface CommentContextValues {
-    registerComment(data: iComment): void
+  registerComment(data: iComment): void;
 }
 
 interface iComment {
-    id?: number;
-    comment?: string;
-    user_id?: number;
-    car_id?: number;
-  }
+  id?: number;
+  comment?: string;
+  user_id?: number;
+  car_id?: number;
+}
 
-export const CommentContext = createContext({} as CommentContextValues)
+export const CommentContext = createContext({} as CommentContextValues);
 
 export const CommentProvider = ({ children }: CommentsProvider) => {
+  const toast = useToast();
 
-    const toast = useToast()
+  const registerComment = async (data: iComment) => {
+    const token = localStorage.getItem("motors-shop:token");
+    const product = localStorage.getItem("id-product-page");
 
-    const registerComment = async (data: iComment) => {
+    if (product) {
+      const idProduct = JSON.parse(product);
 
-      const token = localStorage.getItem("motors-shop:token")
+      try {
+        console.log(idProduct.id);
+        await api.post(`/comments/${idProduct.id}`, data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      let userObj = {
-        id: ""
-      };
-      
-      const dataUser = localStorage.getItem("motors-shop:user")
-      
-      
-      if (dataUser !== null) {
-        userObj = JSON.parse(dataUser);
+        toast({
+          title: "Comentário criado :)",
+          status: "success",
+          isClosable: true,
+        });
+      } catch (error) {
+        toast({
+          title: "Ops, algo deu errado :(",
+          status: "error",
+          isClosable: true,
+        });
+        console.log(error);
       }
-
-        try{
-
-            await api.post(`/comments/${userObj.id}/:idCar`, data, {
-              headers: {
-                Authorization: `Bearer ${token}`
-              }
-            })
-
-            console.log(data);
-
-            toast({
-                title: "Comentário criado :)",
-                status: "success",
-                isClosable: true,
-              })
-
-        }catch(error){
-            toast({
-                title: "Ops, algo deu errado :(",
-                status: "error",
-                isClosable: true,
-              })
-            console.log(error);
-            
-        }
-        
     }
+  };
 
   return (
     <CommentContext.Provider value={{ registerComment }}>
-        { children }
+      {children}
     </CommentContext.Provider>
-  )
-}
+  );
+};
