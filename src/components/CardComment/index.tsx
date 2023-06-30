@@ -20,14 +20,15 @@ export const CardComment = () => {
     userObj = JSON.parse(nameUser);
   }
 
-  const {register, handleSubmit, formState:{errors}} = useForm<iCreateComment>({
+  const {register, handleSubmit, formState:{errors}, reset} = useForm<iCreateComment>({
     resolver: zodResolver(createCommentSchema)
   })
 
   const onSubmit = (data: iCreateComment) => {
-    console.log(data);
+    // console.log(data);
 
     registerComment(data)
+    reset()
     
   }
 
