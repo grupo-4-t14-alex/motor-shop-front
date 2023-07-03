@@ -1,4 +1,4 @@
-import { Button, Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input, MenuItem, ModalBody, ModalFooter,  Textarea, useDisclosure, useToast } from "@chakra-ui/react"
+import { Button, Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input, MenuItem, ModalBody, ModalFooter, useDisclosure, useToast } from "@chakra-ui/react"
 import { useForm } from "react-hook-form"
 import ModalContainer from "../Modal"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -25,7 +25,7 @@ const FormUpdateAddress =  () => {
             console.log(data)
 
 
-            const response = await api.patch("/users", data, {
+            await api.patch("/users", data, {
                 headers: { Authorization: `Bearer ${token}` },
               } )
 

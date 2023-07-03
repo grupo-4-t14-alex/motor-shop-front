@@ -1,11 +1,9 @@
 import {
-  Box,
   Button,
   Flex,
   Heading,
   Image,
   Text,
-  useBreakpointValue,
 } from "@chakra-ui/react";
 import img from "../../assets/img/imgUser2.png";
 

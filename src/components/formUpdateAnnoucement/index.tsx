@@ -10,7 +10,6 @@ import { useEffect, useState, useContext } from "react"
 import axios from "axios"
 import api from "../../services/api"
 import { ProductContext } from "../../contexts/ProductsContext"
-import InputMask from "react-input-mask";
 
 
 

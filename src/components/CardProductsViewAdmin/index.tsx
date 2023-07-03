@@ -6,8 +6,6 @@ import {
   Text,
   Image,
   Flex,
-  ButtonGroup,
-  Button,
 } from "@chakra-ui/react";
 import imgTeste from "../../assets/img/imgteste.png";
 import imgIcon from "../../assets/img/iconCard.png";

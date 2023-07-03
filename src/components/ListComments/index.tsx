@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { Comments } from "../Comments";
-import { Flex, Text, list } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 interface iComment {
   id: number;

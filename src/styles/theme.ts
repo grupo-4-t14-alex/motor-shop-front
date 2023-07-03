@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, extendTheme } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 import { Button } from "./buttons";
 import { InputConfig } from "./input";
 import { modalTheme } from "../components/Modal/style";

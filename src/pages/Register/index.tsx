@@ -8,7 +8,7 @@ import {
   } from '@chakra-ui/react'
 import { useForm } from "react-hook-form"
 import { Footer } from "../../components/Footer"
-import React, { useContext, useState } from "react"
+import { useContext, useState } from "react"
 import { UserContext } from "../../contexts/UserContext"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { registerSchema } from "./schema"

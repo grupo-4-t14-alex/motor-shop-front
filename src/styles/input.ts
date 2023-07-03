@@ -19,7 +19,7 @@ export const InputConfig = defineStyleConfig({
 
   },
 
-  defaultProps: { size:"lg", borderColor:"grey.7",  focusBorderColor:"brand.2",fontFamily:"inter"},
+  defaultProps: {},
 })
 
 
