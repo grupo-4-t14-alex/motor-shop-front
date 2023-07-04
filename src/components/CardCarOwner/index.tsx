@@ -1,15 +1,47 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Image,
-  Text,
-  useBreakpointValue,
-} from "@chakra-ui/react";
-import img from "../../assets/img/imgUser2.png";
+import { Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { ProductContext } from "../../contexts/ProductsContext";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import api from "../../services/api";
 
 export const CardCarOwner = () => {
+  const product = JSON.parse(localStorage.getItem("id-product-page:")!);
+
+  const getInitials = (name: string) => {
+    const nameParts = name.split(" ");
+    const initials = nameParts.map((part) => part[0]);
+    return initials.join("");
+  };
+
+  const navigate = useNavigate();
+  const token = localStorage.getItem("motors-shop:token");
+  const { setProductsProfilePublic, setProfilePublic } =
+    useContext(ProductContext);
+
+  const navigateProfilePublic = async () => {
+    try {
+      const response = await api.get(`/cars`);
+      setProductsProfilePublic(
+        response.data.filter((element: any) => {
+          return element.user.id == product.user.id;
+        })
+      );
+      try {
+        const response = await api.get(`/users/${product.user.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setProfilePublic(response.data);
+        navigate("/profileAdminAnnoucementsPublic");
+      } catch (error) {
+        console.log(error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Flex
       w={{ base: "350px", md: "800px", xl: "400px" }}
@@ -21,9 +53,20 @@ export const CardCarOwner = () => {
       gap={"30px"}
       borderRadius={"5px"}
     >
-      <Image src={img} w={"100px"} h={"100px"} />
+      <Flex
+        backgroundColor={"brand.1"}
+        width={"100px"}
+        height={"100px"}
+        borderRadius={"50%"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        color={"whiteFixed"}
+        fontSize={"heading.1"}
+      >
+        {getInitials(product.user.name)}
+      </Flex>
       <Heading fontSize={"heading.6"} fontWeight={"bold"}>
-        Samuel Leão
+        {product.user.name}
       </Heading>
       <Text
         fontSize={"body.1"}
@@ -31,10 +74,11 @@ export const CardCarOwner = () => {
         color={"grey.3"}
         textAlign={"center"}
       >
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's
+        {product.user.description}
       </Text>
-      <Button>Ver todos anuncios</Button>
+      <Button onClick={() => navigateProfilePublic()}>
+        Ver todos anuncios
+      </Button>
     </Flex>
   );
 };

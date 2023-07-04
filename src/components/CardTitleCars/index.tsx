@@ -1,6 +1,8 @@
 import { Flex, Heading, Text, Button } from "@chakra-ui/react";
 
 export const CardTitleCars = () => {
+  const product = JSON.parse(localStorage.getItem("id-product-page:")!);
+
   return (
     <Flex
       w={{ base: "350px", md: "800px" }}
@@ -13,7 +15,7 @@ export const CardTitleCars = () => {
       padding={"40px"}
     >
       <Heading fontSize={"heading.6"} fontWeight={"bold"}>
-        Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200
+        {product.model}
       </Heading>
       <Flex
         flexDirection={"column"}
@@ -34,7 +36,7 @@ export const CardTitleCars = () => {
               fontSize={"buttonMediumText"}
               fontWeight={"medium"}
             >
-              2013
+              {product.year}
             </Text>
             <Text
               backgroundColor={"brand.4"}
@@ -44,10 +46,10 @@ export const CardTitleCars = () => {
               fontSize={"buttonMediumText"}
               fontWeight={"medium"}
             >
-              0 KM
+              {product.km} KM
             </Text>
           </Flex>
-          <Text>R$ 00.000,00</Text>
+          <Text>R$ {product.sellPrice}</Text>
         </Flex>
         <Button w={"100px"}>Comprar</Button>
       </Flex>
