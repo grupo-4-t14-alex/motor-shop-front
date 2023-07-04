@@ -24,7 +24,7 @@ const FormUpdateUser =  () => {
     const updateUser = async (data:IUpdateUser)=>{
 
         try {
-            const response = await api.patch("/users", data, {
+            await api.patch("/users", data, {
                 headers: { Authorization: `Bearer ${token}` },
               } )
 
