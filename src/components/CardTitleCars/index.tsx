@@ -1,8 +1,7 @@
 import { Flex, Heading, Text, Button } from "@chakra-ui/react";
-import axios from "axios";
 import { useEffect,  useState } from "react"
 import api from "../../services/api";
-import { useNavigate } from "react-router-dom";
+
 
 export const CardTitleCars = () => {
 
