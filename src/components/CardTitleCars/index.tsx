@@ -74,7 +74,7 @@ export const CardTitleCars = () => {
       padding={"40px"}
     >
       <Heading fontSize={"heading.6"} fontWeight={"bold"}>
-        {product.model}
+        {carInfo.model}
       </Heading>
       <Flex
         flexDirection={"column"}
@@ -95,7 +95,7 @@ export const CardTitleCars = () => {
               fontSize={"buttonMediumText"}
               fontWeight={"medium"}
             >
-              {product.year}
+              {carInfo.year}
             </Text>
             <Text
               backgroundColor={"brand.4"}
@@ -105,10 +105,10 @@ export const CardTitleCars = () => {
               fontSize={"buttonMediumText"}
               fontWeight={"medium"}
             >
-              {product.km} KM
+              {carInfo.km} KM
             </Text>
           </Flex>
-          <Text>R$ {product.sellPrice}</Text>
+          <Text>R$ {carInfo.sellPrice}</Text>
         </Flex>
 
         <Button w={"100px"} onClick={handlerWhatsapp}>
