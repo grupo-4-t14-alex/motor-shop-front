@@ -44,7 +44,7 @@ export const AnnouncementProvider = ({
   const toast = useToast();
 
   const CreateAnnouncement = async (data: IcreateAnnounce, banner: File, files: Array<File>) => {
-    console.log(files)
+
     data.year = Number(model?.year!);
     data.fipePrice = model?.value!;
     data.fuel = model?.fuel!;

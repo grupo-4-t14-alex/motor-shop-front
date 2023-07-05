@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import api from "../../services/api";
+import { useContext } from "react";
 import { Comments } from "../Comments";
 import { Flex, Text } from "@chakra-ui/react";
 import { CommentContext } from "../../contexts/CommentsContext";
@@ -9,8 +8,6 @@ export const ListComments = () => {
   const { comments } = useContext(CommentContext)
 
   const userIdString = localStorage.getItem("motors-shop:user")
-
-  const product = localStorage.getItem("id-product-page:");
 
   const userId = userIdString ? JSON.parse(userIdString) : null
 

@@ -17,8 +17,6 @@ export const UserProvider = ({ children }: iUserProvider) => {
     const registerUser = async (data: iFormRegister) => {
         try {
 
-            console.log(data)
-
             await api.post("/users", data)
 
             navigate("/login")

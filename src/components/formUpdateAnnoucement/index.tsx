@@ -59,9 +59,6 @@ export const FormUpdateAnnouncement = ( { product }: iProducts) => {
       data.fuel = model?.fuel!;
       data.sellPrice = Number(data.sellPrice);
       data.km = Number(data.km);
-
-      console.log(data)
-      console.log(product.id)
   
       try {
         const token = localStorage.getItem("motors-shop:token");

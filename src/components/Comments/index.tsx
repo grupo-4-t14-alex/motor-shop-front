@@ -44,8 +44,6 @@ interface iComment {
   idComment? : number
 }
 
-
-
 export const Comments = ({ comment, commentAuthor, display, idComment }: iComment) => {
 
   const {deleteComment, updateComment} = useContext(CommentContext)
@@ -54,7 +52,7 @@ export const Comments = ({ comment, commentAuthor, display, idComment }: iCommen
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const {register, handleSubmit, formState:{errors}, reset} = useForm<iCreateComment>({
+  const {register, handleSubmit, reset} = useForm<iCreateComment>({
     resolver: zodResolver(createCommentSchema)
   })
 

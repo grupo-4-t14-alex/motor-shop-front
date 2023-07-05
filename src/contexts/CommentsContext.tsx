@@ -52,15 +52,11 @@ export const CommentProvider = ({ children }: CommentsProvider) => {
 
   const token = localStorage.getItem("motors-shop:token");
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { onClose } = useDisclosure()
 
   const [comments, setComments] = useState<iComment[] | undefined>([]);
 
-  const userIdString = localStorage.getItem("motors-shop:user")
-
   const product = localStorage.getItem("id-product-page:");
-
-  const userId = userIdString ? JSON.parse(userIdString) : null
 
   const listComments = async () => {
     if (product) {
@@ -68,9 +64,7 @@ export const CommentProvider = ({ children }: CommentsProvider) => {
 
       try {
         const response = await api.get(`/cars/${idProduct.id}/comments`);
-        setComments(response.data);
-        console.log(comments);
-        
+        setComments(response.data);    
         
       } catch (error) {
         console.error(error);
@@ -79,7 +73,6 @@ export const CommentProvider = ({ children }: CommentsProvider) => {
   };
 
   useEffect(() => {
-
     listComments();
   }, []);
 
