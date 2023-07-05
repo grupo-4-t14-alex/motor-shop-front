@@ -40,7 +40,7 @@ export const CardTitleCars = () => {
   }
 
   const carInfoJson = localStorage.getItem("id-product-page:") || "undefined";
-  const userInfoJson = localStorage.getItem("motors-shop:user") || "undefined";
+/*   const userInfoJson = localStorage.getItem("motors-shop:user") || "undefined"; */
 
   const carInfo = JSON.parse(carInfoJson);
 

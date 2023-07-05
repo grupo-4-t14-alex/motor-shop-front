@@ -27,7 +27,7 @@ export const CommentProvider = ({ children }: CommentsProvider) => {
 
   const token = localStorage.getItem("motors-shop:token");
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { onClose } = useDisclosure()
 
   const registerComment = async (data: iComment) => {
     const product = localStorage.getItem("id-product-page:");

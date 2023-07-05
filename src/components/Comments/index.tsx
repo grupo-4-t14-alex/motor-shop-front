@@ -123,6 +123,7 @@ export const Comments = ({ comment, commentAuthor, display, idComment }: iCommen
       <ModalContainer variant="footerStartVariant" title="Editar comentário"  onClose={onClose} isOpen={isOpen}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Input marginBottom={'10px'} placeholder={comment.comment} type="text" {...register('comment')}/>
+            {errors.comment?.message}
             <Flex width={'100%'} paddingBottom={'20px'} justifyContent={'center'} gap={'10px'}>
               <Button type="submit" color={"white"} bg={'#4529E6'} _hover={{bg: 'white', color: '#4529E6'}} w={'100%'} rightIcon={<CheckCircleIcon />}>Alterar</Button>
             </Flex>
