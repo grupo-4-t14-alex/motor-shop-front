@@ -42,7 +42,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
 
   const signIn = async (data: LoginData) => {
-    console.log("signin");
     try {
         const response = await api.post("/login", data);
 
@@ -74,7 +73,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const sendEmail = async (data: SendEmailResetPasswordData) => {
         try {
             api.post("/users/resetPassword", data)
-            // toast de "email enviado"
+            toast({
+                title: "Email enviado!",
+                status: "info",
+                isClosable: true,
+              });
             navigate("")
         } catch (error) {
             console.log(error)
@@ -84,8 +87,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const resetPassword = async(token: string, data: ResetPasswordData) => {
         try {
             api.patch(`/users/resetPassword/${token}`, { password: data.password })
-            console.log("cheguei aqui")
-            // toast de "alteração com sucesso"
+            toast({
+                title: "Senha alterada com sucesso :)",
+                status: "success",
+                isClosable: true,
+              });
             navigate("/login")
         } catch (error) {
             console.log(error)

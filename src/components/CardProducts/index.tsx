@@ -77,6 +77,8 @@ export const CardProducts = ({ product }: iProducts) => {
           },
         });
         setProfilePublic(response.data);
+
+        
         navigate("/profileAdminAnnoucementsPublic");
       } catch (error) {
         console.log(error);

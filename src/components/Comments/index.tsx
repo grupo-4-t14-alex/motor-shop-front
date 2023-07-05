@@ -44,8 +44,6 @@ interface iComment {
   idComment? : number
 }
 
-
-
 export const Comments = ({ comment, commentAuthor, display, idComment }: iComment) => {
 
   const {deleteComment, updateComment} = useContext(CommentContext)
@@ -54,7 +52,7 @@ export const Comments = ({ comment, commentAuthor, display, idComment }: iCommen
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const {register, handleSubmit, formState:{errors}, reset} = useForm<iCreateComment>({
+  const {register, handleSubmit, reset} = useForm<iCreateComment>({
     resolver: zodResolver(createCommentSchema)
   })
 
@@ -123,7 +121,6 @@ export const Comments = ({ comment, commentAuthor, display, idComment }: iCommen
       <ModalContainer variant="footerStartVariant" title="Editar comentário"  onClose={onClose} isOpen={isOpen}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Input marginBottom={'10px'} placeholder={comment.comment} type="text" {...register('comment')}/>
-            {errors.comment?.message}
             <Flex width={'100%'} paddingBottom={'20px'} justifyContent={'center'} gap={'10px'}>
               <Button type="submit" color={"white"} bg={'#4529E6'} _hover={{bg: 'white', color: '#4529E6'}} w={'100%'} rightIcon={<CheckCircleIcon />}>Alterar</Button>
             </Flex>
