@@ -18,7 +18,7 @@ export const Homepage = () => {
   return (
     <Box backgroundColor={"grey.9"}>
       <NavBarComponent />
-      <Container minH="100vh" height="100%" maxW="1600px" marginTop={"100px"}>
+      <Container minH="100vh" height="100%" maxW="1600px">
         <Image src={imgHomePage} />
         <Flex
           w={"100%"}
@@ -26,6 +26,7 @@ export const Homepage = () => {
           flexDirection={{ base: "column", md: "row" }}
         >
           <Button
+            variant={"brand1"}
             marginTop={"20px"}
             display={{ base: "inline-flex", md: "none" }}
             onClick={onOpen}

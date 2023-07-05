@@ -124,9 +124,11 @@ const brandDisabled = defineStyle({
 
 const linkButton = defineStyle({
   width: '146px',
-  bg: 'transparent',
+  bg: 'grey.10',
   borderColor: 'transparent',
   color: 'grey.1',
+  height: "20px",
+  pt: "20px",
   _hover: {
     bg: 'grey.8',
   }

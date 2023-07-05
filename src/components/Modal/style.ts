@@ -31,7 +31,9 @@ const footerEndVariant = definePartsStyle({
     footer: {
         display: "flex",
         justifyContent: "end",
-        gap: "10px"
+        gap: "10px",
+        width: "100%"
+        
     }
 })
 

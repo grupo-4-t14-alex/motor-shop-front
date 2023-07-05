@@ -1,8 +1,10 @@
 import { Flex, Heading, Box, Image } from "@chakra-ui/react";
-import img from "../../assets/img/storagePhoto.png";
 
-export const CardStoragePhoto = () => {
-  const images: string[] = [img, img, img, img, img, img];
+interface iImages {
+  images: string[]
+}
+
+export const CardStoragePhoto = ({images}:iImages) => {
 
   const chunkArray = <T,>(array: T[], size: number): T[][] => {
     const chunkedArray: T[][] = [];
