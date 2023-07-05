@@ -13,7 +13,6 @@ export const SendEmailForm = () => {
       const { sendEmail } = useAuth()
 
       const onFormSubmit = (formData: SendEmailResetPasswordData) => {
-        console.log(formData)
         sendEmail(formData)
       }
 

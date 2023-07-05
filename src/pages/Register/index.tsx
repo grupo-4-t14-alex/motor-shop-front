@@ -26,13 +26,11 @@ export const RegisterPage = () => {
 
     const isAdminTrue = () => {
         setIsAdmin(true)
-        console.log(isAdmin);
         
     }
 
     const isAdminFalse = () => {
         setIsAdmin(false)
-        console.log(isAdmin);
     }
 
     const onSubmit = (data: iFormRegister) => {
@@ -60,8 +58,6 @@ export const RegisterPage = () => {
             }
         }
         registerUser(userBody)
-
-        console.log(userBody);
         
     }
 
