@@ -11,13 +11,13 @@ import {
   Box,
 } from "@chakra-ui/react";
 import imgTeste from "../../assets/img/imgteste.png";
-import imgIcon from "../../assets/img/iconCard.png";
 import { CardUser } from "../CardUser";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ProductContext } from "../../contexts/ProductsContext";
 import api from "../../services/api";
 import { FormUpdateAnnouncement } from "../formUpdateAnnoucement";
+import iconCard from "../../assets/img/iconCard.png"
 
 interface iProducts {
   product: {
@@ -37,6 +37,11 @@ interface iProducts {
       name: string;
       description: string;
     };
+    images: {
+      id: number,
+      name: string,
+      image: string
+    }[]
   };
 }
 
@@ -94,7 +99,7 @@ export const CardProducts = ({ product }: iProducts) => {
       zIndex={"0"}
       backgroundColor={"grey.9"}
       onClick={
-        path === "/products" || path === "/"
+        path === "/products" || path === "/" || path === "/profileAdminAnnoucementsPublic"
           ? () => navigatePageProduct()
           : undefined
       }
@@ -108,10 +113,11 @@ export const CardProducts = ({ product }: iProducts) => {
           justifyContent={"center"}
           alignItems={"center"}
           position={"relative"}
+          overflow="hidden"
         >
           {isCarValueLowerBy5Percent(product.sellPrice, product.fipePrice) && (
             <Image
-              src={imgIcon}
+              src={product.images[0].image ? product.images[0].image : iconCard}
               position={"absolute"}
               top={"0"}
               right={"0"}
@@ -191,7 +197,7 @@ export const CardProducts = ({ product }: iProducts) => {
         {window.location.pathname === "/profileViewAdmin" && (
           <ButtonGroup marginTop={"20px"}>
             <FormUpdateAnnouncement product={product} />
-            <Button>Ver detalhes</Button>
+            <Button variant="outline1">Ver detalhes</Button>
           </ButtonGroup>
         )}
       </CardBody>

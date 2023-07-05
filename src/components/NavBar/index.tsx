@@ -9,6 +9,7 @@ import {
   Img,
   useMediaQuery,
   Box,
+  Link,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/logoHeader.png";
@@ -69,8 +70,10 @@ export const NavBarComponent = () => {
         width={"100%"}
         paddingInline={{ base: "16px", md: "16px" }}
         h={"100%"}
-      >
-        <Img src={Logo} w={"153px"} h={"27px"} />
+      > 
+        <Link href="/">
+          <Img src={Logo} w={"153px"} h={"27px"} />
+        </Link>
 
         <Flex h={"100%"} alignItems={"center"} gap={"30px"}>
           <Box w={"2px"} h={"100%"} backgroundColor={"grey.7"} />
@@ -78,7 +81,7 @@ export const NavBarComponent = () => {
             <Menu>
               {({ isOpen }) => (
                 <>
-                  <MenuButton isActive={isOpen} as={Button} border={"none"}>
+                  <MenuButton variant="outline" isActive={isOpen} as={Button} border={"none"}>
                     <CardUser name={userObj.name} />
                   </MenuButton>
                   <MenuList>
@@ -94,8 +97,8 @@ export const NavBarComponent = () => {
               )}
             </Menu>
           ) : web ? (
-            <Flex display={"flex"}>
-              <Button variant="link" onClick={() => navigate("/login")}>
+            <Flex gap="10px" display={"flex"}>
+              <Button variant="link" h="48px" onClick={() => navigate("/login")}>
                 Fazer Login
               </Button>
               <Button onClick={() => navigate("/register")} variant="outline2">
@@ -106,7 +109,7 @@ export const NavBarComponent = () => {
             <Menu>
               {({ isOpen }) => (
                 <>
-                  <MenuButton isActive={isOpen} as={Button}>
+                  <MenuButton variant="link" w={"50px"} h={"50px"} isActive={isOpen} as={Button}>
                     {isOpen ? (
                       <CloseIcon w={"20px"} h={"20px"} />
                     ) : (

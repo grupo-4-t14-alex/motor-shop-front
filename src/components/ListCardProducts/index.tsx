@@ -5,6 +5,12 @@ import { CardProducts } from "../CardProducts";
 import { ProductContext } from "../../contexts/ProductsContext";
 import { useContext } from "react";
 
+interface iImage {
+  id: number,
+  image: string,
+  name: string
+}
+
 interface iProducts {
   id: number;
   brand: string;
@@ -22,6 +28,7 @@ interface iProducts {
     name: string;
     description: string;
   };
+  images: iImage[]
 }
 
 export const ListCardProducts = () => {
@@ -101,7 +108,7 @@ export const ListCardProducts = () => {
         paddingBottom={"20px"}
       >
         {currentItems.map((element, index) => (
-          <Box padding={"20px"} marginBottom={"20px"}>
+          <Box padding={"20px"} key={index} marginBottom={"20px"}>
             <CardProducts product={element} key={index} />
           </Box>
         ))}

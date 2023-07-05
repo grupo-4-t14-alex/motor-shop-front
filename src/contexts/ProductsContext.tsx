@@ -39,6 +39,11 @@ interface iProducts {
     name: string;
     description: string;
   };
+  images: {
+    id: number,
+    name: string,
+    image: string
+  }[]
 }
 
 interface iCars {

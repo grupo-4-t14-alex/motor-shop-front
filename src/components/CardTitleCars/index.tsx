@@ -111,9 +111,7 @@ export const CardTitleCars = () => {
           <Text>R$ {carInfo.sellPrice}</Text>
         </Flex>
 
-        <Button w={"100px"} onClick={handlerWhatsapp}>
-          Comprar
-        </Button>
+        <Button w={"100px"} variant="brand1" onClick={handlerWhatsapp}>Comprar</Button>
       </Flex>
     </Flex>
   );
