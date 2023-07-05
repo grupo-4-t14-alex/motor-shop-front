@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { Comments } from "../Comments";
-import { Flex, Text, list } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 interface iComment {
   id: number;
@@ -37,7 +37,11 @@ interface iComment {
 export const ListComments = () => {
   const [comments, setComments] = useState<iComment[]>([]);
 
+  const userIdString = localStorage.getItem("motors-shop:user")
+
   const product = localStorage.getItem("id-product-page:");
+
+  const userId = userIdString ? JSON.parse(userIdString) : null
 
   useEffect(() => {
     const listComments = async () => {
@@ -47,14 +51,15 @@ export const ListComments = () => {
         try {
           const response = await api.get(`/cars/${idProduct.id}/comments`);
           setComments(response.data);
-          listComments();
+          // listComments();
+          
         } catch (error) {
           console.error(error);
         }
       }
     };
     listComments();
-  }, []);
+  }, [comments]);
 
   return (
     <Flex
@@ -68,7 +73,15 @@ export const ListComments = () => {
       {
         comments.length >= 1 ? (
           comments.map((comment, index) => (
-            <Comments key={index} comment={comment} commentAuthor={comment.user_id.name} />
+            userId ? (
+              comment.user_id.id == userId.id ? (
+                <Comments key={index} comment={comment} commentAuthor={comment.user_id.name} display={'flex'} idComment={comment.id} />
+                ) : (
+                  <Comments key={index} comment={comment} commentAuthor={comment.user_id.name} display={'none'} idComment={comment.id} />
+              )
+            ) : (
+              <Comments key={index} comment={comment} commentAuthor={comment.user_id.name} display={'none'} idComment={comment.id} />
+            )
           ))
         ) : (
           <Text>No momento não possui comentários!</Text>

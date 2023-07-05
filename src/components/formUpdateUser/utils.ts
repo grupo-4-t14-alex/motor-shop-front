@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { registerSchema } from "../../pages/register/schema"
+import { registerSchema } from "../../pages/Register/schema"
 
 
 export const updateUserSchema = registerSchema.partial()

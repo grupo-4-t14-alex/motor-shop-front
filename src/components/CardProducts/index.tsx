@@ -13,7 +13,7 @@ import {
 import imgTeste from "../../assets/img/imgteste.png";
 import imgIcon from "../../assets/img/iconCard.png";
 import { CardUser } from "../CardUser";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ProductContext } from "../../contexts/ProductsContext";
 import api from "../../services/api";

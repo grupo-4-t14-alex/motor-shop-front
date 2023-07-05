@@ -1,4 +1,4 @@
-import { Box, Flex, Button, Textarea, ButtonGroup, FormErrorMessage } from "@chakra-ui/react";
+import { Box, Flex, Button, Textarea, FormErrorMessage } from "@chakra-ui/react";
 import { CardUser } from "../CardUser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,7 +25,6 @@ export const CardComment = () => {
   })
 
   const onSubmit = (data: iCreateComment) => {
-    // console.log(data);
 
     registerComment(data)
     reset()
