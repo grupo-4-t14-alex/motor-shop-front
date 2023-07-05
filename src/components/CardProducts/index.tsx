@@ -51,6 +51,7 @@ export const CardProducts = ({ product }: iProducts) => {
     return percentage >= 5;
   }
 
+  const path = window.location.pathname;
   const navigate = useNavigate();
   const token = localStorage.getItem("motors-shop:token");
   const { setProductsProfilePublic, setProfilePublic } =
@@ -92,7 +93,11 @@ export const CardProducts = ({ product }: iProducts) => {
       variant="unstyled"
       zIndex={"0"}
       backgroundColor={"grey.9"}
-      onClick={() => navigatePageProduct()}
+      onClick={
+        path === "/products" || path === "/"
+          ? () => navigatePageProduct()
+          : undefined
+      }
       cursor={"pointer"}
     >
       <CardBody marginBottom={0}>
