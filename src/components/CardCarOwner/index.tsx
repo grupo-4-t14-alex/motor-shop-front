@@ -76,7 +76,7 @@ export const CardCarOwner = () => {
       >
         {product.user.description}
       </Text>
-      <Button variant="grey.1" onClick={() => navigateProfilePublic()}>
+      <Button onClick={() => navigateProfilePublic()}>
         Ver todos anuncios
       </Button>
     </Flex>

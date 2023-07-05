@@ -99,7 +99,7 @@ export const CardProducts = ({ product }: iProducts) => {
       zIndex={"0"}
       backgroundColor={"grey.9"}
       onClick={
-        path === "/products" || path === "/"
+        path === "/products" || path === "/" || path === "/profileAdminAnnoucementsPublic"
           ? () => navigatePageProduct()
           : undefined
       }
