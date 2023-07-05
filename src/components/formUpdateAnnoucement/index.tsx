@@ -155,7 +155,7 @@ export const FormUpdateAnnouncement = ( { product }: iProducts) => {
 
     return(
         <>
-            <Button w={"150px"} onClick={onOpen}>Editar</Button>
+            <Button w={"150px"} variant="outline1" onClick={onOpen}>Editar</Button>
             <ModalContainer variant="footerStartVariant" title="editar anuncio" onClose={onClose} isOpen={isOpen} >
                 <form onSubmit={ handleSubmit(updateAnnouncement, onError)}>
                     <ModalBody>

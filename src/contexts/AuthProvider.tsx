@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { LoginData } from "../pages/Login/schema";
 import api from "../services/api";
 import { ResetPasswordData, SendEmailResetPasswordData } from "../pages/ResetPasword/schema";
+import { useToast } from "@chakra-ui/react";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -23,6 +24,7 @@ export const AuthContext = createContext<AuthContextValues>(
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const toast = useToast()
 
   useEffect(() => {
     const token = localStorage.getItem("motors-shop:token");
@@ -60,6 +62,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         navigate(""); //se admin -> profileViewAdmin, se não admin -> página normal com anúncios, mas nome renderizado
     } catch (error) {
         console.error(error);
+        toast({
+            title: "Email/Senha inválidos!",
+            status: "error",
+            isClosable: true,
+          })
+        
     }
     };
 

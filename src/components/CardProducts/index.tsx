@@ -186,7 +186,7 @@ export const CardProducts = ({ product }: iProducts) => {
         {window.location.pathname === "/profileViewAdmin" && (
           <ButtonGroup marginTop={"20px"}>
             <FormUpdateAnnouncement product={product} />
-            <Button>Ver detalhes</Button>
+            <Button variant="outline1">Ver detalhes</Button>
           </ButtonGroup>
         )}
       </CardBody>

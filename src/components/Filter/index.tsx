@@ -316,6 +316,7 @@ export const Filter = () => {
             bg="grey.5"
             w="170px"
             borderRadius="0"
+            variant={"negative"}
             onClick={() => handleSortClick("km", "asc")}
           >
             Min
@@ -324,6 +325,7 @@ export const Filter = () => {
             bg="grey.5"
             w="170px"
             borderRadius="0"
+            variant={"negative"}
             onClick={() => handleSortClick("km", "desc")}
           >
             Max
@@ -339,6 +341,7 @@ export const Filter = () => {
             bg="grey.5"
             w="170px"
             borderRadius="0"
+            variant="negative"
             onClick={() => handleSortClick("sellPrice", "asc")}
           >
             Min
@@ -347,13 +350,14 @@ export const Filter = () => {
             bg="grey.5"
             w="170px"
             borderRadius="0"
+            variant="negative"
             onClick={() => handleSortClick("sellPrice", "desc")}
           >
             Max
           </Button>
         </Flex>
       </Box>
-      <Button marginTop={"20px"} onClick={() => clearFilter()}>
+      <Button marginTop={"20px"} variant="brand1" onClick={() => clearFilter()}>
         Limpar filtro
       </Button>
     </Flex>

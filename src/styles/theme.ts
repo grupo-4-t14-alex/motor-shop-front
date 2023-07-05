@@ -1,6 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 import { Button } from "./buttons";
-import { InputConfig } from "./input";
+import { InputConfig, inputTheme, textAreaConfig } from "./input";
 import { modalTheme } from "../components/Modal/style";
 import { formLabelConfig } from "./formLabel";
 import { formControlConfig } from "./form";
@@ -84,13 +84,12 @@ const theme = extendTheme({
   },
   components: {
     Button: Button,
-    Input: InputConfig,
+    Input: inputTheme,
     Modal: modalTheme,
     FormLabel: formLabelConfig,
     FormControl:formControlConfig,
-    Select: InputConfig,
-    Textarea: InputConfig,
-
+    Select: inputTheme,
+    Textarea: textAreaConfig,
   }
 });
 export default theme;

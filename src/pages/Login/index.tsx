@@ -25,7 +25,8 @@ export const Login = () => {
         alignItems={"center"}
         bg={"grey.9"} 
         w={"100%"} 
-        h={"100vh"} 
+        h={"100vh"}
+        overflow="overlay"
         >
         <NavBarComponent/>
 
@@ -35,7 +36,6 @@ export const Login = () => {
             flexDirection={"column"}
             justifyContent={"center"}
             alignItems={"stretch"}
-            h={"50%"}
             maxW={"500px"}
             w={"60%"}
             bg={"whiteFixed"}

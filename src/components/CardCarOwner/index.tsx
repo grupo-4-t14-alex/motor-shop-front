@@ -32,7 +32,7 @@ export const CardCarOwner = () => {
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's
       </Text>
-      <Button>Ver todos anuncios</Button>
+      <Button variant="grey1">Ver todos anuncios</Button>
     </Flex>
   );
 };

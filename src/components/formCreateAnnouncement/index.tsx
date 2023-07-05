@@ -66,8 +66,8 @@ export const FormCreateAnnouncement = () => {
 
     return (
         <>
-            <Button w={"150px"} onClick={onOpen}>Criar anuncio</Button>
-            <ModalContainer variant="footerStartVariant" title="Criar anuncio" onClose={onClose} isOpen={isOpen} >
+            <Button w={"150px"} onClick={onOpen} variant="outlineBrand1" >Criar anuncio</Button>
+            <ModalContainer variant="footerEndVariant" title="Criar anuncio" onClose={onClose} isOpen={isOpen} >
                 <Box as="form" onSubmit={handleSubmit(handleOnSubmit, onError)}>
                     <ModalBody>
                         <FormControl mb={"5"} isInvalid={errors.brand ? true : false}>
@@ -89,12 +89,12 @@ export const FormCreateAnnouncement = () => {
                         <Flex gap={"2"}>
                             <FormControl mb={"5"} >
                                 <FormLabel >Ano</FormLabel>
-                                <Input type='text' borderRadius={"4px"} {...register("year")} value={model?.year} />
+                                <Input type='text' {...register("year")} value={model?.year} />
                             </FormControl>
 
                             <FormControl mb={"5"} >
                                 <FormLabel >Combustível</FormLabel>
-                                <Input type='text' borderRadius={"4px"} {...register("fuel")} value={arrayFuel[model?.fuel! - 1]} />
+                                <Input type='text' {...register("fuel")} value={arrayFuel[model?.fuel! - 1]} />
                             </FormControl>
 
                         </Flex>
@@ -103,13 +103,13 @@ export const FormCreateAnnouncement = () => {
 
                             <FormControl mb={"5"} isInvalid={errors.km ? true : false} >
                                 <FormLabel >Quilometragem</FormLabel>
-                                <Input type='number' borderRadius={"4px"} {...register("km")} />
+                                <Input type='number' {...register("km")} />
                                 {errors.km && <FormErrorMessage>{errors.km.message}</FormErrorMessage>}
                             </FormControl>
 
                             <FormControl mb={"5"} isInvalid={errors.color ? true : false}>
                                 <FormLabel >Cor</FormLabel>
-                                <Input type='text' borderRadius={"4px"} {...register("color")} />
+                                <Input type='text' {...register("color")} />
                                 {errors.color && <FormErrorMessage>{errors.color.message}</FormErrorMessage>}
                             </FormControl>
 
@@ -119,12 +119,12 @@ export const FormCreateAnnouncement = () => {
 
                             <FormControl mb={"5"} >
                                 <FormLabel >Preço tabela FIPE</FormLabel>
-                                <Input type='number' borderRadius={"4px"} {...register("fipePrice")} value={model?.value} />
+                                <Input type='number' {...register("fipePrice")} value={model?.value} />
                             </FormControl>
 
                             <FormControl mb={"5"} isInvalid={errors.sellPrice ? true : false}>
                                 <FormLabel >Preço</FormLabel>
-                                <Input type='number' borderRadius={"4px"} {...register("sellPrice")} />
+                                <Input type='number' {...register("sellPrice")} />
                                 {errors.sellPrice && <FormErrorMessage>{errors.sellPrice.message}</FormErrorMessage>}
                             </FormControl>
 
@@ -138,7 +138,7 @@ export const FormCreateAnnouncement = () => {
 
                         <FormControl mb={"5"}>
                             <FormLabel>Imagem da Capa</FormLabel>
-                            <Input pt={'6px'} pb={'6px'} /* {...register("banner")}  */type="file"  onChange={(ele) => {
+                            <Input pt={'6px'} pb={'6px'} type="file"  onChange={(ele) => {
                                 if(ele.target.files) setBanner(ele.target.files[0])
                             }}/>
                         </FormControl>
@@ -162,7 +162,7 @@ export const FormCreateAnnouncement = () => {
 
                     </ModalBody>
 
-                    <ModalFooter display={"flex"} justifyContent={"flex-end"}>
+                    <ModalFooter>
                         <Button type="reset" variant={"negative"} onClick={onClose} >Cancelar</Button>
                         <Button type="submit" variant={"brand1"} >Criar anúncio</Button>
                     </ModalFooter>
