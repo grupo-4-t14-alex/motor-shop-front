@@ -1,10 +1,10 @@
-import { Flex, Heading, Box, Image } from "@chakra-ui/react";
+import { Flex, Heading, Box, Image, Text } from "@chakra-ui/react";
 
 interface iImages {
   images: string[]
 }
 
-export const CardStoragePhoto = ({images}:iImages) => {
+export const CardStoragePhoto = ({images}: iImages) => {
 
   const chunkArray = <T,>(array: T[], size: number): T[][] => {
     const chunkedArray: T[][] = [];
@@ -29,7 +29,7 @@ export const CardStoragePhoto = ({images}:iImages) => {
         Fotos
       </Heading>
       <Flex>
-        <Box>
+        {images.length > 0 ? <Box>
           {chunkArray(images, 3).map((imageGroup, index) => (
             <Flex key={index} mb={4}>
               {imageGroup.map((imageSrc, imageIndex) => (
@@ -54,7 +54,11 @@ export const CardStoragePhoto = ({images}:iImages) => {
               ))}
             </Flex>
           ))}
-        </Box>
+        </Box> 
+        : <Flex>
+            <Text>Ainda não possui fotos!</Text>
+          </Flex> }
+        
       </Flex>
     </Flex>
   );

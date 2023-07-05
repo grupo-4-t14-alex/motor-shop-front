@@ -150,7 +150,7 @@ export const FormCreateAnnouncement = () => {
 
                         {fileFields.map((field, index) => {
                             return (
-                                <FormControl mb={"5"}>
+                                <FormControl key={index} mb={"5"}>
                                     <FormLabel>{field.name}</FormLabel>
                                     <Input pt={'6px'} pb={'6px'} type="file" onChange={handleMergeFiles}/>
                                 </FormControl>

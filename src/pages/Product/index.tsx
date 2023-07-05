@@ -12,7 +12,7 @@ import imageMainImage from '../../assets/img/imageCarMain.png'
 
 export const Product = () => {
   const product = JSON.parse(localStorage.getItem("id-product-page:")!)
-  const mainImage: string = product.images[0].image
+  let mainImage: string = product.images.length > 0 ? product.images[0].image : imageMainImage
   const filteredImages: Array<string> = product.images.filter((image: any, index: number) => {
     if(index !== 0) return image.image
   })
@@ -45,7 +45,7 @@ export const Product = () => {
             flexDirection={{ base: "column", xl: "row" }}
           >
             <Flex flexDirection={"column"} gap={"20px"} paddingBottom={"20px"}>
-              <CardMainImage mainImage={mainImage ? mainImage : imageMainImage}/>
+              <CardMainImage mainImage={mainImage !== undefined ? mainImage : imageMainImage}/>
               <CardTitleCars />
               <CardDescriptionCars />
             </Flex>
