@@ -45,4 +45,8 @@ export interface Car2 {
 	value: number;
   }
 
+export interface IFileField {
+	name: string
+}
+
 export { createAnnounceSchema }
