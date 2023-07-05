@@ -6,11 +6,10 @@ import { IUpdateUser, updateUserSchema } from "./utils"
 import api from "../../services/api"
 import { useNavigate } from "react-router-dom"
 
-const FormUpdateUser =  () => { 
+const FormUpdateUser =  ({}) => {
 
     const currencyJSONDataUser = localStorage.getItem("motors-shop:user");
     const userData = currencyJSONDataUser && JSON.parse(currencyJSONDataUser)
-    
 
     const {register, handleSubmit, formState:{errors} } = useForm<IUpdateUser>({
         resolver: zodResolver(updateUserSchema)

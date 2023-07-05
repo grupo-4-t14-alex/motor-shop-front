@@ -1,6 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 import { Button } from "./buttons";
-import { InputConfig, inputTheme, textAreaConfig } from "./input";
+import { inputTheme, textAreaConfig } from "./input";
 import { modalTheme } from "../components/Modal/style";
 import { formLabelConfig } from "./formLabel";
 import { formControlConfig } from "./form";

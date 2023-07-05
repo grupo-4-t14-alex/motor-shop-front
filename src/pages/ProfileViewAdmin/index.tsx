@@ -19,7 +19,6 @@ export const ProfileViewAdmin = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data);
         setProductsProfile(response.data);
       } catch (error) {
         console.log(error);
