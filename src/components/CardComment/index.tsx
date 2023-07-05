@@ -25,7 +25,6 @@ export const CardComment = () => {
   })
 
   const onSubmit = (data: iCreateComment) => {
-    // console.log(data);
 
     registerComment(data)
     reset()
