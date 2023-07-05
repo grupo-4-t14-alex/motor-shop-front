@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { ProductContext } from "../../contexts/ProductsContext";
 import { useContext, useEffect, useState } from "react";
 

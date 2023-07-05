@@ -34,7 +34,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
                 title: "Ops, algo deu errado :(",
                 status: "error",
                 isClosable: true,
-              })
+            })
             console.log(error);
             
         }

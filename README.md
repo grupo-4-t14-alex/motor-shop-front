@@ -30,7 +30,7 @@ To run the application locally, follow these steps:
 4. Start the development server: **`npm run dev`**
 5. Open your browser and visit: **`http://localhost:3000`**
 
-Or you can open the deploy link and visit the page online here: "INSERIR LINK"
+Or you can open the deploy link and visit the page online **[here](https://motors-shop-black.vercel.app/)**
 
 
 
