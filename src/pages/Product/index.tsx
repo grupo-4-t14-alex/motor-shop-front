@@ -1,4 +1,4 @@
-import { Container, Image, Flex, OrderedList, Box } from "@chakra-ui/react";
+import { Container, Flex, Box } from "@chakra-ui/react";
 import { NavBarComponent } from "../../components/NavBar";
 import { Footer } from "../../components/Footer";
 import { CardMainImage } from "../../components/CardMainImage";

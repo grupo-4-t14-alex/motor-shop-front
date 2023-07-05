@@ -9,7 +9,6 @@ import { ProtectedRoutes } from "./ProtectedRoutes";
 import { ViewAdminAnnouncementsPublic } from "../pages/ViewAdminAnnouncements";
 import { SendEmailResetPassword } from "../pages/ResetPasword";
 import { ResetPassword } from "../pages/ResetPasword/token";
-import { TestPage } from "../pages/testPage";
 
 
 const RoutesPages = () => {
@@ -27,7 +26,6 @@ const RoutesPages = () => {
           <Route path="/profileViewAdmin" element={<ProfileViewAdmin />} />
         </Route>
           <Route path="/profileAdminAnnoucementsPublic" element={<ViewAdminAnnouncementsPublic />} />
-          <Route path="/testPage" element={<TestPage />} />
         {/* <Route path="/login" element={} />
         <Route path="/profileView" element={} />
         <Route path="/register" element={} />
