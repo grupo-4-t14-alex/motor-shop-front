@@ -59,7 +59,7 @@ export const ListComments = () => {
       }
     };
     listComments();
-  }, [comments]);
+  }, []);
 
   return (
     <Flex

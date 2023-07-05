@@ -117,7 +117,7 @@ export const CardProducts = ({ product }: iProducts) => {
         >
           {isCarValueLowerBy5Percent(product.sellPrice, product.fipePrice) && (
             <Image
-              src={product.images[0].image ? product.images[0].image : iconCard}
+              src={product.images.length > 0 ? product.images[0].image : iconCard}
               position={"absolute"}
               top={"0"}
               right={"0"}
@@ -157,7 +157,7 @@ export const CardProducts = ({ product }: iProducts) => {
         </Stack>
         <Flex mt={"20px"} flexDirection={"column"} gap={"20px"}>
           {window.location.pathname === "/profileViewAdmin" ||
-          window.location.pathname === "/profileAdminAnnoucementsPublic" ? (
+            window.location.pathname === "/profileAdminAnnoucementsPublic" ? (
             <Box cursor={"pointer"}>
               <CardUser name={product.user.name} />
             </Box>
@@ -197,7 +197,7 @@ export const CardProducts = ({ product }: iProducts) => {
         {window.location.pathname === "/profileViewAdmin" && (
           <ButtonGroup marginTop={"20px"}>
             <FormUpdateAnnouncement product={product} />
-            <Button variant="outline1">Ver detalhes</Button>
+            <Button variant="outline1" onClick={navigatePageProduct}>Ver detalhes</Button>
           </ButtonGroup>
         )}
       </CardBody>

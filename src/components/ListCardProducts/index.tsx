@@ -64,28 +64,28 @@ export const ListCardProducts = () => {
         path === "/profileViewAdmin"
           ? productsProfile.length
           : path === "/"
-          ? productsFiltered.length > 0
-            ? productsFiltered.length
-            : productsSorted.length > 0
-            ? productsSorted.length
-            : products.length
-          : path === "/profileAdminAnnoucementsPublic"
-          ? productsProfilePublic.length
-          : 0
+            ? productsFiltered.length > 0
+              ? productsFiltered.length
+              : productsSorted.length > 0
+                ? productsSorted.length
+                : products.length
+            : path === "/profileAdminAnnoucementsPublic"
+              ? productsProfilePublic.length
+              : 0
       );
 
       setCurrentItems(
         path === "/profileViewAdmin"
           ? productsProfile.slice(startIndex, endIndex)
           : path === "/"
-          ? productsFiltered.length > 0
-            ? productsFiltered.slice(startIndex, endIndex)
-            : productsSorted.length > 0
-            ? productsSorted.slice(startIndex, endIndex)
-            : products.slice(startIndex, endIndex)
-          : path === "/profileAdminAnnoucementsPublic"
-          ? productsProfilePublic.slice(startIndex, endIndex)
-          : []
+            ? productsFiltered.length > 0
+              ? productsFiltered.slice(startIndex, endIndex)
+              : productsSorted.length > 0
+                ? productsSorted.slice(startIndex, endIndex)
+                : products.slice(startIndex, endIndex)
+            : path === "/profileAdminAnnoucementsPublic"
+              ? productsProfilePublic.slice(startIndex, endIndex)
+              : []
       );
     })();
   }, [
@@ -98,21 +98,35 @@ export const ListCardProducts = () => {
 
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>
-      <Flex
-        overflowX={{ base: "auto", md: "unset" }}
-        overflowY={"hidden"}
-        flexWrap={{ base: "nowrap", md: "wrap" }}
-        w={"100%"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        paddingBottom={"20px"}
-      >
-        {currentItems.map((element, index) => (
-          <Box padding={"20px"} key={index} marginBottom={"20px"}>
-            <CardProducts product={element} key={index} />
-          </Box>
-        ))}
-      </Flex>
+      {currentItems.length > 0
+        ? <Flex
+          overflowX={{ base: "auto", md: "unset" }}
+          overflowY={"hidden"}
+          flexWrap={{ base: "nowrap", md: "wrap" }}
+          w={"100%"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          paddingBottom={"20px"}
+        >
+          {currentItems.map((element, index) => (
+            <Box padding={"20px"} key={index} marginBottom={"20px"}>
+              <CardProducts product={element} key={index} />
+            </Box>
+          ))}
+        </Flex>
+        : <Flex 
+          overflowX={{ base: "auto", md: "unset" }}
+          overflowY={"hidden"}
+          flexWrap={{ base: "nowrap", md: "wrap" }}
+          w={"100%"}
+          marginTop={"50px"}
+          fontSize={"heading.3"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          paddingBottom={"20px"}
+        ><Text>Nenhum anúncio publicado!</Text></Flex>
+      }
+
 
       <Flex
         mt={4}
@@ -150,6 +164,7 @@ export const ListCardProducts = () => {
           )}
         </Box>
       </Flex>
+
     </Flex>
   );
 };
