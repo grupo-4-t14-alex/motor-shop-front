@@ -17,6 +17,7 @@ import { useContext } from "react";
 import { ProductContext } from "../../contexts/ProductsContext";
 import api from "../../services/api";
 import { FormUpdateAnnouncement } from "../formUpdateAnnoucement";
+import iconCard from "../../assets/img/iconCard.png"
 
 interface iProducts {
   product: {
@@ -116,7 +117,7 @@ export const CardProducts = ({ product }: iProducts) => {
         >
           {isCarValueLowerBy5Percent(product.sellPrice, product.fipePrice) && (
             <Image
-              src={product.images[0].image}
+              src={product.images[0].image ? product.images[0].image : iconCard}
               position={"absolute"}
               top={"0"}
               right={"0"}

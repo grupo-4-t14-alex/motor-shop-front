@@ -8,6 +8,7 @@ import { CardStoragePhoto } from "../../components/CardStoragePhoto";
 import { CardCarOwner } from "../../components/CardCarOwner";
 import { CommentsArea } from "../../components/CommenstsArea";
 import { CardComment } from "../../components/CardComment";
+import imageMainImage from '../../assets/img/imageCarMain.png'
 
 export const Product = () => {
   const product = JSON.parse(localStorage.getItem("id-product-page:")!)
@@ -44,7 +45,7 @@ export const Product = () => {
             flexDirection={{ base: "column", xl: "row" }}
           >
             <Flex flexDirection={"column"} gap={"20px"} paddingBottom={"20px"}>
-              <CardMainImage mainImage={mainImage}/>
+              <CardMainImage mainImage={mainImage ? mainImage : imageMainImage}/>
               <CardTitleCars />
               <CardDescriptionCars />
             </Flex>
