@@ -1,6 +1,7 @@
-import { useToast } from "@chakra-ui/react";
-import { ReactNode, createContext } from "react";
+import { useDisclosure, useToast } from "@chakra-ui/react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import api from "../services/api";
+import { iCreateComment } from "../components/CardComment/types";
 
 interface CommentsProvider {
   children: ReactNode;
@@ -8,13 +9,40 @@ interface CommentsProvider {
 
 interface CommentContextValues {
   registerComment(data: iComment): void;
+  deleteComment(commentId: number): void;
+  updateComment(data: iCreateComment, idComment: number): void;
+  comments: iComment[] | undefined
 }
 
 interface iComment {
-  id?: number;
-  comment?: string;
-  user_id?: number;
-  car_id?: number;
+  id: number;
+  comment: string;
+  createdAt: string;
+  user_id: {
+    id: number;
+    name: string;
+    email: string;
+    cpf: string;
+    phone: string;
+    birthDate: string;
+    description: string;
+    admin: boolean;
+    password: string;
+    reset_token: null;
+  };
+  car_id: {
+    id: number;
+    brand: string;
+    model: string;
+    year: number;
+    fuel: number;
+    km: number;
+    color: string;
+    fipePrice: number;
+    sellPrice: number;
+    description: string;
+    isActive: true;
+  };
 }
 
 export const CommentContext = createContext({} as CommentContextValues);
@@ -22,9 +50,36 @@ export const CommentContext = createContext({} as CommentContextValues);
 export const CommentProvider = ({ children }: CommentsProvider) => {
   const toast = useToast();
 
+  const token = localStorage.getItem("motors-shop:token");
+
+  const { onClose } = useDisclosure()
+
+  const [comments, setComments] = useState<iComment[] | undefined>([]);
+
+  const product = localStorage.getItem("id-product-page:");
+
+  const listComments = async () => {
+    if (product) {
+      const idProduct = JSON.parse(product);
+
+      try {
+        const response = await api.get(`/cars/${idProduct.id}/comments`);
+        setComments(response.data);    
+        
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    listComments();
+  }, []);
+
   const registerComment = async (data: iComment) => {
-    const token = localStorage.getItem("motors-shop:token");
     const product = localStorage.getItem("id-product-page:");
+
+    const token = localStorage.getItem("motors-shop:token");
 
     if (product) {
       const idProduct = JSON.parse(product);
@@ -41,6 +96,7 @@ export const CommentProvider = ({ children }: CommentsProvider) => {
             headers: {
               Authorization: `Bearer ${token}`,
             },
+            timeout: 10000,
           });
   
           toast({
@@ -48,6 +104,8 @@ export const CommentProvider = ({ children }: CommentsProvider) => {
             status: "success",
             isClosable: true,
           });
+
+          listComments()
         } catch (error) {
           toast({
             title: "Ops, algo deu errado :(",
@@ -60,8 +118,63 @@ export const CommentProvider = ({ children }: CommentsProvider) => {
     }
   };
 
+  const deleteComment = async (commentId: number) => {
+    try{
+      await api.delete(`/comments/${commentId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        timeout: 10000,
+      })
+      toast({
+        title: "Comentário excluido :)",
+        status: "success",
+        isClosable: true,
+      });
+
+      listComments()
+
+    } catch (error) {
+      toast({
+        title: "Ops, algo deu errado :(",
+        status: "error",
+        isClosable: true,
+      });
+      console.log(error);
+    }
+  }
+
+  const updateComment = async (data: iCreateComment, idComment: number) => {
+    try {
+      await api.patch(`/comments/${idComment}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        timeout: 10000,
+      })
+
+      listComments()
+
+      onClose()
+
+      toast({
+        title: "Comentário alterado :)",
+        status: "success",
+        isClosable: true,
+      });
+
+    } catch (error) {
+      toast({
+        title: "Ops, algo deu errado :(",
+        status: "error",
+        isClosable: true,
+      });
+      console.log(error);
+    }
+  }
+
   return (
-    <CommentContext.Provider value={{ registerComment }}>
+    <CommentContext.Provider value={{ registerComment, deleteComment, updateComment, comments }}>
       {children}
     </CommentContext.Provider>
   );

@@ -1,5 +1,4 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { useToast } from "@chakra-ui/react";
 import api from "../services/api";
 
 interface ProductsProviderProps {
@@ -19,8 +18,8 @@ interface ProductsContextValues {
   setProductsSorted: React.Dispatch<React.SetStateAction<iProducts[]>>;
   productsProfilePublic: iProducts[];
   setProductsProfilePublic: React.Dispatch<React.SetStateAction<iProducts[]>>;
-  profilePublic: iUser[];
-  setProfilePublic: React.Dispatch<React.SetStateAction<iUser[]>>;
+  profilePublic: iUser | undefined;
+  setProfilePublic: React.Dispatch<React.SetStateAction<iUser | undefined>>;
 }
 
 interface iProducts {
@@ -40,6 +39,11 @@ interface iProducts {
     name: string;
     description: string;
   };
+  images: {
+    id: number,
+    name: string,
+    image: string
+  }[]
 }
 
 interface iCars {
@@ -89,8 +93,7 @@ export const ProductProvider = ({ children }: ProductsProviderProps) => {
   const [productsProfilePublic, setProductsProfilePublic] = useState<
     iProducts[]
   >([]);
-  const [profilePublic, setProfilePublic] = useState<iUser[]>([]);
-  const toast = useToast();
+  const [profilePublic, setProfilePublic] = useState<iUser | undefined>();
   const [updatePage, setUpdatePage] = useState(true);
 
   useEffect(() => {

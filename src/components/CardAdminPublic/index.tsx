@@ -1,5 +1,5 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { ProductContext } from "../../contexts/ProductsContext";
 
 export const CardAdminPublic = () => {
@@ -30,11 +30,11 @@ export const CardAdminPublic = () => {
         color={"whiteFixed"}
         fontSize={"heading.1"}
       >
-        {getInitials(profilePublic.name)}
+        {getInitials(profilePublic!.name)}
       </Flex>
       <Flex alignItems={"center"} gap={"20px"}>
         <Text fontSize={"heading.6"} fontWeight={"bold"}>
-          {profilePublic.name}
+          {profilePublic!.name}
         </Text>
         <Text
           backgroundColor={"brand.4"}
@@ -48,7 +48,7 @@ export const CardAdminPublic = () => {
         </Text>
       </Flex>
       <Text fontSize={"body.1"} color={"grey.3"}>
-        {profilePublic.description}
+        {profilePublic!.description}
       </Text>
     </Flex>
   );

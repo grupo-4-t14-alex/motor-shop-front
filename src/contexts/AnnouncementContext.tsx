@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState, useContext } from "react";
-import {useDisclosure, useToast } from "@chakra-ui/react";
+import { useDisclosure, useToast } from "@chakra-ui/react";
 import {
   Car2,
   CarData,
@@ -13,7 +13,7 @@ interface AnnouncementProviderProps {
 }
 
 interface AnnouncementContextValues {
-  CreateAnnouncement: (data: IcreateAnnounce) => void;
+  CreateAnnouncement: (data: IcreateAnnounce, banner: File, files: Array<File>) => void;
   onError: (errors: any, e: any) => void;
   resApiForm: CarData;
   setResApiForm: React.Dispatch<React.SetStateAction<CarData>>;
@@ -29,7 +29,7 @@ interface AnnouncementContextValues {
   ops1: string[];
   isOpen: boolean;
   onOpen: () => void;
-  onClose: () => void; 
+  onClose: () => void;
 }
 export const AnnouncementContext = createContext<AnnouncementContextValues>(
   {} as AnnouncementContextValues
@@ -40,9 +40,11 @@ export const AnnouncementProvider = ({
 }: AnnouncementProviderProps) => {
   const { updatePage, setUpdatePage } = useContext(ProductContext);
   const { isOpen, onOpen, onClose } = useDisclosure()
+  
   const toast = useToast();
 
-  const CreateAnnouncement = async (data: IcreateAnnounce) => {
+  const CreateAnnouncement = async (data: IcreateAnnounce, banner: File, files: Array<File>) => {
+
     data.year = Number(model?.year!);
     data.fipePrice = model?.value!;
     data.fuel = model?.fuel!;
@@ -50,10 +52,22 @@ export const AnnouncementProvider = ({
     data.km = Number(data.km);
 
     try {
+      const config = { headers: { "Content-Type": "multipart/form-data" } };
       const token = localStorage.getItem("motors-shop:token");
-      await api.post("/cars", data, {
+      const response = await api.post("/cars", data, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      
+      const fd = new FormData()
+      
+      files.forEach((element: File) => {
+          fd.append("photos", element)
+      });
+      
+      fd.append("banner", banner)
+
+
+      await api.post(`/import/${response.data.newCar.id}`, fd, config)
       onClose()
       toast({
         title: "Annoucement created",
@@ -84,10 +98,10 @@ export const AnnouncementProvider = ({
   const [model, setModel] = useState({} as Car2 | undefined);
   const arrayFuel = ["flex", "hibrido", "eletrico"];
 
-  const onError = (errors: any, e: any) =>{ 
+  const onError = (errors: any, e: any) => {
     console.log(errors, e);
     const fields = Object.keys(errors).toString()
-    
+
 
     toast({
       title: "fill in all required fields",
@@ -113,8 +127,8 @@ export const AnnouncementProvider = ({
   return (
     <AnnouncementContext.Provider
       value={{
-        isOpen, 
-        onOpen, 
+        isOpen,
+        onOpen,
         onClose,
         ops1,
         handlerModel,

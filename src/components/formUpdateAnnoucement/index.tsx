@@ -10,7 +10,6 @@ import { useEffect, useState, useContext } from "react"
 import axios from "axios"
 import api from "../../services/api"
 import { ProductContext } from "../../contexts/ProductsContext"
-import InputMask from "react-input-mask";
 
 
 
@@ -60,9 +59,6 @@ export const FormUpdateAnnouncement = ( { product }: iProducts) => {
       data.fuel = model?.fuel!;
       data.sellPrice = Number(data.sellPrice);
       data.km = Number(data.km);
-
-      console.log(data)
-      console.log(product.id)
   
       try {
         const token = localStorage.getItem("motors-shop:token");
@@ -156,7 +152,7 @@ export const FormUpdateAnnouncement = ( { product }: iProducts) => {
 
     return(
         <>
-            <Button w={"150px"} onClick={onOpen}>Editar</Button>
+            <Button w={"150px"} variant="outline1" onClick={onOpen}>Editar</Button>
             <ModalContainer variant="footerStartVariant" title="editar anuncio" onClose={onClose} isOpen={isOpen} >
                 <form onSubmit={ handleSubmit(updateAnnouncement, onError)}>
                     <ModalBody>

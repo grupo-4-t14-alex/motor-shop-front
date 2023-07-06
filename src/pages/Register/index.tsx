@@ -8,7 +8,7 @@ import {
   } from '@chakra-ui/react'
 import { useForm } from "react-hook-form"
 import { Footer } from "../../components/Footer"
-import React, { useContext, useState } from "react"
+import { useContext, useState } from "react"
 import { UserContext } from "../../contexts/UserContext"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { registerSchema } from "./schema"
@@ -26,13 +26,11 @@ export const RegisterPage = () => {
 
     const isAdminTrue = () => {
         setIsAdmin(true)
-        console.log(isAdmin);
         
     }
 
     const isAdminFalse = () => {
         setIsAdmin(false)
-        console.log(isAdmin);
     }
 
     const onSubmit = (data: iFormRegister) => {
@@ -60,8 +58,6 @@ export const RegisterPage = () => {
             }
         }
         registerUser(userBody)
-
-        console.log(userBody);
         
     }
 
@@ -83,7 +79,7 @@ export const RegisterPage = () => {
         >
             <Center bg={"white"} display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} padding={"30px"} borderRadius={"10px"} marginBottom={"100px"}>
                 <div style={{width: '22.125rem'}}>
-                    <Text fontSize={"24px"} marginBottom={"20px"}>Cadastro</Text>
+                    <Text fontSize={"24px"} fontWeight="medium" marginBottom={"20px"}>Cadastro</Text>
                     <Text fontSize={"14px"} marginBottom={"20px"}>Informações pessoais</Text>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         
@@ -144,14 +140,14 @@ export const RegisterPage = () => {
                             </Flex>
                         </Flex>
                         <FormLabel>Tipo de conta</FormLabel>
-                        <Flex marginBottom={"10px"} display={"flex"} justifyContent={""} w={"100%"}>
-                            <Button onClick={() => isAdminFalse()} w={"50%"} bg="#4529E6" color="white" _focus={{ bg: "white", color: "#4529E6" }} >Comprador</Button>
-                            <Button onClick={() => isAdminTrue()} w={"50%"} bg="#4529E6" color="white" _focus={{ bg: "white", color: "#4529E6" }} >Anunciante</Button>
+                        <Flex marginBottom={"10px"} gap="10px" display={"flex"} justifyContent={""} w={"100%"}>
+                            <Button variant="brand1" onClick={() => isAdminFalse()} w={"50%"} bg="#4529E6" color="white" _focus={{ bg: "white", color: "#4529E6" }} >Comprador</Button>
+                            <Button variant="brand1" onClick={() => isAdminTrue()} w={"50%"} bg="#4529E6" color="white" _focus={{ bg: "white", color: "#4529E6" }} >Anunciante</Button>
                         </Flex>
                         <FormLabel>Senha</FormLabel>
                         <Input marginBottom={"15px"} type="password" placeholder="Digitar senha" {...register("password", { required: true })}/>
                         {errors.password && <Text color={"red"} marginTop={"-10px"} marginBottom={"10px"}>{errors.password?.message}</Text>}
-                        <Button w={"100%"} bg="#4529E6" color="white" _hover={{ bg: "white", color: "#4529E6" }} type="submit" >Cadastrar</Button>
+                        <Button variant="brand1" w="100%" type="submit" >Cadastrar</Button>
                     </form>
                     <Text marginTop={"15px"} textAlign={"center"}>Já possui conta? <Link to="/">Logar</Link></Text>
                 </div>

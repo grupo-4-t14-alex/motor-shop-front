@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { ProductContext } from "../../contexts/ProductsContext";
 import { useContext, useEffect, useState } from "react";
 
@@ -19,6 +19,11 @@ interface iProducts {
     name: string;
     description: string;
   };
+  images: {
+    id: number,
+    name: string,
+    image: string
+  }[]
   [key: string]: any;
 }
 
@@ -177,9 +182,10 @@ export const Filter = () => {
           pl="10px"
           mt="15px"
         >
-          {uniqueBrandsArray.map((element) => {
+          {uniqueBrandsArray.map((element, index) => {
             return (
               <Button
+                key={index}
                 border={"none"}
                 fontSize="heading.6"
                 fontWeight="500"
@@ -204,9 +210,10 @@ export const Filter = () => {
           mt="20px"
           alignItems={"flex-start"}
         >
-          {uniqueModelsArray.map((element) => {
+          {uniqueModelsArray.map((element, index) => {
             return (
               <Button
+                key={index}
                 border={"none"}
                 fontSize="heading.6"
                 fontWeight="500"
@@ -231,9 +238,10 @@ export const Filter = () => {
           mt="20px"
           alignItems={"flex-start"}
         >
-          {uniqueColorsArray.map((element) => {
+          {uniqueColorsArray.map((element, index) => {
             return (
               <Button
+                key={index}
                 border={"none"}
                 fontSize="heading.6"
                 fontWeight="500"
@@ -258,9 +266,10 @@ export const Filter = () => {
           mt="20px"
           alignItems={"flex-start"}
         >
-          {uniqueYearsArray.map((element) => {
+          {uniqueYearsArray.map((element, index) => {
             return (
               <Button
+                key={index}
                 border={"none"}
                 fontSize="heading.6"
                 fontWeight="500"
@@ -285,9 +294,10 @@ export const Filter = () => {
           mt="20px"
           alignItems={"flex-start"}
         >
-          {uniqueFuelsArray.map((element) => {
+          {uniqueFuelsArray.map((element, index) => {
             return (
               <Button
+                key={index}
                 border={"none"}
                 fontSize="heading.6"
                 fontWeight="500"
@@ -316,6 +326,7 @@ export const Filter = () => {
             bg="grey.5"
             w="170px"
             borderRadius="0"
+            variant={"negative"}
             onClick={() => handleSortClick("km", "asc")}
           >
             Min
@@ -324,6 +335,7 @@ export const Filter = () => {
             bg="grey.5"
             w="170px"
             borderRadius="0"
+            variant={"negative"}
             onClick={() => handleSortClick("km", "desc")}
           >
             Max
@@ -339,6 +351,7 @@ export const Filter = () => {
             bg="grey.5"
             w="170px"
             borderRadius="0"
+            variant="negative"
             onClick={() => handleSortClick("sellPrice", "asc")}
           >
             Min
@@ -347,13 +360,14 @@ export const Filter = () => {
             bg="grey.5"
             w="170px"
             borderRadius="0"
+            variant="negative"
             onClick={() => handleSortClick("sellPrice", "desc")}
           >
             Max
           </Button>
         </Flex>
       </Box>
-      <Button marginTop={"20px"} onClick={() => clearFilter()}>
+      <Button marginTop={"20px"} variant="brand1" onClick={() => clearFilter()}>
         Limpar filtro
       </Button>
     </Flex>

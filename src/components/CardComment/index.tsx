@@ -1,4 +1,4 @@
-import { Box, Flex, Button, Textarea, ButtonGroup, FormErrorMessage } from "@chakra-ui/react";
+import { Box, Flex, Button, Textarea, FormErrorMessage } from "@chakra-ui/react";
 import { CardUser } from "../CardUser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,7 +25,6 @@ export const CardComment = () => {
   })
 
   const onSubmit = (data: iCreateComment) => {
-    // console.log(data);
 
     registerComment(data)
     reset()
@@ -51,15 +50,15 @@ export const CardComment = () => {
             {...register("comment")}
           />
           {errors.comment && (<FormErrorMessage>{errors.comment.message}</FormErrorMessage>)}
-          <Button type="submit" size="sm" position="absolute" bottom="10px" right="10px">
+          <Button variant="brand1" type="submit" size="sm" position="absolute" bottom="10px" right="10px">
             Comentar
           </Button>
         </form>
       </Box>
       <Flex flexDirection={{ base: "column", md: "row" }} gap={"10px"}>
-        <Button size="sm">Gostei muito!</Button>
-        <Button size="sm">Incrível</Button>
-        <Button size="sm">Recomendarei para meus amigos!</Button>
+        <Button variant="negative" borderRadius="full" bg="grey.8" color="grey.4" size="sm">Gostei muito!</Button>
+        <Button variant="negative" borderRadius="full" bg="grey.8" color="grey.4" size="sm">Incrível</Button>
+        <Button variant="negative" borderRadius="full" bg="grey.8" color="grey.4" size="sm">Recomendarei para meus amigos!</Button>
       </Flex>
     </Flex>
   );

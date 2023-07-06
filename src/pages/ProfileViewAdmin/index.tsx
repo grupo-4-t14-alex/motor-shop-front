@@ -10,7 +10,7 @@ import { ProductContext } from "../../contexts/ProductsContext";
 export const ProfileViewAdmin = () => {
   const token = localStorage.getItem("motors-shop:token");
   const { setProductsProfile, updatePage } = useContext(ProductContext);
-
+  
   useEffect(() => {
     (async () => {
       try {
@@ -19,7 +19,6 @@ export const ProfileViewAdmin = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data);
         setProductsProfile(response.data);
       } catch (error) {
         console.log(error);
